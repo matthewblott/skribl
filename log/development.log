@@ -1,0 +1,373 @@
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='Web'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-02-24 13:00:25.322941', '2025-02-24 13:00:25.322943') RETURNING "key" /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+Migrating to CreateUsers (20250224125945)
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar NOT NULL, "password_digest" varchar NOT NULL, "verified" boolean DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email") /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250224125945') RETURNING "version" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+Migrating to CreateSessions (20250224125946)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_agent" varchar, "ip_address" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_758836b4f0"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_user_id" ON "sessions" ("user_id") /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250224125946') RETURNING "version" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+Migrating to RolifyCreateRoles (20250224130017)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "roles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_type" varchar, "resource_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_roles_on_resource" ON "roles" ("resource_type", "resource_id") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_users_roles_on_user_id" ON "users_roles" ("user_id") /*application='Web'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_users_roles_on_role_id" ON "users_roles" ("role_id") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_roles_on_name" ON "roles" ("name") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id") /*application='Web'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id") /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250224130017') RETURNING "version" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_css, path: "/tailwind.css"}
+Started GET "/" for 127.0.0.1 at 2025-02-24 13:05:01 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+Processing by HomeController#index as HTML
+  [1m[36mSession Load (0.0ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IS NULL LIMIT 1 /*action='index',application='Web',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#authenticate'
+Redirected to http://127.0.0.1:3000/sign_in
+Filter chain halted as :authenticate rendered or redirected
+Completed 302 Found in 100ms (ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 1.3ms)
+
+
+Started GET "/sign_in" for 127.0.0.1 at 2025-02-24 13:05:01 +0000
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 8.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.6ms | GC: 0.0ms)
+Completed 200 OK in 592ms (Views: 18.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 58.6ms)
+
+
+Started GET "/assets/tailwind-7832c1d0.css" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/assets/turbo.min-fae85750.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/assets/stimulus.min-4b1e420e.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/assets/controllers/hello_controller-708796bd.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/assets/controllers/index-ee64e1f1.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/assets/hotwire_spark-d7e0ee73.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_css, path: "/tailwind.css"}
+Started GET "/assets/application-bfcdf840.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/assets/stimulus-loading-1fc53fe7.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/assets/controllers/application-3affb389.js" for 127.0.0.1 at 2025-02-24 13:05:02 +0000
+Started GET "/hotwire-spark" for 127.0.0.1 at 2025-02-24 13:05:03 +0000
+Started GET "/hotwire-spark" [WebSocket] for 127.0.0.1 at 2025-02-24 13:05:03 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
+Started GET "/sign_in" for 127.0.0.1 at 2025-02-24 13:05:05 +0000
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 9.2ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.5ms | GC: 0.2ms)
+Completed 200 OK in 72ms (Views: 13.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.4ms)
+
+
+Finished "/hotwire-spark" [WebSocket] for 127.0.0.1 at 2025-02-24 13:05:05 +0000
+Hotwire::Spark::Channel stopped streaming from hotwire_spark
+Started GET "/hotwire-spark" for 127.0.0.1 at 2025-02-24 13:05:05 +0000
+Started GET "/hotwire-spark" [WebSocket] for 127.0.0.1 at 2025-02-24 13:05:05 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
+Finished "/hotwire-spark" [WebSocket] for 127.0.0.1 at 2025-02-24 13:05:11 +0000
+Hotwire::Spark::Channel stopped streaming from hotwire_spark
+Started GET "/sign_in" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 2.5ms | GC: 0.1ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.5ms | GC: 0.1ms)
+Completed 200 OK in 46ms (Views: 5.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/assets/application-8b441ae0.css" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Started GET "/assets/application-bfcdf840.js" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Started GET "/assets/turbo.min-fae85750.js" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Started GET "/assets/controllers/application-3affb389.js" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Started GET "/assets/controllers/hello_controller-708796bd.js" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Started GET "/assets/controllers/index-ee64e1f1.js" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Started GET "/assets/hotwire_spark-d7e0ee73.js" for 127.0.0.1 at 2025-02-24 13:05:13 +0000
+Started GET "/assets/tailwind-7832c1d0.css" for 127.0.0.1 at 2025-02-24 13:05:14 +0000
+Started GET "/assets/stimulus.min-4b1e420e.js" for 127.0.0.1 at 2025-02-24 13:05:14 +0000
+Started GET "/assets/stimulus-loading-1fc53fe7.js" for 127.0.0.1 at 2025-02-24 13:05:14 +0000
+Started GET "/hotwire-spark" for 127.0.0.1 at 2025-02-24 13:05:14 +0000
+Started GET "/hotwire-spark" [WebSocket] for 127.0.0.1 at 2025-02-24 13:05:14 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
+Finished "/hotwire-spark" [WebSocket] for 127.0.0.1 at 2025-02-24 13:05:19 +0000
+Hotwire::Spark::Channel stopped streaming from hotwire_spark
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1 /*application='Web'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "verified", "created_at", "updated_at") VALUES ('admin@example.com', '$2a$12$zLUJnl6BbluYBtDjEWpEWOk7ExTOB3FrSCIOUO9mGbSNhqoedZ4fi', 1, '2025-02-24 13:09:38.788497', '2025-02-24 13:09:38.788497') RETURNING "id" /*application='Web'*/[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "notes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  ↳ app/services/user_database_service.rb:12:in 'block in UserDatabaseService.create_database'
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='Web'*/[0m
+  ↳ app/services/user_database_service.rb:11:in 'UserDatabaseService.create_database'
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  ↳ app/services/user_database_service.rb:11:in 'UserDatabaseService.create_database'
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Web'*/[0m
+  ↳ app/services/user_database_service.rb:11:in 'UserDatabaseService.create_database'
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-02-24 13:09:38.805680', '2025-02-24 13:09:38.805682') RETURNING "key" /*application='Web'*/[0m
+  ↳ app/services/user_database_service.rb:11:in 'UserDatabaseService.create_database'
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = 1 /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."name" = 'user' AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mRole Create (2.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES ('user', NULL, NULL, '2025-02-24 13:09:38.872988', '2025-02-24 13:09:38.872988') RETURNING "id" /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mUser::HABTM_Roles Create (0.0ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (1, 1) /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[31mROLLBACK TRANSACTION /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1 /*application='Web'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "verified", "created_at", "updated_at") VALUES ('admin@example.com', '$2a$12$JrXGXxnKj7p8tTewRYtgq.v6Eethd4hUfCDz0cEjjSi29RW2n.gXS', 1, '2025-02-24 13:10:36.307763', '2025-02-24 13:10:36.307763') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1 /*application='Web'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "verified", "created_at", "updated_at") VALUES ('admin@example.com', '$2a$12$w0YGxtNJbinD.gT55fa7JOIKNIO4xGquFpIzhTWGAsfExgrR/ZLky', 1, '2025-02-24 13:11:05.467859', '2025-02-24 13:11:05.467859') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1 /*application='Web'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "verified", "created_at", "updated_at") VALUES ('admin@example.com', '$2a$12$P4PMCG/SM7f6Vuc4YBNFxuvvNv8FRg1fsYtPk9Q5q9oKUz/yq30kG', 1, '2025-02-24 13:11:22.817083', '2025-02-24 13:11:22.817083') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = 1 /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."name" = 'admin' AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mRole Create (1.0ms)[0m  [1m[32mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES ('admin', NULL, NULL, '2025-02-24 13:11:22.864515', '2025-02-24 13:11:22.864515') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser::HABTM_Roles Create (0.1ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (1, 2) /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Exists? (2.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jane@example.com' LIMIT 1 /*application='Web'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "verified", "created_at", "updated_at") VALUES ('jane@example.com', '$2a$12$KNtO8DZ3fKwHZgoBO6PyKurcdLxAmjpiy0Vhs2hZBKe8L7.7YozkG', 1, '2025-02-24 13:11:23.159299', '2025-02-24 13:11:23.159299') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mRole Load (0.1ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = 2 /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."name" = 'user' AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mUser::HABTM_Roles Create (0.0ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (2, 1) /*application='Web'*/[0m
+  ↳ app/models/user.rb:14:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" /*application='Web'*/[0m
+  [1m[36mRole Pluck (1.9ms)[0m  [1m[34mSELECT "roles"."name" FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = 1 /*application='Web'*/[0m
+  [1m[36mRole Pluck (0.0ms)[0m  [1m[34mSELECT "roles"."name" FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = 2 /*application='Web'*/[0m
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_css, path: "/tailwind.css"}
+Started GET "/" for ::1 at 2025-02-24 13:12:44 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+Processing by HomeController#index as HTML
+  [1m[36mSession Load (0.0ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" IS NULL LIMIT 1 /*action='index',application='Web',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#authenticate'
+Redirected to http://localhost:3000/sign_in
+Filter chain halted as :authenticate rendered or redirected
+Completed 302 Found in 80ms (ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/sign_in" for ::1 at 2025-02-24 13:12:45 +0000
+Processing by SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 5.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.6ms | GC: 0.0ms)
+Completed 200 OK in 140ms (Views: 14.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 10.3ms)
+
+
+Started GET "/assets/tailwind-438a194b.css" for ::1 at 2025-02-24 13:12:45 +0000
+Started GET "/assets/turbo.min-fae85750.js" for ::1 at 2025-02-24 13:12:45 +0000
+Started GET "/assets/stimulus.min-4b1e420e.js" for ::1 at 2025-02-24 13:12:45 +0000
+Started GET "/assets/hotwire_spark-d7e0ee73.js" for ::1 at 2025-02-24 13:12:45 +0000
+Started GET "/assets/stimulus-loading-1fc53fe7.js" for ::1 at 2025-02-24 13:12:45 +0000
+Started GET "/hotwire-spark" for ::1 at 2025-02-24 13:12:45 +0000
+Started GET "/hotwire-spark" [WebSocket] for ::1 at 2025-02-24 13:12:45 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
+Started POST "/sign_in" for ::1 at 2025-02-24 13:12:58 +0000
+Processing by SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "email" => "[FILTERED]", "password" => "[FILTERED]", "commit" => "Sign in"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1 /*action='create',application='Web',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:14:in 'SessionsController#create'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='Web',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:15:in 'SessionsController#create'
+  [1m[36mSession Create (3.1ms)[0m  [1m[32mINSERT INTO "sessions" ("user_id", "user_agent", "ip_address", "created_at", "updated_at") VALUES (1, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', '::1', '2025-02-24 13:12:58.515690', '2025-02-24 13:12:58.515690') RETURNING "id" /*action='create',application='Web',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:15:in 'SessionsController#create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='Web',controller='sessions'*/[0m
+  ↳ app/controllers/sessions_controller.rb:15:in 'SessionsController#create'
+Redirected to http://localhost:3000/
+Completed 302 Found in 347ms (ActiveRecord: 7.7ms (2 queries, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/" for ::1 at 2025-02-24 13:12:58 +0000
+Processing by HomeController#index as TURBO_STREAM
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 1 LIMIT 1 /*action='index',application='Web',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#authenticate'
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='Web',controller='home'*/[0m
+  ↳ app/models/current.rb:5:in 'Current#user'
+  Rendered home/index.html.erb within layouts/application (Duration: 6.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.8ms | GC: 0.0ms)
+Completed 200 OK in 50ms (Views: 9.8ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/identity/email/edit" for ::1 at 2025-02-24 13:13:07 +0000
+Processing by Identity::EmailsController#edit as HTML
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 1 LIMIT 1 /*action='edit',application='Web',controller='emails'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='edit',application='Web',controller='emails'*/[0m
+  ↳ app/models/current.rb:5:in 'Current#user'
+  Rendering layout layouts/application.html.erb
+  Rendering identity/emails/edit.html.erb within layouts/application
+  Rendered identity/emails/edit.html.erb within layouts/application (Duration: 9.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | GC: 0.0ms)
+Completed 200 OK in 63ms (Views: 11.9ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/identity/email/edit" for ::1 at 2025-02-24 13:13:08 +0000
+Processing by Identity::EmailsController#edit as HTML
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 1 LIMIT 1 /*action='edit',application='Web',controller='emails'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='edit',application='Web',controller='emails'*/[0m
+  ↳ app/models/current.rb:5:in 'Current#user'
+  Rendering layout layouts/application.html.erb
+  Rendering identity/emails/edit.html.erb within layouts/application
+  Rendered identity/emails/edit.html.erb within layouts/application (Duration: 1.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | GC: 0.0ms)
+Completed 200 OK in 61ms (Views: 3.7ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/notes" for ::1 at 2025-02-24 13:13:12 +0000
+Processing by NotesController#index as HTML
+  [1m[36mSession Load (0.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 1 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:10:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/models/current.rb:5:in 'Current#user'
+Completed 500 Internal Server Error in 64ms (ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NameError (undefined local variable or method 'current_user' for an instance of NotesController):
+  
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:99:in 'method_missing'
+cancancan (3.6.1) lib/cancan/controller_additions.rb:359:in 'CanCan::ControllerAdditions#current_ability'
+cancancan (3.6.1) lib/cancan/controller_resource.rb:138:in 'CanCan::ControllerResource#current_ability'
+cancancan (3.6.1) lib/cancan/controller_resource.rb:78:in 'CanCan::ControllerResource#load_collection?'
+cancancan (3.6.1) lib/cancan/controller_resource_loader.rb:19:in 'CanCan::ControllerResourceLoader#load_resource'
+cancancan (3.6.1) lib/cancan/controller_resource.rb:33:in 'CanCan::ControllerResource#load_and_authorize_resource'
+cancancan (3.6.1) lib/cancan/controller_resource.rb:17:in 'block in CanCan::ControllerResource.add_before_action'
+activesupport (8.0.1) lib/active_support/callbacks.rb:428:in 'BasicObject#instance_exec'
+activesupport (8.0.1) lib/active_support/callbacks.rb:428:in 'block in ActiveSupport::Callbacks::CallTemplate::InstanceExec1#make_lambda'
+activesupport (8.0.1) lib/active_support/callbacks.rb:178:in 'block in ActiveSupport::Callbacks::Filters::Before#call'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:34:in 'block (2 levels) in <module:Callbacks>'
+activesupport (8.0.1) lib/active_support/callbacks.rb:179:in 'ActiveSupport::Callbacks::Filters::Before#call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in 'block in ActiveSupport::Callbacks::CallbackSequence#invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in 'Array#each'
+activesupport (8.0.1) lib/active_support/callbacks.rb:558:in 'ActiveSupport::Callbacks::CallbackSequence#invoke_before'
+activesupport (8.0.1) lib/active_support/callbacks.rb:118:in 'block in ActiveSupport::Callbacks#run_callbacks'
+turbo-rails (2.0.11) lib/turbo-rails.rb:24:in 'Turbo.with_request_id'
+turbo-rails (2.0.11) app/controllers/concerns/turbo/request_id_tracking.rb:10:in 'Turbo::RequestIdTracking#turbo_tracking_request_id'
+activesupport (8.0.1) lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+actiontext (8.0.1) lib/action_text/rendering.rb:25:in 'ActionText::Rendering::ClassMethods#with_renderer'
+actiontext (8.0.1) lib/action_text/engine.rb:71:in 'block (4 levels) in <class:Engine>'
+activesupport (8.0.1) lib/active_support/callbacks.rb:129:in 'BasicObject#instance_exec'
+activesupport (8.0.1) lib/active_support/callbacks.rb:129:in 'block in ActiveSupport::Callbacks#run_callbacks'
+activesupport (8.0.1) lib/active_support/callbacks.rb:140:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.1) lib/abstract_controller/callbacks.rb:260:in 'AbstractController::Callbacks#process_action'
+actionpack (8.0.1) lib/action_controller/metal/rescue.rb:27:in 'ActionController::Rescue#process_action'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:76:in 'block in ActionController::Instrumentation#process_action'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in 'block in ActiveSupport::Notifications.instrument'
+activesupport (8.0.1) lib/active_support/notifications/instrumenter.rb:58:in 'ActiveSupport::Notifications::Instrumenter#instrument'
+activesupport (8.0.1) lib/active_support/notifications.rb:210:in 'ActiveSupport::Notifications.instrument'
+actionpack (8.0.1) lib/action_controller/metal/instrumentation.rb:75:in 'ActionController::Instrumentation#process_action'
+actionpack (8.0.1) lib/action_controller/metal/params_wrapper.rb:259:in 'ActionController::ParamsWrapper#process_action'
+activerecord (8.0.1) lib/active_record/railties/controller_runtime.rb:39:in 'ActiveRecord::Railties::ControllerRuntime#process_action'
+actionpack (8.0.1) lib/abstract_controller/base.rb:163:in 'AbstractController::Base#process'
+actionview (8.0.1) lib/action_view/rendering.rb:40:in 'ActionView::Rendering#process'
+actionpack (8.0.1) lib/action_controller/metal.rb:252:in 'ActionController::Metal#dispatch'
+actionpack (8.0.1) lib/action_controller/metal.rb:335:in 'ActionController::Metal.dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:67:in 'ActionDispatch::Routing::RouteSet::Dispatcher#dispatch'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:50:in 'ActionDispatch::Routing::RouteSet::Dispatcher#serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in 'block in ActionDispatch::Journey::Router#serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in 'block in ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in 'Array#each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in 'ActionDispatch::Journey::Router#find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in 'ActionDispatch::Journey::Router#serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in 'ActionDispatch::Routing::RouteSet#call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in 'Rails::Engine::LazyRouteSet#call'
+hotwire-spark (0.1.13) lib/hotwire/spark/middleware.rb:7:in 'Hotwire::Spark::Middleware#call'
+rack (3.1.10) lib/rack/tempfile_reaper.rb:20:in 'Rack::TempfileReaper#call'
+rack (3.1.10) lib/rack/etag.rb:29:in 'Rack::ETag#call'
+rack (3.1.10) lib/rack/conditional_get.rb:31:in 'Rack::ConditionalGet#call'
+rack (3.1.10) lib/rack/head.rb:15:in 'Rack::Head#call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in 'ActionDispatch::PermissionsPolicy::Middleware#call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in 'ActionDispatch::ContentSecurityPolicy::Middleware#call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in 'Rack::Session::Abstract::Persisted#context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in 'Rack::Session::Abstract::Persisted#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in 'ActionDispatch::Cookies#call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in 'ActiveRecord::Migration::CheckPending#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in 'block in ActionDispatch::Callbacks#call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in 'ActiveSupport::Callbacks#run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in 'ActionDispatch::Callbacks#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in 'ActionDispatch::ActionableExceptions#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in 'ActionDispatch::DebugExceptions#call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in 'WebConsole::Middleware#call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in 'block in WebConsole::Middleware#call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'Kernel#catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in 'WebConsole::Middleware#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in 'ActionDispatch::ShowExceptions#call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in 'Rails::Rack::Logger#call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in 'Rails::Rack::Logger#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in 'ActionDispatch::RemoteIp#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in 'ActionDispatch::RequestId#call'
+rack (3.1.10) lib/rack/method_override.rb:28:in 'Rack::MethodOverride#call'
+rack (3.1.10) lib/rack/runtime.rb:24:in 'Rack::Runtime#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in 'block in ActionDispatch::ServerTiming#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in 'ActionDispatch::ServerTiming::Subscriber#collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in 'ActionDispatch::ServerTiming#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in 'ActionDispatch::Executor#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in 'ActionDispatch::Static#call'
+rack (3.1.10) lib/rack/sendfile.rb:114:in 'Rack::Sendfile#call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in 'ActionDispatch::HostAuthorization#call'
+railties (8.0.1) lib/rails/engine.rb:535:in 'Rails::Engine#call'
+puma (6.6.0) lib/puma/configuration.rb:279:in 'Puma::Configuration::ConfigMiddleware#call'
+puma (6.6.0) lib/puma/request.rb:99:in 'block in Puma::Request#handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in 'Puma::ThreadPool#with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in 'Puma::Request#handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in 'Puma::Server#process_client'
+puma (6.6.0) lib/puma/server.rb:254:in 'block in Puma::Server#run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in 'block in Puma::ThreadPool#spawn_thread'
+Finished "/hotwire-spark" [WebSocket] for ::1 at 2025-02-24 13:13:12 +0000
+Hotwire::Spark::Channel stopped streaming from hotwire_spark
+Started GET "/favicon.ico" for ::1 at 2025-02-24 13:13:13 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_css, path: "/tailwind.css"}
