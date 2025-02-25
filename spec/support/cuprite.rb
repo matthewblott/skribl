@@ -18,4 +18,3 @@ end
 # Configure Capybara to use :cuprite driver by default
 Capybara.default_driver = :cuprite
 Capybara.javascript_driver = :cuprite
-

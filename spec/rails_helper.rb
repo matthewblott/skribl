@@ -71,9 +71,6 @@ RSpec.configure do |config|
   # Include FactoryBot methods
   config.include FactoryBot::Syntax::Methods
 
-  # Include AuthenticationHelper in system tests
-  config.include AuthenticationHelper, type: :system
-
   # Configure DatabaseCleaner
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
