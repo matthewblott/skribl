@@ -1,21 +1,11 @@
 <% if Current.user %>
-  <header class="bg-white shadow">
-    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <h1 class="text-xl font-semibold text-gray-900">Scribble</h1>
-        </div>
-        <div class="flex items-center space-x-4">
-          <span class="text-sm text-gray-600">
-            Signed in as <%= Current.user.email %>
-          </span>
+  <header>
+    <span>
+      Signed in as <%= Current.user.email %>
+    </span>
 
-          <%= button_to "Sign out", 
-              Current.session, 
-              method: :delete,
-              class: "ml-4 inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500" %>
-        </div>
-      </div>
-    </div>
+    <%= button_to "Sign out", 
+        Current.session, 
+        method: :delete %>
   </header>
 <% end %>

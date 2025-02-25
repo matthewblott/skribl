@@ -18,18 +18,22 @@ class SessionsController < ApplicationController
       Current.session = @session
       Current.user = user
 
-      begin
-        # Initialize the user's notes database
+      # begin
+      #   # Connect to the user's notes database
+      #   Rails.logger.info "Connecting to database for user #{user.id}"
         Note.set_database_connection(user)
+      #   Rails.logger.info "Connected to database"
         redirect_to user_notes_path(user), notice: "Signed in successfully"
-      rescue => e
-        # If database setup fails, clean up the session
-        @session.destroy
-        cookies.delete(:session_token)
-        Current.session = nil
-        Current.user = nil
-        redirect_to sign_in_path, alert: "Error setting up user data. Please try again."
-      end
+      # rescue => e
+      #   # If database setup fails, clean up the session
+      #   Rails.logger.error "Failed to set up user database: #{e.message}"
+      #   Rails.logger.error e.backtrace.join("\n")
+      #   @session.destroy
+      #   cookies.delete(:session_token)
+      #   Current.session = nil
+      #   Current.user = nil
+      #   redirect_to sign_in_path, alert: "Error setting up user data. Please try again."
+      # end
     else
       redirect_to sign_in_path(email_hint: params[:email]), alert: "That email or password is incorrect"
     end

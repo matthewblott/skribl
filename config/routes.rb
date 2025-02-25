@@ -12,9 +12,7 @@ Rails.application.routes.draw do
   end
   root "home#index"
 
-  scope '/:user_id', as: 'user' do
-    resources :notes
-  end
+  resources :notes
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

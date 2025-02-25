@@ -12,6 +12,10 @@ class RegistrationsController < ApplicationController
       session_record = @user.sessions.create!
       cookies.signed.permanent[:session_token] = { value: session_record.id, httponly: true }
 
+      # Set up user's database
+      UserDatabaseService.create_database(@user)
+      Note.set_database_connection(@user)
+
       send_email_verification
       redirect_to root_path, notice: "Welcome! You have signed up successfully"
     else

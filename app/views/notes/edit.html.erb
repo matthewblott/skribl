@@ -1,8 +1,8 @@
-<div class="max-w-2xl mx-auto py-6">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-bold">Edit Note</h1>
+<div class="container">
+  <div class="header">
+    <h1>Edit Note</h1>
     <%= link_to "Back to notes", user_notes_path(Current.user), 
-        class: "text-gray-600 hover:text-gray-900" %>
+        class: "link" %>
   </div>
 
   <%= render "form", note: @note %>

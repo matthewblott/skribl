@@ -16,7 +16,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new(note_params)
+    @note = Note.new(note_params.except(:user_id))
 
     if @note.save
       redirect_to user_note_path(Current.user, @note), notice: 'Note was successfully created.'
