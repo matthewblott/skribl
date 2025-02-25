@@ -1,5 +1,4 @@
 class Note < ApplicationRecord
-  belongs_to :user
   validates :title, presence: true
   validates :content, presence: true
   # This model will connect to different databases based on the current user
