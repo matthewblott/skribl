@@ -1,6 +1,8 @@
-class Note < ApplicationRecord
-  validates :title, presence: true
+class Note < UserRecord 
+  validates :title, presence: true, length: { maximum: 255 }
   validates :content, presence: true
+  before_save :strip_whitespace
+
   # This model will connect to different databases based on the current user
   def self.set_database_connection(user)
     return unless user # Don't try to connect if no user
@@ -32,10 +34,6 @@ class Note < ApplicationRecord
     end
   end
 
-  validates :title, presence: true, length: { maximum: 255 }
-  validates :content, presence: true
-
-  before_save :strip_whitespace
 
   private
 
