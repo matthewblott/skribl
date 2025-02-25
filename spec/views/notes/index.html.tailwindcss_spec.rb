@@ -3,13 +3,16 @@ require 'rails_helper'
 RSpec.describe "notes/index", type: :view do
   let(:user) { create(:user) }
   let(:notes) do
+    Note.set_database_connection(user)
+    Note.delete_all # Clean the test database
     [
-      create(:note, title: "First Note", content: "First note content", user: user),
-      create(:note, title: "Second Note", content: "Second note content", user: user)
+      create(:note, title: "First Note", content: "First note content"),
+      create(:note, title: "Second Note", content: "Second note content")
     ]
   end
 
   before(:each) do
+    Note.set_database_connection(user)
     allow(Current).to receive(:user).and_return(user)
     assign(:notes, notes)
   end
