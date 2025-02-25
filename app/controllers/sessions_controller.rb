@@ -15,7 +15,21 @@ class SessionsController < ApplicationController
       @session = user.sessions.create!
       cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
 
-      redirect_to root_path, notice: "Signed in successfully"
+      Current.session = @session
+      Current.user = user
+
+      begin
+        # Initialize the user's notes database
+        Note.set_database_connection(user)
+        redirect_to user_notes_path(user), notice: "Signed in successfully"
+      rescue => e
+        # If database setup fails, clean up the session
+        @session.destroy
+        cookies.delete(:session_token)
+        Current.session = nil
+        Current.user = nil
+        redirect_to sign_in_path, alert: "Error setting up user data. Please try again."
+      end
     else
       redirect_to sign_in_path(email_hint: params[:email]), alert: "That email or password is incorrect"
     end

@@ -36,6 +36,7 @@ end
 group :test do
   gem 'capybara'
   gem 'cuprite'
+  gem 'database_cleaner-active_record'
   gem 'factory_bot_rails', '~> 6.4'
   gem 'guard'
   gem 'guard-rspec'

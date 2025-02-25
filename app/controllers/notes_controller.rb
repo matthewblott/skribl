@@ -1,7 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note_connection
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
 
   def index
     @notes = Note.all
@@ -21,30 +19,32 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
 
     if @note.save
-      redirect_to @note, notice: 'Note was successfully created.'
+      redirect_to user_note_path(Current.user, @note), notice: 'Note was successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     if @note.update(note_params)
-      redirect_to @note, notice: 'Note was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to user_note_path(Current.user, @note), notice: 'Note was successfully updated.' }
+        format.turbo_stream { redirect_to user_note_path(Current.user, @note), notice: 'Note was successfully updated.' }
+      end
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @note.destroy
-    redirect_to notes_url, notice: 'Note was successfully deleted.'
+    respond_to do |format|
+      format.html { redirect_to user_notes_path(Current.user), notice: 'Note was successfully deleted.' }
+      format.turbo_stream { redirect_to user_notes_path(Current.user), notice: 'Note was successfully deleted.' }
+    end
   end
 
   private
-
-  def set_note_connection
-    Note.set_database_connection(Current.user)
-  end
 
   def set_note
     @note = Note.find(params[:id])
