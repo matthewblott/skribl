@@ -18,7 +18,10 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%#= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css"> 
+
     <%= javascript_importmap_tags %>
   </head>
 
