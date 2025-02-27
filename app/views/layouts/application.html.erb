@@ -17,14 +17,16 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css"> 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%#= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-gray-50">
+  <body>
     <%= render "shared/header" %>
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <main>
       <%= yield %>
     </main>
   </body>
