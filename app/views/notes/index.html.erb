@@ -10,14 +10,11 @@
       <% @notes.each do |note| %>
         <%= turbo_frame_tag dom_id(note) do %>
           <div>
-            <h2><%= note.title %></h2>
             <p><%= truncate(note.content, length: 100) %></p>
             <div>
-              <%= link_to "View", user_note_path(Current.user, note), 
-                  data: { turbo_frame: "_top" } %>
               <%= link_to "Edit", edit_user_note_path(Current.user, note), 
                   data: { turbo_frame: "_top" } %>
-              <%= link_to "Delete", user_note_path(Current.user, note), 
+              <%#= link_to "Delete", user_note_path(Current.user, note), 
                   data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
             </div>
           </div>

@@ -19,44 +19,63 @@ describe "Notes", type: :system do
     sign_in_as(user)
     click_link 'New Note'
     expect(page).to have_current_path(new_user_note_path(user))
-    fill_in 'Title', with: 'My First Note'
-    fill_in 'Content', with: 'This is my first note'
+    fill_in 'note_content', with: 'This is my first note'
     click_button 'Create Note'
-    expect(page).to have_current_path(user_note_path(user, Note.last))
-    expect(page).to have_selector('h1', text: 'My First Note')
+    expect(page).to have_current_path(user_notes_path(user))
+    expect(page).to have_content('This is my first note')
   end
 
   it 'creates a note and updates the note' do
     sign_in_as(user)
     click_link 'New Note'
     expect(page).to have_current_path(new_user_note_path(user))
-    fill_in 'Title', with: 'My First Note To Update'
-    fill_in 'Content', with: 'This is my first note to update'
+    fill_in 'note_content', with: 'This is my first note to update'
     click_button 'Create Note'
-    expect(page).to have_current_path(user_note_path(user, Note.last))
-    expect(page).to have_selector('h1', text: 'My First Note To Update')
+    expect(page).to have_current_path(user_notes_path(user))
+    expect(page).to have_content('This is my first note to update')
     
     click_button 'Sign out'
 
     sign_in_as(user)
 
-    # within(:xpath, "//div[h2[text()='My First Note To Update']]") do
-    #   click_link "Edit"
-    # end
-
     all("a", text: "Edit").last.click
 
     expect(page).to have_selector('h1', text: 'Edit Note')
 
-    fill_in 'Title', with: 'This title has been updated'
-    fill_in 'Content', with: 'This content has been updated'
+    fill_in 'note_content', with: 'This content has been updated'
 
     click_button 'Update Note'
 
-    expect(page).to have_selector('h1', text: 'This title has been updated')
-    expect(page).to have_selector('p', text: 'This content has been updated')
+    # Verify we're redirected to the notes index page
+    expect(page).to have_current_path(user_notes_path(user))
+    expect(page).to have_content('This content has been updated')
+
+  end
+
+  it 'creates a note and deletes the note' do
+    sign_in_as(user)
+    click_link 'New Note'
+    expect(page).to have_current_path(new_user_note_path(user))
+    fill_in 'note_content', with: 'This is my first note to delete'
+    click_button 'Create Note'
+    expect(page).to have_current_path(user_notes_path(user))
+    expect(page).to have_content('This is my first note to delete')
+    
+    click_button 'Sign out'
+
+    sign_in_as(user)
+
+    all("a", text: "Edit").first.click
+
+    expect(page).to have_selector("textarea", text: "This is my first note to delete")
+
+    accept_prompt do
+      click_link 'Delete Note'
+    end
+
+    expect(page).to have_selector('h1', text: 'My Notes')
+    expect(page).to_not have_content('This is my first note to delete')
 
   end
 
 end
-

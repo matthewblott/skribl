@@ -132,7 +132,7 @@ RSpec.describe User, type: :model do
   describe 'database creation' do
     it 'creates a user database on creation' do
       user = create(:user)
-      db_path = "storage/user_#{user.id}.sqlite3"
+      db_path = "storage/#{Rails.env}_user_#{user.id}.sqlite3"
       expect(File.exist?(db_path)).to be true
     end
   end

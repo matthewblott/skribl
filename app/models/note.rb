@@ -1,7 +1,9 @@
 class Note < UserRecord 
-  validates :title, presence: true, length: { maximum: 255 }
+  validates :title, length: { maximum: 255 }, allow_blank: true
   validates :content, presence: true
   before_save :strip_whitespace
+
+  scope :recent_first, -> { order(created_at: :desc) }
 
   # This model will connect to different databases based on the current user
   def self.set_database_connection(user)
