@@ -1,6 +1,5 @@
 <div>
   <div>
-    <h1><%= @note.title %></h1>
     <div>
       <%= link_to "Edit", edit_user_note_path(Current.user, @note) %>
       <%= link_to "Back", user_notes_path(Current.user) %>

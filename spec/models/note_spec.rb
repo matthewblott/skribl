@@ -11,15 +11,14 @@ RSpec.describe Note, type: :model do
   describe 'validations' do
     subject { build(:note) }
 
-    it { should validate_presence_of(:title) }
+    it { should_not validate_presence_of(:title) }
     it { should validate_presence_of(:content) }
     it { should validate_length_of(:title).is_at_most(255) }
 
     describe 'title validations' do
-      it 'requires a title' do
+      it 'allows empty title' do
         note = build(:note, title: '')
-        expect(note).not_to be_valid
-        expect(note.errors[:title]).to include("can't be blank")
+        expect(note).to be_valid
       end
 
       it 'limits title length' do

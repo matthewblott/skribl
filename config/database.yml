@@ -13,9 +13,9 @@ development:
   primary:
     <<: *default
     database: storage/development.sqlite3
-  user_specific:
-    <<: *default
-    database: storage/user_%{user_id}.sqlite3
+  # user_specific:
+  #   <<: *default
+  #   database: storage/development_user_%{user_id}.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,9 +24,10 @@ test:
   primary:
     <<: *default
     database: storage/test.sqlite3
-  user_specific:
-    <<: *default
-    database: storage/test_user_specific.sqlite3
+  # user_specific:
+  #   <<: *default
+  #   # database: storage/test_user_specific.sqlite3
+  #   database: storage/test_user_%{user_id}.sqlite3
 
 
 # Store production database in the storage/ directory, which by default
@@ -47,6 +48,6 @@ production:
     <<: *default
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
-  user_specific:
-    <<: *default
-    database: storage/user_%{user_id}.sqlite3
+  # user_specific:
+  #   <<: *default
+  #   database: storage/production_user_%{user_id}.sqlite3

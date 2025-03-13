@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Notes", type: :request do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
-  let(:valid_attributes) { { title: "Test Note", content: "This is a test note" } }
-  let(:invalid_attributes) { { title: "", content: "" } }
+  let(:valid_attributes) { { content: "This is a test note" } }
+  let(:invalid_attributes) { { content: "" } }
 
   before do
     sign_in(user)
@@ -22,13 +22,13 @@ RSpec.describe "Notes", type: :request do
 
       # Create note for another user
       sign_in(another_user)
-      note2 = Note.create!(title: "Another User's Note", content: "This shouldn't be visible")
+      note2 = Note.create!(content: "This shouldn't be visible")
 
       # Get notes as current user
       sign_in(user)
       get user_notes_path(user)
-      expect(response.body).to include(note1.title)
-      expect(response.body).not_to include(note2.title)
+      expect(response.body).to include(note1.content)
+      expect(response.body).not_to include(note2.content)
     end
   end
 
@@ -61,7 +61,7 @@ RSpec.describe "Notes", type: :request do
 
       it "redirects to the created note" do
         post user_notes_path(user), params: { note: valid_attributes }
-        expect(response).to redirect_to(user_note_path(user, Note.last))
+        expect(response).to redirect_to(user_notes_path(user))
       end
     end
 
@@ -81,20 +81,19 @@ RSpec.describe "Notes", type: :request do
 
   describe "PATCH /notes/:id" do
     context "with valid parameters" do
-      let(:new_attributes) { { title: "Updated Title", content: "Updated content" } }
+      let(:new_attributes) { { content: "Updated content" } }
 
       it "updates the requested note" do
         note = Note.create!(valid_attributes)
         patch user_note_path(user, note), params: { note: new_attributes }
         note.reload
-        expect(note.title).to eq("Updated Title")
         expect(note.content).to eq("Updated content")
       end
 
-      it "redirects to the note" do
+      it "redirects to the notes index" do
         note = Note.create!(valid_attributes)
         patch user_note_path(user, note), params: { note: new_attributes }
-        expect(response).to redirect_to(user_note_path(user, note))
+        expect(response).to redirect_to(user_notes_path(user))
       end
     end
 
@@ -113,7 +112,7 @@ RSpec.describe "Notes", type: :request do
 
       # Try to update as current user
       sign_in(user)
-      patch user_note_path(user, note), params: { note: { title: "Hacked!" } }
+      patch user_note_path(user, note), params: { note: { content: "Hacked!" } }
       expect(response).to be_not_found
     end
   end
@@ -149,7 +148,7 @@ RSpec.describe "Notes", type: :request do
     it "maintains separate note counts for different users" do
       # Create notes for current user
       Note.create!(valid_attributes)
-      Note.create!(valid_attributes.merge(title: "Second Note"))
+      Note.create!(valid_attributes.merge(content: "Second Note Content"))
       expect(Note.count).to eq(2)
 
       # Switch to another user

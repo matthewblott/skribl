@@ -12,15 +12,9 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title %>
-    <div>
-      <%= form.text_field :title %>
-    </div>
-  </div>
+  <%= form.hidden_field :title, value: '' %>
 
   <div>
-    <%= form.label :content %>
     <div>
       <%= form.text_area :content, rows: 10 %>
     </div>
@@ -28,11 +22,12 @@
 
   <div>
     <%= form.submit %>
-    
-    <% if note.persisted? %>
-      <%= link_to "Cancel", user_note_path(Current.user, note) %>
-    <% else %>
-      <%= link_to "Cancel", user_notes_path(Current.user) %>
-    <% end %>
+    <%= link_to "Cancel", user_notes_path(Current.user) %>
   </div>
 <% end %>
+
+<% if note.persisted? %>
+  <%= link_to "Delete Note", user_note_path(Current.user, note), 
+      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this note?" } %>
+<% end %>
+

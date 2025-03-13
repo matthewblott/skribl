@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_current_request_details
   before_action :authenticate
+  before_action :set_database_connection
 
   private
 
@@ -37,6 +38,13 @@ class ApplicationController < ActionController::Base
   def set_current_request_details
     Current.user_agent = request.user_agent
     Current.ip_address = request.ip
+  end
+
+  
+  def set_database_connection
+    user = Current.user
+    return unless user
+    Note.set_database_connection(user)
   end
 
 end

@@ -29,11 +29,13 @@ group :development, :test do
 end
 
 group :development do
+  gem 'bullet'
   gem 'hotwire-spark', '~> 0.1'
   gem 'web-console'
 end
 
 group :test do
+  gem 'bullet'
   gem 'capybara'
   gem 'cuprite'
   gem 'database_cleaner-active_record'

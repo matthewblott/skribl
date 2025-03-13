@@ -1,6 +1,6 @@
 class UserDatabaseService
   def self.create_database(user)
-    database_name = "storage/user_#{user.id}.sqlite3"
+    database_name = "storage/#{Rails.env}_user_#{user.id}.sqlite3"
     
     # Create SQLite database file
     SQLite3::Database.new(database_name) do |db|
@@ -19,7 +19,7 @@ class UserDatabaseService
   def self.get_connection_config(user)
     {
       adapter: 'sqlite3',
-      database: "storage/user_#{user.id}.sqlite3"
+      database: "storage/#{Rails.env}_user_#{user.id}.sqlite3"
     }
   end
 end

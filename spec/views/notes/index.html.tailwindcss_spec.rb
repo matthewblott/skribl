@@ -25,8 +25,6 @@ RSpec.describe "notes/index", type: :view do
 
   it "renders a list of notes" do
     render
-    assert_select 'h2', text: "First Note"
-    assert_select 'h2', text: "Second Note"
     assert_select 'p', text: "First note content"
     assert_select 'p', text: "Second note content"
   end
