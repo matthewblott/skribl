@@ -1,13 +1,8 @@
 class NotesController < ApplicationController
-  include Pagy::Backend
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
-  # @pagy, @order_items = pagy(OrderItem.includes(:product).by_order(order_id), items: count)
-  # scope :by_order, -> (order_id) { where(order_id: order_id) }
-
   def index
-    # @notes = Note.all
-    @notes = Note.recent_first
+    @pagy, @notes = pagy(Note.recent_first)
   end
 
   def show
