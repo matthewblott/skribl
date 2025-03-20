@@ -6,7 +6,7 @@
 
     <canvas data-note-target="canvas"></canvas>
    
-    <%= hidden_field_tag 'img', nil, data: { note_target: 'img' } %>
+    <%= form.hidden_field :img, data: { note_target: 'img' } %>
 
     <% if note.errors.any? %>
       <div>

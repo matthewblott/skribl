@@ -3,7 +3,15 @@ require 'rails_helper'
 RSpec.describe 'Notes', type: :request do
   let(:user) { create(:user) }
   let(:another_user) { create(:user) }
-  let(:valid_attributes) { { content: 'This is a test note' } }
+
+  let(:valid_attributes) do
+    file = File.open(Rails.root.join('spec/images/test_image.png'))
+    { 
+      content: 'This is a test note',
+      img: file
+    }
+  end
+
   let(:invalid_attributes) { { content: '' } }
 
   before do

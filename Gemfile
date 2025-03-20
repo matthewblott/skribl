@@ -42,6 +42,7 @@ group :test do
   gem 'factory_bot_rails', '~> 6.4'
   gem 'guard'
   gem 'guard-rspec'
+  # gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 6.4'
 end

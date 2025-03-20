@@ -47,9 +47,9 @@ class Note < UserRecord
   private
 
   def set_uuid
-    # self.id ||= SecureRandom.uuid
-    self.id = SecureRandom.uuid
-    Rails.logger.debug "Generated UUID: #{self.id}"
+    self.id ||= SecureRandom.uuid
+    # self.id = SecureRandom.uuid
+    # Rails.logger.debug "Generated UUID: #{self.id}"
   end
 
   def strip_whitespace
