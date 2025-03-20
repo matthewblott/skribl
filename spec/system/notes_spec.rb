@@ -52,6 +52,22 @@ describe 'Notes', type: :system do
     click_link 'New Note'
     expect(page).to have_current_path(new_user_note_path(user))
     fill_in 'note[content]', with: 'This is my first note'
+    
+    draw_on_canvas(page)
+
+    click_button 'Create Note'
+    expect(page).to have_current_path(user_notes_path(user))
+    expect(page).to have_content('This is my first note')
+  end
+
+
+  it 'creates a new note on mobile' do
+    click_link 'New Note'
+    expect(page).to have_current_path(new_user_note_path(user))
+    fill_in 'note[content]', with: 'This is my first note'
+    
+    draw_on_canvas_using_touch(page)
+
     click_button 'Create Note'
     expect(page).to have_current_path(user_notes_path(user))
     expect(page).to have_content('This is my first note')
@@ -61,6 +77,7 @@ describe 'Notes', type: :system do
     click_link 'New Note'
     expect(page).to have_current_path(new_user_note_path(user))
     fill_in 'note_content', with: 'This is my first note to update'
+    draw_on_canvas(page)
     click_button 'Create Note'
     expect(page).to have_current_path(user_notes_path(user))
     expect(page).to have_content('This is my first note to update')
@@ -74,6 +91,7 @@ describe 'Notes', type: :system do
     expect(page).to have_selector('h1', text: 'Edit Note')
 
     fill_in 'note_content', with: 'This content has been updated'
+    draw_on_canvas(page)
 
     click_button 'Update Note'
 
@@ -87,6 +105,7 @@ describe 'Notes', type: :system do
     click_link 'New Note'
     expect(page).to have_current_path(new_user_note_path(user))
     fill_in 'note_content', with: 'This is my first note to delete'
+    draw_on_canvas(page)
     click_button 'Create Note'
     expect(page).to have_current_path(user_notes_path(user))
     expect(page).to have_content('This is my first note to delete')

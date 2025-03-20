@@ -2,7 +2,13 @@ class Note < UserRecord
   # validates :title, length: { maximum: 255 }, allow_blank: true
   validates :content, presence: true
   before_save :strip_whitespace
-  before_validation :generate_uuid, on: :create
+  before_validation :set_uuid, on: :create
+  attr_accessor :img
+
+  # Use a custom connection handler per user
+  # self.primary_key = 'id'
+  # before_create :set_uuid, unless: -> { id.present? }
+
 
   scope :recent_first, -> { order(created_at: :desc) }
 
@@ -40,8 +46,10 @@ class Note < UserRecord
 
   private
 
-  def generate_uuid
-    self.id ||= SecureRandom.uuid
+  def set_uuid
+    # self.id ||= SecureRandom.uuid
+    self.id = SecureRandom.uuid
+    Rails.logger.debug "Generated UUID: #{self.id}"
   end
 
   def strip_whitespace

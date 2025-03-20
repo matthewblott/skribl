@@ -5,6 +5,8 @@
   <%= form_with(model: [Current.user, note], html: { id: 'note_form' }) do |form| %>
 
     <canvas data-note-target="canvas"></canvas>
+   
+    <%= hidden_field_tag 'img', nil, data: { note_target: 'img' } %>
 
     <% if note.errors.any? %>
       <div>
@@ -23,9 +25,12 @@
       <%= form.text_field :content %>
     </div>
 
+  <%= form.submit style: 'display: none', data: { note_target: 'submit', search_field_target: 'submit' } %> 
   <% end %>
 
-  <%= button_tag "#{action_name} Note", form: 'note_form'  %>
+  <%= button_tag "Clear", data: { action: 'click->note#clear' }   %>
+
+  <%= button_tag "#{action_name} Note", data: { action: 'click->note#create' } %>
 
   <% if note.persisted? %>
     <%= link_to 'Delete Note', user_note_path(Current.user, note), 
@@ -34,8 +39,6 @@
   <% end %>
 
   <%= link_to 'Cancel', user_notes_path(Current.user), role: 'button' %>
-
-  <%= button_tag "Clear", data: { action: 'click->note#clear' }   %>
 
 
 </div>

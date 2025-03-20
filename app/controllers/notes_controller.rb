@@ -17,6 +17,13 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
+    # @note.img = params[:img]
+
+    # image_data = @note.img
+    # image_data = image_data.sub('data:image/png;base64,', '')
+    # File.open(Rails.root.join('public', 'uploads', "#{@note.id}.png"), 'wb') do |file|
+    #   file.write(Base64.decode64(image_data))
+    # end
 
     if @note.save
       redirect_to user_notes_path(Current.user), notice: 'Note was successfully created.'
@@ -46,6 +53,7 @@ class NotesController < ApplicationController
 
   def note_params
     # Title is now optional, but we still permit it in case it's provided
+    # params.require(:note).permit(:title, :content, :img)
     params.require(:note).permit(:title, :content)
     # params.permit(:text, :img)
   end

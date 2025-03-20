@@ -15,14 +15,15 @@ user = User.create!(
   verified: true
 )
 
-# Create notes for admin user
-Note.set_database_connection(admin)
-30.times do |i|
-  Note.create!(
-    content: "Admin note #{i+1}: This is a sample note created by the admin user. It contains some important information that needs to be remembered."
-  )
-end
+# # Create notes for admin user
+# Note.set_database_connection(admin)
+# 30.times do |i|
+#   Note.create!(
+#     content: "Admin note #{i+1}: This is a sample note created by the admin user. It contains some important information that needs to be remembered."
+#   )
+# end
 
+# Create notes for jane 
 Note.set_database_connection(user)
 
 20.times do |i|
