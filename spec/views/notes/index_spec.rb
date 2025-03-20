@@ -8,8 +8,8 @@ RSpec.describe 'notes/index', type: :view do
   let(:notes) do
     Note.set_database_connection(user)
     Note.delete_all # Clean the test database
-    notes = 50.times.map { |n| create(:note, content: "Note content #{n + 1}") }
-    notes.sort.reverse
+    50.times.map { |n| create(:note, content: "Note content #{n + 1}") }
+    Note.recent_first
   end
 
   before(:each) do
@@ -31,8 +31,5 @@ RSpec.describe 'notes/index', type: :view do
     assert_select 'p', text: 'Note content 50'
     assert_select 'p', text: 'Note content 43'
   end
-  
-  # it 'renders the correct notes when next is clicked' do
-  # end
   
 end

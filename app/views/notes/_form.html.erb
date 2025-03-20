@@ -1,33 +1,41 @@
-<%= form_with(model: [Current.user, note], data: { turbo: false }) do |form| %>
-  <% if note.errors.any? %>
+<% action_name = note.new_record? ? 'Create' : 'Update' %>
+
+<div data-controller="note">
+
+  <%= form_with(model: [Current.user, note], html: { id: 'note_form' }) do |form| %>
+
+    <canvas data-note-target="canvas"></canvas>
+
+    <% if note.errors.any? %>
+      <div>
+        <h3>
+          <%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:
+        </h3>
+        <ul>
+          <% note.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <div>
-      <h3>
-        <%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:
-      </h3>
-      <ul>
-        <% note.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+      <%= form.text_field :content %>
     </div>
+
   <% end %>
 
-  <%= form.hidden_field :title, value: '' %>
+  <%= button_tag "#{action_name} Note", form: 'note_form'  %>
 
-  <div>
-    <div>
-      <%= form.text_area :content, rows: 10 %>
-    </div>
-  </div>
+  <% if note.persisted? %>
+    <%= link_to 'Delete Note', user_note_path(Current.user, note), 
+        role: 'button',
+        data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this note?' } %>
+  <% end %>
 
-  <div>
-    <%= form.submit %>
-    <%= link_to "Cancel", user_notes_path(Current.user) %>
-  </div>
-<% end %>
+  <%= link_to 'Cancel', user_notes_path(Current.user), role: 'button' %>
 
-<% if note.persisted? %>
-  <%= link_to "Delete Note", user_note_path(Current.user, note), 
-      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this note?" } %>
-<% end %>
+  <%= button_tag "Clear", data: { action: 'click->note#clear' }   %>
 
+
+</div>

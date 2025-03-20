@@ -47,12 +47,11 @@ describe 'Notes', type: :system do
     expect(page).to have_selector('p', text: 'Note content 43')
     expect(page).to_not have_selector('p', text: 'Note content 42')
   end
-  
 
   it 'creates a new note' do
     click_link 'New Note'
     expect(page).to have_current_path(new_user_note_path(user))
-    fill_in 'note_content', with: 'This is my first note'
+    fill_in 'note[content]', with: 'This is my first note'
     click_button 'Create Note'
     expect(page).to have_current_path(user_notes_path(user))
     expect(page).to have_content('This is my first note')
@@ -98,7 +97,7 @@ describe 'Notes', type: :system do
 
     all('a', text: 'Edit').first.click
 
-    expect(page).to have_selector('textarea', text: 'This is my first note to delete')
+    expect(page).to have_field('note[content]', with: 'This is my first note to delete')
 
     accept_prompt do
       click_link 'Delete Note'

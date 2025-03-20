@@ -13,6 +13,7 @@ gem 'pagy', '~> 9.3'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.0'
+gem 'requestjs-rails'
 gem 'rolify'
 gem 'solid_cable'
 gem 'solid_cache'
@@ -25,17 +26,16 @@ gem 'turbo-rails'
 
 group :development, :test do
   gem 'brakeman', require: false
+  gem 'bullet'
   gem 'debug', platforms: %i[ mri ], require: 'debug/prelude'
 end
 
 group :development do
-  gem 'bullet'
   gem 'hotwire-spark', '~> 0.1'
   gem 'web-console'
 end
 
 group :test do
-  gem 'bullet'
   gem 'capybara'
   gem 'cuprite'
   gem 'database_cleaner-active_record'

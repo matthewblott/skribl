@@ -1,7 +1,8 @@
 class Note < UserRecord 
-  validates :title, length: { maximum: 255 }, allow_blank: true
+  # validates :title, length: { maximum: 255 }, allow_blank: true
   validates :content, presence: true
   before_save :strip_whitespace
+  before_validation :generate_uuid, on: :create
 
   scope :recent_first, -> { order(created_at: :desc) }
 
@@ -39,8 +40,12 @@ class Note < UserRecord
 
   private
 
+  def generate_uuid
+    self.id ||= SecureRandom.uuid
+  end
+
   def strip_whitespace
-    self.title = title.strip if title.present?
+    # self.title = title.strip if title.present?
     self.content = content.strip if content.present?
   end
 end

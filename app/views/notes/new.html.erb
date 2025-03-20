@@ -1,9 +1,4 @@
 <div>
   <h1>New Note</h1>
-
-  <%= turbo_frame_tag "note_form" do %>
-    <%= render "form", note: @note %>
-  <% end %>
-
-
+  <%= render "form", note: @note %>
 </div>

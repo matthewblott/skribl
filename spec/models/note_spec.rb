@@ -11,22 +11,7 @@ RSpec.describe Note, type: :model do
   describe 'validations' do
     subject { build(:note) }
 
-    it { should_not validate_presence_of(:title) }
     it { should validate_presence_of(:content) }
-    it { should validate_length_of(:title).is_at_most(255) }
-
-    describe 'title validations' do
-      it 'allows empty title' do
-        note = build(:note, title: '')
-        expect(note).to be_valid
-      end
-
-      it 'limits title length' do
-        note = build(:note, title: 'a' * 256)
-        expect(note).not_to be_valid
-        expect(note.errors[:title]).to include('is too long (maximum is 255 characters)')
-      end
-    end
 
     describe 'content validations' do
       it 'requires content' do
@@ -38,11 +23,6 @@ RSpec.describe Note, type: :model do
   end
 
   describe 'whitespace handling' do
-    it 'strips whitespace from title' do
-      note = create(:note, title: '  My Note  ', content: 'Content')
-      expect(note.title).to eq('My Note')
-    end
-
     it 'strips whitespace from content' do
       note = create(:note, title: 'Title', content: '  My content  ')
       expect(note.content).to eq('My content')

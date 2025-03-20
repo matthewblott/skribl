@@ -27,10 +27,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      respond_to do |format|
-        format.html { redirect_to user_notes_path(Current.user), notice: 'Note was successfully updated.' }
-        format.turbo_stream { redirect_to user_notes_path(Current.user), notice: 'Note was successfully updated.' }
-      end
+      redirect_to user_notes_path(Current.user), notice: 'Note was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,12 +35,7 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
-    respond_to do |format|
-      format.html { redirect_to user_notes_path(Current.user), notice: 'Note was successfully deleted.' }
-      # format.turbo_stream
-      format.turbo_stream { redirect_to user_notes_path(Current.user), notice: 'Note was successfully deleted.' }
-
-    end
+    redirect_to user_notes_path(Current.user), notice: 'Note was successfully deleted.'
   end
 
   private
@@ -55,5 +47,6 @@ class NotesController < ApplicationController
   def note_params
     # Title is now optional, but we still permit it in case it's provided
     params.require(:note).permit(:title, :content)
+    # params.permit(:text, :img)
   end
 end

@@ -19,7 +19,6 @@ user = User.create!(
 Note.set_database_connection(admin)
 30.times do |i|
   Note.create!(
-    title: "",
     content: "Admin note #{i+1}: This is a sample note created by the admin user. It contains some important information that needs to be remembered."
   )
 end
@@ -28,7 +27,6 @@ Note.set_database_connection(user)
 
 20.times do |i|
   Note.create!(
-    title: "",
     content: "Jane's note #{i+1}: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember."
   )
 end

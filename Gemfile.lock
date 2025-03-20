@@ -297,6 +297,8 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
+    requestjs-rails (0.0.12)
+      railties (>= 6.1.0)
     rolify (6.0.1)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
@@ -426,6 +428,7 @@ DEPENDENCIES
   propshaft
   puma (>= 5.0)
   rails (~> 8.0)
+  requestjs-rails
   rolify
   rspec-rails
   shoulda-matchers (~> 6.4)
