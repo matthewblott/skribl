@@ -424,6 +424,7 @@ DEPENDENCIES
   hotwire-spark (~> 0.1)
   image_processing (~> 1.2)
   importmap-rails
+  mini_magick
   pagy (~> 9.3)
   propshaft
   puma (>= 5.0)

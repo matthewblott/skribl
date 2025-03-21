@@ -18,19 +18,11 @@
 <%= link_to "Last", user_notes_path(Current.user) + "?page=" + (@pagy.last).to_s, role: "button" %>
 
 <% @notes.each do |note| %>
-  <%= turbo_frame_tag dom_id(note) do %>
-    <div>
-      <p><%= truncate(note.content, length: 100) %></p>
-      <div>
-        <%= link_to "Edit", edit_user_note_path(Current.user, note), 
-            data: { turbo_frame: "_top" } %>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
-<% if @pagy.next %>
-  <%= turbo_frame_tag "posts", loading: :lazy, src: user_notes_path(@notes, page: @pagy.next) do %>
-    <!--- put your loading prompt and/or spinner here --->
-  <% end %>
+  <p>
+    <%= link_to "View", user_note_path(Current.user, note) %>
+    <img src="<%= "/uploads/user_#{Current.user.id}/#{note.id}.png" %>">
+  </p>
+  <p>
+    <%= note.content %>
+  </p>
 <% end %>
