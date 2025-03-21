@@ -4,41 +4,51 @@
 
   <%= form_with(model: [Current.user, note], html: { id: 'note_form' }) do |form| %>
 
-    <canvas data-note-target="canvas"></canvas>
-   
-    <%= form.hidden_field :img, data: { note_target: 'img' } %>
-
-    <% if note.errors.any? %>
+    <% if note.persisted? %>
       <div>
-        <h3>
-          <%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:
-        </h3>
-        <ul>
-          <% note.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+        <img src="<%= "/uploads/user_#{Current.user.id}/#{note.id}.png" %>">
       </div>
+    <% else %>
+      <canvas data-note-target="canvas"></canvas>
+   
+      <%= form.hidden_field :img, data: { note_target: 'img' } %>
+
+      <% if note.errors.any? %>
+        <div>
+          <h3>
+            <%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:
+          </h3>
+          <ul>
+            <% note.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= form.submit style: 'display: none', data: { note_target: 'submit', search_field_target: 'submit' } %> 
+
     <% end %>
 
     <div>
       <%= form.text_field :content %>
     </div>
 
-  <%= form.submit style: 'display: none', data: { note_target: 'submit', search_field_target: 'submit' } %> 
   <% end %>
 
-  <%= button_tag "Clear", data: { action: 'click->note#clear' }   %>
-
-  <%= button_tag "#{action_name} Note", data: { action: 'click->note#create' } %>
 
   <% if note.persisted? %>
     <%= link_to 'Delete Note', user_note_path(Current.user, note), 
         role: 'button',
         data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this note?' } %>
+  <% else %>
+
+    <%= button_tag "Clear", data: { action: 'click->note#clear' }   %>
+
+    <%= button_tag "#{action_name} Note", data: { action: 'click->note#create' } %>
+
   <% end %>
 
   <%= link_to 'Cancel', user_notes_path(Current.user), role: 'button' %>
-
 
 </div>

@@ -1,6 +1,6 @@
 class Note < UserRecord 
   # validates :title, length: { maximum: 255 }, allow_blank: true
-  validates :content, presence: true
+  # validates :content, presence: true
   before_save :strip_whitespace
   before_validation :set_uuid, on: :create
   attr_accessor :img

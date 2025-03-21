@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_create :create_user_database 
+  after_create :create_user_database, :create_user_image_storage
 
   rolify
 
@@ -10,6 +10,14 @@ class User < ApplicationRecord
 
   def create_user_database
     UserDatabaseService.create_database(self)
+  end
+
+  def create_user_image_storage
+    # Create directory for user uploads
+    user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
+    FileUtils.mkdir_p(user_dir)
+    FileUtils.chmod_R(0755, user_dir)
+     
   end
 
   def assign_default_role

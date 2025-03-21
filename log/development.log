@@ -1776,3 +1776,157 @@ Error checking database connection: undefined local variable or method 'connecti
 Completed 200 OK in 34ms (Views: 3.8ms | ActiveRecord: 0.2ms (4 queries, 0 cached) | GC: 0.4ms)
 
 
+  [1m[35m (0.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "roles" /*application='Web'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "roles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "resource_type" varchar, "resource_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_roles_on_name_and_resource_type_and_resource_id" ON "roles" ("name", "resource_type", "resource_id") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_roles_on_name" ON "roles" ("name") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_roles_on_resource" ON "roles" ("resource_type", "resource_id") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "sessions" /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_agent" varchar, "ip_address" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_user_id" ON "sessions" ("user_id") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar NOT NULL, "password_digest" varchar NOT NULL, "verified" boolean DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "users_roles" /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "users_roles" ("user_id" integer, "role_id" integer) /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_users_roles_on_role_id" ON "users_roles" ("role_id") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_users_roles_on_user_id_and_role_id" ON "users_roles" ("user_id", "role_id") /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_users_roles_on_user_id" ON "users_roles" ("user_id") /*application='Web'*/[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[35mSQL (4.3ms)[0m  [1m[35mPRAGMA foreign_keys /*application='Web'*/[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mPRAGMA defer_foreign_keys /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF /*application='Web'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "asessions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_agent" varchar, "ip_address" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "tindex_asessions_on_user_id" ON "asessions" ("user_id") /*application='Web'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "asessions" ("id","user_id","user_agent","ip_address","created_at","updated_at")
+                     SELECT "id","user_id","user_agent","ip_address","created_at","updated_at" FROM "sessions" /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "sessions" /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE TABLE "sessions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_agent" varchar, "ip_address" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_758836b4f0"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mCREATE INDEX "index_sessions_on_user_id" ON "sessions" ("user_id") /*application='Web'*/[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[32mINSERT INTO "sessions" ("id","user_id","user_agent","ip_address","created_at","updated_at")
+                     SELECT "id","user_id","user_agent","ip_address","created_at","updated_at" FROM "asessions" /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE "asessions" /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0 /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1 /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20250224130017) /*application='Web'*/[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20250224125946),
+(20250224125945); /*application='Web'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-03-21 12:22:02.478305', '2025-03-21 12:22:02.478306') RETURNING "key" /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'a7197111edc82aae53f925ed9e83e1f8cec13473', '2025-03-21 12:22:02.485043', '2025-03-21 12:22:02.485044') RETURNING "key" /*application='Web'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1 /*application='Web'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "verified", "created_at", "updated_at") VALUES ('admin@example.com', '$2a$12$rJTAobkSBMp5gd7ZXlUzjebqdI84DsnMCTDABLdxDlFE50pxVLUze', 1, '2025-03-21 12:22:07.695106', '2025-03-21 12:22:07.695106') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = 1 /*application='Web'*/[0m
+  ↳ app/models/user.rb:24:in 'User#assign_default_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."name" = 'user' AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  ↳ app/models/user.rb:24:in 'User#assign_default_role'
+  [1m[36mRole Create (0.3ms)[0m  [1m[32mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES ('user', NULL, NULL, '2025-03-21 12:22:07.738306', '2025-03-21 12:22:07.738306') RETURNING "id" /*application='Web'*/[0m
+  ↳ app/models/user.rb:24:in 'User#assign_default_role'
+  [1m[36mUser::HABTM_Roles Create (0.2ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (1, 1) /*application='Web'*/[0m
+  ↳ app/models/user.rb:24:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."name" = 'admin' AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mRole Create (4.2ms)[0m  [1m[32mINSERT INTO "roles" ("name", "resource_type", "resource_id", "created_at", "updated_at") VALUES ('admin', NULL, NULL, '2025-03-21 12:22:07.767414', '2025-03-21 12:22:07.767414') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser::HABTM_Roles Create (1.4ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (1, 2) /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jane@example.com' LIMIT 1 /*application='Web'*/[0m
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "verified", "created_at", "updated_at") VALUES ('jane@example.com', '$2a$12$DBCdaKwv.IC1EXXU8p0b5.MlGDh/Djqszki3i2kXg4eoP9WNs.KrG', 1, '2025-03-21 12:22:08.049232', '2025-03-21 12:22:08.049232') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mRole Load (0.0ms)[0m  [1m[34mSELECT "roles".* FROM "roles" INNER JOIN "users_roles" ON "roles"."id" = "users_roles"."role_id" WHERE "users_roles"."user_id" = 2 /*application='Web'*/[0m
+  ↳ app/models/user.rb:24:in 'User#assign_default_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT "roles".* FROM "roles" WHERE "roles"."name" = 'user' AND "roles"."resource_type" IS NULL AND "roles"."resource_id" IS NULL ORDER BY "roles"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  ↳ app/models/user.rb:24:in 'User#assign_default_role'
+  [1m[36mUser::HABTM_Roles Create (0.0ms)[0m  [1m[32mINSERT INTO "users_roles" ("user_id", "role_id") VALUES (2, 1) /*application='Web'*/[0m
+  ↳ app/models/user.rb:24:in 'User#assign_default_role'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.6ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('67d793f7-bd74-45df-9059-16076911c6c7', NULL, 'Jane''s note 1: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.084139', '2025-03-21 12:22:08.084139') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('4c60d949-5df8-4fb1-a887-6f2852c654cf', NULL, 'Jane''s note 2: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.089731', '2025-03-21 12:22:08.089731') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('2d2bf4cd-becf-4281-8bc2-6a853d5690bf', NULL, 'Jane''s note 3: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.091309', '2025-03-21 12:22:08.091309') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.5ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('710f97d2-12e3-4ff8-b60f-0c9ba31dd6d1', NULL, 'Jane''s note 4: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.093141', '2025-03-21 12:22:08.093141') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.5ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('1bd0cb3e-fa23-4a7b-8e66-d7ba44bb9122', NULL, 'Jane''s note 5: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.095253', '2025-03-21 12:22:08.095253') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.5ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('b6167ea8-f41a-4cca-b970-81f578abe62f', NULL, 'Jane''s note 6: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.097309', '2025-03-21 12:22:08.097309') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('57280164-7028-4eb0-9864-88c5782c81b1', NULL, 'Jane''s note 7: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.098597', '2025-03-21 12:22:08.098597') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('f602ccac-219c-48ef-81df-58f8781d7a23', NULL, 'Jane''s note 8: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.099593', '2025-03-21 12:22:08.099593') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('52fd7256-15e1-4688-99dc-6d5683a24763', NULL, 'Jane''s note 9: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.100607', '2025-03-21 12:22:08.100607') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.6ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('841ff3ad-f365-42c2-b31b-764f970139c0', NULL, 'Jane''s note 10: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.103076', '2025-03-21 12:22:08.103076') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('2e93c214-1a1a-4911-9431-61c97a465d41', NULL, 'Jane''s note 11: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.104369', '2025-03-21 12:22:08.104369') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('1bc00add-eae7-461e-9c9b-9e7a0b870977', NULL, 'Jane''s note 12: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.107695', '2025-03-21 12:22:08.107695') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('9be6c533-3d02-425d-8859-987d7fde115a', NULL, 'Jane''s note 13: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.108819', '2025-03-21 12:22:08.108819') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('2f7412a3-ad49-428a-b253-782fab0dcb2a', NULL, 'Jane''s note 14: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.110235', '2025-03-21 12:22:08.110235') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('ba1ec822-740b-45b9-b82c-6cbdb5f15e8c', NULL, 'Jane''s note 15: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.111321', '2025-03-21 12:22:08.111321') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('d48aa96b-dce7-4fc5-90ca-628b15ceb13a', NULL, 'Jane''s note 16: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.112342', '2025-03-21 12:22:08.112342') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('a04b3128-7870-437b-a00e-d1d307b32761', NULL, 'Jane''s note 17: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.113394', '2025-03-21 12:22:08.113394') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.5ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('6c6d2d0d-ff32-4979-b7cd-3f173664d1c6', NULL, 'Jane''s note 18: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.115265', '2025-03-21 12:22:08.115265') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('ff38f381-bce6-420b-b4f0-29a84c6af0ce', NULL, 'Jane''s note 19: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.116400', '2025-03-21 12:22:08.116400') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Web'*/[0m
+  [1m[36mNote Create (0.4ms)[0m  [1m[32mINSERT INTO "notes" ("id", "title", "content", "created_at", "updated_at") VALUES ('c9977760-6165-4416-b870-4e5b9e5a85dc', NULL, 'Jane''s note 20: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.', '2025-03-21 12:22:08.117725', '2025-03-21 12:22:08.117725') RETURNING "id" /*application='Web'*/[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Web'*/[0m
+Started GET "/hotwire-spark" for ::1 at 2025-03-21 14:38:48 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+Started GET "/hotwire-spark" [WebSocket] for ::1 at 2025-03-21 14:38:48 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
+Started GET "/hotwire-spark" for ::1 at 2025-03-21 14:38:54 +0000
+Started GET "/hotwire-spark" [WebSocket] for ::1 at 2025-03-21 14:38:54 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
