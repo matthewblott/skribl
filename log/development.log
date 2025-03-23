@@ -4377,3 +4377,27 @@ Error checking database connection: undefined local variable or method 'connecti
 Completed 200 OK in 71ms (Views: 14.6ms | ActiveRecord: 2.2ms (4 queries, 0 cached) | GC: 1.9ms)
 
 
+  [1m[36mNote Load (2.9ms)[0m  [1m[34mSELECT "notes".* FROM "notes" /* loading for pp */ LIMIT 11 /*application='Web'*/[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@example.com' LIMIT 1 /*application='Web'*/[0m
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" /* loading for pp */ LIMIT 11 /*application='Web'*/[0m
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (1.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."id" DESC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" /* loading for pp */ LIMIT 11 OFFSET 10 /*application='Web'*/[0m
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."id" DESC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (6.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."id" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT "notes".* FROM "notes" /* loading for pp */ ORDER BY "notes"."created_at" DESC LIMIT 11 /*application='Web'*/[0m
+  [1m[36mNote Load (1.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" /* loading for pp */ ORDER BY "notes"."created_at" DESC LIMIT 1 OFFSET 2 /*application='Web'*/[0m
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 1 OFFSET 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 1 OFFSET 2 /*application='Web'*/[0m
+  [1m[36mNote Load (1.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 1 OFFSET 2 /*application='Web'*/[0m
+  [1m[36mNote Load (3.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT -1 OFFSET 2 /*application='Web'*/[0m
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" /* loading for pp */ ORDER BY "notes"."created_at" ASC LIMIT 11 /*application='Web'*/[0m
+  [1m[36mNote Load (0.5ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" ASC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" ASC LIMIT 1 OFFSET 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" ASC LIMIT 1 OFFSET 2 /*application='Web'*/[0m
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" ASC LIMIT 1 OFFSET 0 /*application='Web'*/[0m

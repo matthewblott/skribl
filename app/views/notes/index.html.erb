@@ -18,11 +18,15 @@
 <%= link_to "Last", user_notes_path(Current.user) + "?page=" + (@pagy.last).to_s, role: "button" %>
 
 <% @notes.each do |note| %>
+  <div>
+    <%= link_to user_note_path(Current.user, note), class: "note" do %>
+      <%= image_tag "/uploads/user_#{Current.user.id}/#{note.id}.png",
+        alt: note.content,
+        title: note.content
+      %> 
+  </div>
+  <% end %>
   <p>
-    <%= link_to "View", user_note_path(Current.user, note) %>
-    <img src="<%= "/uploads/user_#{Current.user.id}/#{note.id}.png" %>">
-  </p>
-  <p>
-    <%= note.content %>
+    <%#= note.content %>
   </p>
 <% end %>

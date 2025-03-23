@@ -5,7 +5,7 @@ RSpec.describe 'Notes', type: :request do
   let(:another_user) { create(:user) }
 
   let(:valid_attributes) do
-    file = File.open(Rails.root.join('spec/images/test_image.png'))
+    file = File.open(Rails.root.join('spec', 'images', 'test_image.png'))
     { 
       content: 'This is a test note',
       img: file
@@ -32,8 +32,11 @@ RSpec.describe 'Notes', type: :request do
       # Get notes as current user
       sign_in(user)
       get user_notes_path(user)
-      expect(response.body).to include(note1.content)
 
+      expect(response.body).to include "/uploads/user_#{user.id}/#{note1.id}.png"
+      expect(response.body).to_not include "/uploads/user_#{another_user.id}/#{note2.id}.png"
+
+      expect(response.body).to include(note1.content)
       expect(response.body).not_to include(note2.content)
     end
   end
