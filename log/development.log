@@ -30373,3 +30373,1590 @@ uQmCC
 </html>
 <!-- END app/views/layouts/mailer.html.erb -->=
 
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687741628" for ::1 at 2025-04-03 14:42:21 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687741628", "user_id" => "3"}
+  [1m[36mSession Load (1.6ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 2.9ms | GC: 0.1ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.2ms)
+Completed 200 OK in 62ms (Views: 6.8ms | ActiveRecord: 2.3ms (4 queries, 0 cached) | GC: 0.4ms)
+
+
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687763654" for ::1 at 2025-04-03 14:42:43 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687763654", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 58ms (Views: 6.2ms | ActiveRecord: 2.1ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687779537" for ::1 at 2025-04-03 14:42:59 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687779537", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 2.7ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 58ms (Views: 6.1ms | ActiveRecord: 2.1ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687781987" for ::1 at 2025-04-03 14:43:01 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687781987", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 3.0ms | GC: 0.2ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.4ms)
+Completed 200 OK in 60ms (Views: 6.7ms | ActiveRecord: 2.2ms (4 queries, 0 cached) | GC: 1.1ms)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."created_at" BETWEEN '2025-03-26 13:43:11.428837' AND '2025-04-03 13:43:11.428862' /*application='Web'*/[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering user_mailer/daily_notification.html.erb within layouts/mailer
+  Rendered user_mailer/daily_notification.html.erb within layouts/mailer (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 2.6ms | GC: 0.0ms)
+UserMailer#daily_notification: processed outbound mail in 164.1ms
+Delivered mail 67ee906f8f99e_83f06b0-45f@Matthews-MacBook-Pro.local.mail (8.9ms)
+Date: Thu, 03 Apr 2025 14:43:11 +0100
+From: notifications@example.com
+To: admin@example.com
+Message-ID: <67ee906f8f99e_83f06b0-45f@Matthews-MacBook-Pro.local.mail>
+Subject: Daily Notification
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!-- BEGIN app/views/layouts/mailer.html.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 300px;
+      }
+      h1 {
+        color: blue;
+      }
+      li {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- BEGIN app/views/user_mailer/daily_notification.html.erb --><h1>Daily Notification</h1>
+
+<ul>
+</ul>
+<!-- END app/views/user_mailer/daily_notification.html.erb -->
+  </body>
+</html>
+<!-- END app/views/layouts/mailer.html.erb -->
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687863187" for ::1 at 2025-04-03 14:44:23 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687863187", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 2.7ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.1ms)
+Completed 200 OK in 58ms (Views: 6.2ms | ActiveRecord: 2.0ms (4 queries, 0 cached) | GC: 0.4ms)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."created_at" BETWEEN '2025-03-26 13:44:32.626076' AND '2025-04-03 13:44:32.626104' /*application='Web'*/[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering user_mailer/daily_notification.html.erb within layouts/mailer
+  Rendered user_mailer/daily_notification.html.erb within layouts/mailer (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 2.6ms | GC: 0.0ms)
+UserMailer#daily_notification: processed outbound mail in 142.9ms
+Delivered mail 67ee90c0bac1f_85696b0-52c@Matthews-MacBook-Pro.local.mail (8.0ms)
+Date: Thu, 03 Apr 2025 14:44:32 +0100
+From: notifications@example.com
+To: admin@example.com
+Message-ID: <67ee90c0bac1f_85696b0-52c@Matthews-MacBook-Pro.local.mail>
+Subject: Daily Notification
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!-- BEGIN app/views/layouts/mailer.html.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 300px;
+      }
+      h1 {
+        color: blue;
+      }
+      li {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- BEGIN app/views/user_mailer/daily_notification.html.erb --><h1>Daily Notification</h1>
+
+<ul>
+</ul>
+<!-- END app/views/user_mailer/daily_notification.html.erb -->
+  </body>
+</html>
+<!-- END app/views/layouts/mailer.html.erb -->
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."created_at" BETWEEN '2025-03-26 13:44:57.119065' AND '2025-04-03 13:44:57.119095' /*application='Web'*/[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering user_mailer/daily_notification.html.erb within layouts/mailer
+  Rendered user_mailer/daily_notification.html.erb within layouts/mailer (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 4.2ms | GC: 0.0ms)
+UserMailer#daily_notification: processed outbound mail in 11.1ms
+Delivered mail 67ee90d921b1f_85696b0-4a7@Matthews-MacBook-Pro.local.mail (24.7ms)
+Date: Thu, 03 Apr 2025 14:44:57 +0100
+From: notifications@example.com
+To: admin@example.com
+Message-ID: <67ee90d921b1f_85696b0-4a7@Matthews-MacBook-Pro.local.mail>
+Subject: Daily Notification
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!-- BEGIN app/views/layouts/mailer.html.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 300px;
+      }
+      h1 {
+        color: blue;
+      }
+      li {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- BEGIN app/views/user_mailer/daily_notification.html.erb --><h1>Daily Notification</h1>
+
+<ul>
+</ul>
+<!-- END app/views/user_mailer/daily_notification.html.erb -->
+  </body>
+</html>
+<!-- END app/views/layouts/mailer.html.erb -->
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687906934" for ::1 at 2025-04-03 14:45:06 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687906934", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.7ms | GC: 0.0ms)
+Completed 200 OK in 64ms (Views: 6.3ms | ActiveRecord: 2.2ms (4 queries, 0 cached) | GC: 2.0ms)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."created_at" BETWEEN '2025-03-18 13:45:29.211798' AND '2025-04-03 13:45:29.211824' /*application='Web'*/[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering user_mailer/daily_notification.html.erb within layouts/mailer
+  Rendered user_mailer/daily_notification.html.erb within layouts/mailer (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 2.4ms | GC: 0.0ms)
+UserMailer#daily_notification: processed outbound mail in 135.9ms
+Delivered mail 67ee90f953f0b_869e6b0-4d3@Matthews-MacBook-Pro.local.mail (16.3ms)
+Date: Thu, 03 Apr 2025 14:45:29 +0100
+From: notifications@example.com
+To: admin@example.com
+Message-ID: <67ee90f953f0b_869e6b0-4d3@Matthews-MacBook-Pro.local.mail>
+Subject: Daily Notification
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!-- BEGIN app/views/layouts/mailer.html.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf=
+-8">
+    <style>
+      =
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 300px;
+      }
+      h1 {
+        color: blue;
+      }
+      li {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- BEGIN app/views/user_mailer/daily_notification.html.erb --><h1>D=
+aily Notification</h1>
+
+<ul>
+    <li>
+      <img alt=3D"Image" class=3D"image" src=3D"data:image/png;base64,iVB=
+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
+ccAAAAASUVORK5CYII=3D" />
+      <img src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAACWC=
+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3D">
+    </li>  =
+
+    <li>
+      <img alt=3D"Image" class=3D"image" src=3D"data:image/png;base64,iVB=
+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
+KgACdwqwIAQIECBAgQIDAKAIC9CidtA8CBAgQIECAAIEUAQE6hVkRAgQIECBAgACBUQQE6FE6=
+aR8ECBAgQIAAAQIpAgJ0CrMiBAgQIECAAAECowgI0KN00j4IECBAgAABAgRSBAToFGZFCBAgQ=
+IAAAQIERhEQoEfppH0QIECAAAECBAikCAjQKcyKECBAgAABAgQIjCIgQI/SSfsgQIAAAQIECB=
+BIERCgU5gVIUCAAAECBAgQGEVAgB6lk/ZBgAABAgQIECCQIiBApzArQoAAAQIECBAgMIqAAD1=
+KJ+2DAAECBAgQIEAgRUCATmFWhAABAgQIECBAYBQBAXqUTtoHAQIECBAgQIBAioAAncKsCAEC=
+BAgQIECAwCgCAvQonbQPAgQIECBAgACBFAEBOoVZEQIECBAgQIAAgVEEBOhROmkfBAgQIECAA=
+AECKQICdAqzIgQIECBAgAABAqMICNCjdNI+CBAgQIAAAQIEUgQE6BRmRQgQIECAAAECBEYREK=
+BH6aR9ECBAgAABAgQIpAgI0CnMihAgQIAAAQIECIwiIECP0kn7IECAAAECBAgQSBEQoFOYFSF=
+AgAABAgQIEBhFQIAepZP2QYAAAQIECBAgkCIgQKcwK0KAAAECBAgQIDCKgAA9SiftgwABAgQI=
+ECBAIEVAgE5hVoQAAQIECBAgQGAUAQF6lE7aBwECBAgQIECAQIqAAJ3CrAgBAgQIECBAgMAoA=
+gL0KJ20DwIECBAgQIAAgRQBATqFWRECBAgQIECAAIFRBAToUTppHwQIECBAgAABAikC/wPzmG=
+SmIlJK/wAAAABJRU5ErkJggg=3D=3D" />
+      <img src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAACWC=
+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3D=3D=
+">
+    </li>  =
+
+    <li>
+      <img alt=3D"Image" class=3D"image" src=3D"data:image/png;base64,iVB=
+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"=
+ />
+      <img src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAACWC=
+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">
+    </li>  =
+
+    <li>
+      <img alt=3D"Image" class=3D"image" src=3D"data:image/png;base64,iVB=
+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
+" />
+      <img src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAACWC=
+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">
+    </li>  =
+
+</ul>
+<!-- END app/views/user_mailer/daily_notification.html.erb -->
+  </body>
+</html>
+<!-- END app/views/layouts/mailer.html.erb -->=
+
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687969048" for ::1 at 2025-04-03 14:46:09 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687969048", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 59ms (Views: 6.2ms | ActiveRecord: 2.0ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687970080" for ::1 at 2025-04-03 14:46:10 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687970080", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 3.3ms | GC: 0.3ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | GC: 0.4ms)
+Completed 200 OK in 60ms (Views: 6.8ms | ActiveRecord: 2.1ms (4 queries, 0 cached) | GC: 1.4ms)
+
+
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687976045" for ::1 at 2025-04-03 14:46:16 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687976045", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 3.2ms | GC: 0.1ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.1ms)
+Completed 200 OK in 60ms (Views: 6.7ms | ActiveRecord: 2.1ms (4 queries, 0 cached) | GC: 0.5ms)
+
+
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743687977482" for ::1 at 2025-04-03 14:46:17 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743687977482", "user_id" => "3"}
+  [1m[36mSession Load (0.2ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 2.8ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.7ms | GC: 0.0ms)
+Completed 200 OK in 61ms (Views: 6.3ms | ActiveRecord: 2.0ms (4 queries, 0 cached) | GC: 1.5ms)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*application='Web'*/[0m
+  [1m[36mNote Load (0.0ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."created_at" BETWEEN '2025-03-18 13:46:29.306317' AND '2025-04-03 13:46:29.306344' /*application='Web'*/[0m
+  Rendering layout layouts/mailer.html.erb
+  Rendering user_mailer/daily_notification.html.erb within layouts/mailer
+  Rendered user_mailer/daily_notification.html.erb within layouts/mailer (Duration: 0.4ms | GC: 0.0ms)
+  Rendered layout layouts/mailer.html.erb (Duration: 2.3ms | GC: 0.0ms)
+UserMailer#daily_notification: processed outbound mail in 133.8ms
+Delivered mail 67ee91356a7de_88036b0-4a5@Matthews-MacBook-Pro.local.mail (11.7ms)
+Date: Thu, 03 Apr 2025 14:46:29 +0100
+From: notifications@example.com
+To: admin@example.com
+Message-ID: <67ee91356a7de_88036b0-4a5@Matthews-MacBook-Pro.local.mail>
+Subject: Daily Notification
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!-- BEGIN app/views/layouts/mailer.html.erb --><!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf=
+-8">
+    <style>
+      =
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        max-width: 300px;
+      }
+      h1 {
+        color: blue;
+      }
+      li {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- BEGIN app/views/user_mailer/daily_notification.html.erb --><h1>D=
+aily Notification</h1>
+
+<ul>
+    <li>
+      <img alt=3D"Image" src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUh=
+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
+II=3D" />
+    </li>  =
+
+    <li>
+      <img alt=3D"Image" src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUh=
+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
+5ErkJggg=3D=3D" />
+    </li>  =
+
+    <li>
+      <img alt=3D"Image" src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUh=
+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" />
+    </li>  =
+
+    <li>
+      <img alt=3D"Image" src=3D"data:image/png;base64,iVBORw0KGgoAAAANSUh=
+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" />
+    </li>  =
+
+</ul>
+<!-- END app/views/user_mailer/daily_notification.html.erb -->
+  </body>
+</html>
+<!-- END app/views/layouts/mailer.html.erb -->=
+

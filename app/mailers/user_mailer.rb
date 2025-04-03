@@ -30,7 +30,7 @@ class UserMailer < ApplicationMailer
 
     user_dir = Rails.root.join('public', 'uploads', "user_#{user.id.to_s}")
 
-    notes = Note.where created_at: 192.hours.ago..Time.current
+    notes = Note.where created_at: 384.hours.ago..Time.current
 
     notes.each do |note|
       filename = "#{user_dir}/#{note.id}.png"
