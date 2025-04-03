@@ -31960,3 +31960,89 @@ AgT4FBOg+56ZqAgQIECBAgACBIIH/As+jC7UE2bB1AAAAAElFTkSuQmCC" />
 </html>
 <!-- END app/views/layouts/mailer.html.erb -->=
 
+Started GET "/3/notes" for ::1 at 2025-04-03 15:07:54 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Web'*/[0m
+Processing by NotesController#index as HTML
+  Parameters: {"user_id" => "3"}
+  [1m[36mSession Load (0.5ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 15.9ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 3.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 34.4ms | GC: 0.0ms)
+Completed 200 OK in 274ms (Views: 37.7ms | ActiveRecord: 7.5ms (4 queries, 0 cached) | GC: 11.5ms)
+
+
+Started GET "/assets/application-adbdb34a.css" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/tailwind-eb0a72a0.css" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/turbo.min-1262d735.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/ocr-7ced4620.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/controllers/hello_controller-708796bd.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/controllers/index-ee64e1f1.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/controllers/note_controller-139a2663.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/hotwire_spark-d7e0ee73.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/application-32d47011.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/requestjs-8da83efe.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/assets/stimulus.min-4b1e420e.js" for ::1 at 2025-04-03 15:07:54 +0100
+Started GET "/hotwire-spark" for ::1 at 2025-04-03 15:07:55 +0100
+Started GET "/hotwire-spark" [WebSocket] for ::1 at 2025-04-03 15:07:55 +0100
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
+Started GET "/3/notes/ff73f5c1-a7e2-4ee6-8263-815dd77f74ee" for ::1 at 2025-04-03 17:13:38 +0100
+Processing by NotesController#show as HTML
+  Parameters: {"user_id" => "3", "id" => "ff73f5c1-a7e2-4ee6-8263-815dd77f74ee"}
+  [1m[36mSession Load (11.1ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='show',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='show',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" WHERE "notes"."id" = 'ff73f5c1-a7e2-4ee6-8263-815dd77f74ee' LIMIT 1 /*action='show',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:46:in 'NotesController#set_note'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/show.html.erb within layouts/application
+  Rendered notes/_form.html.erb (Duration: 15.7ms | GC: 0.0ms)
+  Rendered notes/show.html.erb within layouts/application (Duration: 16.9ms | GC: 0.0ms)
+  Rendered shared/_header.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.5ms | GC: 0.0ms)
+Completed 200 OK in 109ms (Views: 23.1ms | ActiveRecord: 11.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Finished "/hotwire-spark" [WebSocket] for ::1 at 2025-04-03 20:17:39 +0100
+Hotwire::Spark::Channel stopped streaming from hotwire_spark
+Started GET "/hotwire-spark" for ::1 at 2025-04-03 20:18:48 +0100
+Started GET "/hotwire-spark" [WebSocket] for ::1 at 2025-04-03 20:18:48 +0100
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Hotwire::Spark::Channel is transmitting the subscription confirmation
+Hotwire::Spark::Channel is streaming from hotwire_spark
+[ActionCable] Broadcasting to hotwire_spark: {action: :reload_html, path: "/user_mailer/daily_notification.html.erb"}
+Hotwire::Spark::Channel transmitting {"action" => "reload_html", "path" => "/user_mailer/daily_notification.html.erb"} (via streamed from hotwire_spark)
+Started GET "/3/notes?hotwire_spark=true&reload=1743708149715" for ::1 at 2025-04-03 20:22:29 +0100
+Processing by NotesController#index as HTML
+  Parameters: {"hotwire_spark" => "true", "reload" => "1743708149715", "user_id" => "3"}
+  [1m[36mSession Load (1.5ms)[0m  [1m[34mSELECT "sessions".* FROM "sessions" WHERE "sessions"."id" = 6 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:15:in 'ApplicationController#authenticate'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/application_controller.rb:17:in 'ApplicationController#authenticate'
+Error checking database connection: undefined local variable or method 'connection_config' for class Note
+  [1m[36mNote Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "notes" /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/controllers/notes_controller.rb:5:in 'NotesController#index'
+  Rendering layout layouts/application.html.erb
+  Rendering notes/index.html.erb within layouts/application
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT "notes".* FROM "notes" ORDER BY "notes"."created_at" DESC LIMIT 8 OFFSET 0 /*action='index',application='Web',controller='notes'*/[0m
+  ↳ app/views/notes/index.html.erb:20
+  Rendered notes/index.html.erb within layouts/application (Duration: 15.8ms | GC: 0.4ms)
+  Rendered shared/_header.html.erb (Duration: 2.8ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.0ms | GC: 0.7ms)
+Completed 200 OK in 110ms (Views: 23.2ms | ActiveRecord: 2.6ms (4 queries, 0 cached) | GC: 1.8ms)
+
+

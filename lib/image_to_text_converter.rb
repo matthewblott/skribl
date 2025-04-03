@@ -16,7 +16,7 @@ class ImageToTextConverter
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(url)
-    request["x-rapidapi-key"] = 'c56f8a9233mshdab70bb270f1fbap11c5c6jsnc1c5c38f85db'
+    request["x-rapidapi-key"] =  ENV['RAPIDAPI_KEY']
     request["x-rapidapi-host"] = 'pen-to-print-handwriting-ocr.p.rapidapi.com'
 
     # Change Content-Type to multipart/form-data
