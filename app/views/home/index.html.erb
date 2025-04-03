@@ -21,3 +21,7 @@
 <br>
 
 <%= button_to "Log out", Current.session, method: :delete %>
+
+<%= link_to "New Note", new_user_note_path(Current.user), 
+  data: { turbo_frame: "_top" },
+  role: "button" %>

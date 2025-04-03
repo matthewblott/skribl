@@ -28,8 +28,10 @@ RSpec.describe 'notes/index', type: :view do
 
   it 'renders a list of notes' do
     render
-    assert_select 'p', text: 'Note content 50'
-    assert_select 'p', text: 'Note content 43'
+
+    assert_select 'a.note > img[title=?]', 'Note content 50', count: 1
+    assert_select 'a.note > img[title=?]', 'Note content 43', count: 1
+    assert_select 'a.note > img[title=?]', 'Note content 42', count: 0
   end
   
 end

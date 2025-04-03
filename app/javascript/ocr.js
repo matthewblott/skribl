@@ -6,6 +6,9 @@ const ocr = () => {
   canvas.width = canvas.clientWidth
   canvas.height = canvas.clientHeight
 
+  // We need a background colour for the pen-to-print api
+  ctx.fillStyle = 'white'
+
   let isPainting = false;
   let startX;
   let startY;

@@ -1,9 +1,14 @@
 class Note < UserRecord 
   before_save :strip_whitespace
-  before_validation :set_uuid, on: :create
+  # before_validation :set_uuid, on: :create
   attr_accessor :img
 
   scope :recent_first, -> { order(created_at: :desc) }
+
+  def initialize(attributes = nil)
+    super
+    self.id = SecureRandom.uuid if new_record?
+  end
 
   # This model will connect to different databases based on the current user
   def self.set_database_connection(user)
@@ -36,12 +41,11 @@ class Note < UserRecord
     end
   end
 
-
   private
 
-  def set_uuid
-    self.id ||= SecureRandom.uuid
-  end
+  # def set_uuid
+  #   self.id ||= SecureRandom.uuid
+  # end
 
   def strip_whitespace
     self.content = content.strip if content.present?

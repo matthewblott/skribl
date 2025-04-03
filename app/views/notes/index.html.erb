@@ -1,8 +1,4 @@
-<div>
-  <h1>My Notes</h1>
-  <%= link_to "New Note", new_user_note_path(Current.user), 
-      data: { turbo_frame: "_top" } %>
-</div>
+<% content_for :title, 'My Notes' %>
 
 <%= link_to "First", user_notes_path(Current.user) + "?page=1", role: "button" %>
 <% if @pagy.page > 1 %>
@@ -17,6 +13,10 @@
 <% end %>
 <%= link_to "Last", user_notes_path(Current.user) + "?page=" + (@pagy.last).to_s, role: "button" %>
 
+<%= link_to "New Note", new_user_note_path(Current.user), 
+  data: { turbo_frame: "_top" },
+  role: "button" %>
+
 <% @notes.each do |note| %>
   <div>
     <%= link_to user_note_path(Current.user, note), class: "note" do %>
@@ -24,8 +24,8 @@
         alt: note.content,
         title: note.content
       %> 
+    <% end %>
   </div>
-  <% end %>
   <p>
     <%#= note.content %>
   </p>

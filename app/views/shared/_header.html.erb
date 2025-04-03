@@ -1,16 +1,15 @@
-<% if Current.user %>
-  <header>
-    <div>
-      <h1>Scribble</h1>
-    </div>
+<header>
+  <h1>
+    <%= page_title %>
+  </h1>
+  <% if Current.user %>
     <div>
       <span>
         Signed in as <%= Current.user.email %>
       </span>
-
       <%= button_to "Sign out", 
           Current.session, 
           method: :delete %>
     </div>
-  </header>
-<% end %>
+  <% end %>
+</header>

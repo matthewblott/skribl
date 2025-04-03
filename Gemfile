@@ -12,6 +12,7 @@ gem 'importmap-rails'
 gem 'pagy', '~> 9.3'
 gem 'propshaft'
 gem 'puma', '>= 5.0'
+gem 'rack'
 gem 'rails', '~> 8.0'
 gem 'requestjs-rails'
 gem 'rolify'
@@ -33,6 +34,7 @@ end
 group :development do
   gem 'hotwire-spark', '~> 0.1'
   gem 'web-console'
+  gem 'letter_opener'
 end
 
 group :test do

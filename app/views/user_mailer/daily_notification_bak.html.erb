@@ -1,0 +1,6 @@
+<h1 style="color: blue;">Daily Notification</h1>
+
+<% @image_cids.each do |filename, cid| %>
+  <img src="<%= cid %>" alt="" style="max-width: 100%; height: auto;">
+  <br>
+<% end %>

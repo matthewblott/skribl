@@ -49,6 +49,29 @@ Rails.application.configure do
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
+  mail_service = ENV.fetch("MAIL_SERVICE", "mailhog") # Default to MailHog
+
+  case mail_service
+  when "mailhog"
+    # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      # user_name: Rails.application.credentials.dig(:smtp, :user_name),
+      # password: Rails.application.credentials.dig(:smtp, :password),
+      # address: "smtp.eu.mailgun.org",
+      address: 'localhost', 
+      # port: 587,
+      port:  2025,
+      # authentication: :plain,
+      # enable_starttls_auto: true,
+    }
+  when "letter_opener"
+    config.action_mailer.delivery_method = :letter_opener
+  end
+
+  config.action_mailer.perform_deliveries = true # Ensure emails are actually sent
+  config.action_mailer.raise_delivery_errors = true
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

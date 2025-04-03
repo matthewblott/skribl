@@ -115,7 +115,7 @@ describe 'Notes', type: :system do
 
     expect(page).to have_current_path(new_user_note_path(user))
 
-    fill_in 'note[content]', with: 'This is my first note'
+    # fill_in 'note[content]', with: 'This is my first note'
     
     draw_on_canvas(page)
 

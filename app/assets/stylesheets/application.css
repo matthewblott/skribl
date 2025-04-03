@@ -73,7 +73,8 @@ header,
 main {
   margin: 0 auto;
   max-width: var(--width-content);
-  padding: 3rem 1rem;
+  /* padding: 3rem 1rem; */
+  padding: 0.5rem;
 }
 
 hr {
@@ -593,7 +594,7 @@ blockquote footer {
   scrollbar-width: thin;
   scrollbar-color: var(--color-scrollbar) transparent;
 }
-
+  
 *::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -608,9 +609,26 @@ blockquote footer {
   border-radius: 10px;
 }
 
+/* Additional */
+header {
+  display: flex;
+  justify-content: space-between;
+  
+  form {
+    padding-left: 0.5rem;
+    display: inline;
+  }
+}
+
+h1 {
+  font-size: xx-large;
+}
+
 canvas {
   width: 100%;
   width: 100vw;
   flex-grow: 1;
   background-color: lightyellow;
 }
+
+

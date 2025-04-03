@@ -1,0 +1,8 @@
+<h1>Daily Notification</h1>
+
+<% mime_type = "image/png" %>
+
+<% @image_data.each do |filename, base64_data| %>
+  <% encoded_image = Base64.strict_encode64(File.read(filename)) %>
+  <%= encoded_image.html_safe %>
+<% end %>
