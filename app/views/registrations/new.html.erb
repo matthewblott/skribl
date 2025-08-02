@@ -1,10 +1,11 @@
-<h1>Sign up</h1>
+<% content_for :title, 'Sign up' %>
+
+<% @user.email = 'abc@example.com' %>
 
 <%= form_with(url: sign_up_path) do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
       <ul>
         <% @user.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -13,23 +14,36 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email" %>
-  </div>
+  <%= form.label :email %>
+  <%= form.email_field :email, value: @user.email, required: true, autofocus: true, autocomplete: "email" %>
 
-  <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.password_field :password, required: true, autocomplete: "new-password" %>
-    <div>12 characters minimum.</div>
-  </div>
+  <%= form.label :password  %>
 
-  <div>
-    <%= form.label :password_confirmation, style: "display: block" %>
-    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
-  </div>
+  <%#= form.password_field :password, required: true, autocomplete: "new-password" %>
 
-  <div>
-    <%= form.submit "Sign up" %>
-  </div>
+  <%= form.password_field :password, 
+      required: true, 
+      value: 'password12345',
+      autocomplete: "new-password" %>
+
+  <div>12 characters minimum.</div>
+
+  <%= form.label :password_confirmation %>
+
+  <%#= form.password_field :password_confirmation, required: true, autocomplete: "new-password" %>
+
+  <%= form.password_field :password_confirmation, 
+      required: true, 
+      value: 'password12345',
+      autocomplete: "new-password" %>
+
+
+  <%= form.submit "Sign up", data: {
+    controller: "bridge--sign-in"
+  }, class: 'hotwire-native-hidden' %>
+
 <% end %>
+
+<sign-up>
+  Already have an account? <%= link_to "Sign in", sign_in_path %>
+</sign-up>

@@ -503,3 +503,6 @@ yarn-debug.log*
 ### Extra
 storage/
 .aider*
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

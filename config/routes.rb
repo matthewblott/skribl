@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get "signed_in", to: "status#signed_in"
+  get 'status', to: 'status#status'
   get  "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
+  get  "sign_in_success", to: "sessions#sign_in_success"
   get  "sign_up", to: "registrations#new"
   post "sign_up", to: "registrations#create"
   resources :sessions, only: [:index, :show, :destroy]
@@ -11,6 +14,10 @@ Rails.application.routes.draw do
     resource :password_reset,     only: [:new, :edit, :create, :update]
   end
   root "home#index"
+   
+  # get "home",          to: "home#index"
+  get "settings", to: "home#settings"
+  delete "settings", to: "settings#destroy"
 
   scope '/:user_id', as: 'user' do
     resources :notes

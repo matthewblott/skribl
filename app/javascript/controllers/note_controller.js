@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ['canvas', 'text', 'submit', 'img'];
 
   initialize() {
-    ocr()
+    ocr(this.canvasTarget)
   }
 
   clear() {

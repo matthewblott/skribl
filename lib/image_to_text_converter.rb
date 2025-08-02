@@ -10,14 +10,14 @@ class ImageToTextConverter
     # Read the image file as binary data
     image_data = File.binread(image_path)
 
-    url = URI("https://pen-to-print-handwriting-ocr.p.rapidapi.com/recognize/")
+    url = URI("https://#{ENV['RAPIDAPI_HOST']}/recognize/")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
 
     request = Net::HTTP::Post.new(url)
     request["x-rapidapi-key"] =  ENV['RAPIDAPI_KEY']
-    request["x-rapidapi-host"] = 'pen-to-print-handwriting-ocr.p.rapidapi.com'
+    request["x-rapidapi-host"] = ENV['RAPIDAPI_HOST']
 
     # Change Content-Type to multipart/form-data
     boundary = "----WebKitFormBoundary#{SecureRandom.hex(16)}"

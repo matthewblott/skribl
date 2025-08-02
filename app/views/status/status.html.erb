@@ -1,0 +1,12 @@
+<%= link_to "Sign in", sign_in_path, 
+  data: {
+    turbo_frame: "_top",
+    controller: "bridge--select-sign-in"
+  },
+  role: "button",
+  class: "hotwire-native-hidden" %>
+
+
+<p>
+  Signed in: <%= Current.user.present? %>
+</p>

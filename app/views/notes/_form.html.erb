@@ -3,18 +3,38 @@
 <div data-controller="note">
 
   <% if note.persisted? %>
+
+
+    <%#= button_tag "#{action_name} Note",
+      class: 'hotwire-native-hidden',
+      data: {
+        controller: 'bridge--create-note',
+        action: 'click->note#create'
+      } %>
+
+    <%#= button_tag "Clear",
+      data: {
+        action: 'click->note#clear'
+      },
+      class: 'outline'   %>
+
     <%= link_to 'Delete Note', user_note_path(Current.user, note), 
-        role: 'button',
-        data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this note?' } %>
+      class: 'hotwire-native-hidden',
+      role: 'button',
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: 'Are you sure you want to delete this note?'
+      } %>
+
   <% else %>
 
     <%= button_tag "Clear", data: { action: 'click->note#clear' }   %>
-
     <%= button_tag "#{action_name} Note", data: { action: 'click->note#create' } %>
 
   <% end %>
 
-  <%= link_to 'Cancel', user_notes_path(Current.user), role: 'button' %>
+  <%#= link_to 'Cancel', user_notes_path(Current.user), role: 'button' %>
+
   <%= form_with(model: [Current.user, note], html: { id: 'note_form' }) do |form| %>
 
     <% if note.persisted? %>
@@ -53,7 +73,5 @@
     </div>
 
   <% end %>
-
-
 
 </div>

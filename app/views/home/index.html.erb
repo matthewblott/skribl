@@ -22,6 +22,19 @@
 
 <%= button_to "Log out", Current.session, method: :delete %>
 
-<%= link_to "New Note", new_user_note_path(Current.user), 
-  data: { turbo_frame: "_top" },
-  role: "button" %>
+<%= link_to "Notes",
+  new_user_note_path(Current.user), 
+  data: {
+    turbo_frame: "_top",
+    controller: "bridge--view-notes-from-index"
+  },
+  role: "button",
+  class: "outline hotwire-native-hidden" %>
+
+<%#= button_to "Sign in link", sign_in_path %>
+
+<%#= button_tag "New Note",
+  data: {
+    controller: "bridge--new-note-from-index"
+  },
+  class: "outline hotwire-native-hidden" %>

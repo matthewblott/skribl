@@ -1,7 +1,8 @@
-const ocr = () => {
-  const canvas = document.querySelector('[data-note-target="canvas"]');
+const ocr = (canvas) => {
   const ctx = canvas.getContext('2d');
   const lineWidth = 3;
+  
+  let hasDimensionsSet = false;
 
   canvas.width = canvas.clientWidth
   canvas.height = canvas.clientHeight
@@ -36,6 +37,13 @@ const ocr = () => {
 
   // Touch
   canvas.addEventListener('touchstart', (e) => {
+
+    if (!hasDimensionsSet) {
+      canvas.width = canvas.clientWidth
+      canvas.height = canvas.clientHeight
+      hasDimensionsSet = true;
+    }
+
     isPainting = true;
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;

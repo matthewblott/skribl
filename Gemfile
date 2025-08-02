@@ -21,6 +21,7 @@ gem 'solid_cache'
 gem 'solid_queue'
 gem 'sqlite3', '>= 2.1'
 gem 'stimulus-rails'
+gem 'tailwindcss-ruby'
 gem 'tailwindcss-rails'
 gem 'thruster', require: false
 gem 'turbo-rails'

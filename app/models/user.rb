@@ -1,10 +1,12 @@
 class User < ApplicationRecord
-  after_create :create_user_database, :create_user_image_storage
-
   rolify
 
   after_create :create_user_database
+  after_create :create_user_image_storage
   after_create :assign_default_role
+
+  after_destroy :delete_user_database
+  after_destroy :delete_user_image_storage
 
   private
 
@@ -12,17 +14,26 @@ class User < ApplicationRecord
     UserDatabaseService.create_database(self)
   end
 
+  def delete_user_database
+    UserDatabaseService.delete_database(self)
+  end
+
   def create_user_image_storage
-    # Create directory for user uploads
     user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
     FileUtils.mkdir_p(user_dir)
     FileUtils.chmod_R(0755, user_dir)
-     
+  end
+
+  def delete_user_image_storage
+    user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
+    # debugger
+    FileUtils.rm_rf(user_dir)
   end
 
   def assign_default_role
     add_role(:user) if roles.blank?
   end
+
   has_secure_password
 
   generates_token_for :email_verification, expires_in: 2.days do

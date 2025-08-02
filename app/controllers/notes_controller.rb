@@ -21,7 +21,9 @@ class NotesController < ApplicationController
     ImageToFileJob.perform_later(Current.user.id, @note.id, @note.img) # if @note.persisted?
 
     if @note.save
-      redirect_to user_notes_path(Current.user), notice: 'Note was successfully created.'
+      # redirect_to user_notes_path(Current.user), notice: 'Note was successfully created.'
+      # redirect_to new_user_note_path, notice: 'Note was successfully created.'
+      redirect_to new_user_note_path
     else
       render :new, status: :unprocessable_entity
     end
