@@ -5,7 +5,6 @@ export default class extends BridgeComponent {
 
   connect() {
     super.connect()
-    console.log('Sign in connected')
     this.#addButton()
   }
 

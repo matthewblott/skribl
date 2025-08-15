@@ -38,12 +38,13 @@
       autocomplete: "new-password" %>
 
 
-  <%= form.submit "Sign up", data: {
+  <%= form.submit "Submit", data: {
     controller: "bridge--sign-in"
   }, class: 'hotwire-native-hidden' %>
 
 <% end %>
 
 <sign-up>
-  Already have an account? <%= link_to "Sign in", sign_in_path %>
+  <%# Already have an account?  %>
+  <%#= link_to "Sign in", sign_in_path %>
 </sign-up>

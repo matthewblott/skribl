@@ -27,7 +27,7 @@
       value: 'password12345',
       autocomplete: "current-password" %>
 
-  <%= form.submit "Sign in", data: {
+  <%= form.submit "Submit", data: {
     controller: "bridge--sign-in"
   }, class: 'hotwire-native-hidden' %>
 
@@ -45,5 +45,11 @@
 <sign-up>
   Don't have an account? <%= link_to "Sign up", sign_up_path %>
 </sign-up>
+
+<%#= link_to "Show a toast", "#", data: {
+  controller: "bridge--toast",
+  action: "bridge--toast#show",
+  bridge_message: "This is a toast message."
+} %>
 
 <%#= link_to "Forgot your password?", new_identity_password_reset_path %>

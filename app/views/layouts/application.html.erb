@@ -28,7 +28,33 @@
   </head>
 
   <body class="<%= 'hotwire-native' if native_app? %>">
-    <%#= cookies[:session_token] %>
+    <div>
+      <%#= link_to 'Show tabs', "#", data: {
+        controller: "bridge--show-tabbar",
+        action: "bridge--show-tabbar#foo"
+      } %>
+
+      <%#= link_to 'Hide tabs', "#", data: {
+        controller: "bridge--hide-tabbar",
+        action: "bridge--hide-tabbar#foo"
+      } %>
+
+      <%#= link_to 'Change tab', "#", data: {
+        controller: "bridge--change-tab",
+        action: "bridge--change-tab#foo"
+      } %>
+
+      <a href="/1/notes">Notes</a>
+      <%# <a href="/1/notes/new">New</a> %>
+
+      <%#= link_to 'Test', "#", data: {
+        controller: "bridge--test",
+        action: "bridge--test#foo"
+      } %>
+
+      <%# <a href="/settings">Settings</a> %>
+    </div>
+
     <% unless native_app? %>
       <%= render "shared/header" %>
     <% end %>
