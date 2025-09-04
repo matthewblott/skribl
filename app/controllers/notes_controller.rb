@@ -40,6 +40,7 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     redirect_to user_notes_path(Current.user), notice: 'Note was successfully deleted.'
+    DeleteImageJob.perform_later(Current.user.id, @note.id)
   end
 
   private

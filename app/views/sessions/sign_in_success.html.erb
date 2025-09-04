@@ -1,9 +1,5 @@
-<%#= form_with(url: sign_in_path, html: { onkeydown: "return event.key !== 'Enter';" }) do |form| %>
-
-<%= link_to "Notes", user_notes_path(Current.user), 
+<%= hidden_field_tag :user_id, Current.user.id,
   data: {
-    turbo_frame: "_top",
     controller: "bridge--sign-in-success"
-  },
-  role: "button",
-  class: "hotwire-native-hidden" %>
+  } %>
+

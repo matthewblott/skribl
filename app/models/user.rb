@@ -24,6 +24,10 @@ class User < ApplicationRecord
     FileUtils.chmod_R(0755, user_dir)
   end
 
+  def delete_user_image
+
+  end
+
   def delete_user_image_storage
     user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
     # debugger

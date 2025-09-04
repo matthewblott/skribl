@@ -44,15 +44,15 @@
         action: "bridge--change-tab#foo"
       } %>
 
-      <a href="/1/notes">Notes</a>
+      <%# <a href="/1/notes">Notes</a> %>
       <%# <a href="/1/notes/new">New</a> %>
+      <%# <a href="/settings">Settings</a> %>
 
       <%#= link_to 'Test', "#", data: {
         controller: "bridge--test",
         action: "bridge--test#foo"
       } %>
 
-      <%# <a href="/settings">Settings</a> %>
     </div>
 
     <% unless native_app? %>
