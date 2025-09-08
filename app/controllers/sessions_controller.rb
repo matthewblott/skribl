@@ -33,6 +33,7 @@ class SessionsController < ApplicationController
 
     Note.set_database_connection(user)
     # redirect_to user_notes_path(user), notice: "Signed in successfully"
+    flash[:notice] = "Signed in successfully"
     redirect_to sign_in_success_path(user_id: user.id)
   end
   

@@ -16,6 +16,7 @@ class RegistrationsController < ApplicationController
       send_email_verification
       # redirect_to root_path, notice: "Welcome! You have signed up successfully"
 
+      flash[:notice] = "Welcome! You have signed up successfully"
       redirect_to sign_in_success_path(user_id: @user.id)
 
     else

@@ -21,8 +21,7 @@ class NotesController < ApplicationController
     ImageToFileJob.perform_later(Current.user.id, @note.id, @note.img) # if @note.persisted?
 
     if @note.save
-      # redirect_to user_notes_path(Current.user), notice: 'Note was successfully created.'
-      # redirect_to new_user_note_path, notice: 'Note was successfully created.'
+      flash[:notice] = "Note was successfully created."
       redirect_to new_user_note_path
     else
       render :new, status: :unprocessable_entity
@@ -39,7 +38,8 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
-    redirect_to user_notes_path(Current.user), notice: 'Note was successfully deleted.'
+    flash[:notice] = "Note was successfully deleted."
+    redirect_to user_notes_path(Current.user)
     DeleteImageJob.perform_later(Current.user.id, @note.id)
   end
 

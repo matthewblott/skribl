@@ -1,0 +1,13 @@
+<% flash.each do |key, message| %>
+  <div
+    class="flash hotwire-native-hidden <%= key %>"><%= message %></div>
+
+    <%= hidden_field_tag :user_id, 1,
+      data: {
+        controller: "bridge--toast",
+        bridge_message: message
+      }
+    %>
+
+
+<% end %>

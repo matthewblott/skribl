@@ -21,6 +21,7 @@ export default class extends Controller {
     const canvas = this.canvasTarget.toDataURL('image/png')
     this.imgTarget.value = canvas
     this.submitTarget.click()
+    clear()
   }
 
   isCanvasDirty() {
