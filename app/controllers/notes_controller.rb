@@ -2,7 +2,12 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def index
+    if params[:note_deleted] == 1.to_s
+      flash.now[:notice] = "Note was successfully deleted."
+    end
+
     @pagy, @notes = pagy(Note.recent_first)
+
   end
 
   def show
@@ -21,8 +26,16 @@ class NotesController < ApplicationController
     ImageToFileJob.perform_later(Current.user.id, @note.id, @note.img) # if @note.persisted?
 
     if @note.save
-      flash[:notice] = "Note was successfully created."
-      redirect_to new_user_note_path
+      flash.now[:notice] = "Note was successfully created."
+      # redirect_to new_user_note_path
+
+      respond_to do |format|
+        format.turbo_stream
+        # format.html { redirect_to notes_path, notice: "Note created." }
+        # format.turbo_stream { render turbo_stream: turbo_stream.replace("new_note", partial: "notes/form", locals: { note: @note }) }
+
+      end
+
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,9 +52,26 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     flash[:notice] = "Note was successfully deleted."
-    redirect_to user_notes_path(Current.user)
+    session[:deletion_notice] = flash[:notice]
     DeleteImageJob.perform_later(Current.user.id, @note.id)
+
+    # redirect_to user_notes_path(Current.user)
+    redirect_to user_notes_path(Current.user, note_deleted: 1)
+
   end
+
+  # def destroy
+  #   @note.destroy
+  #   flash.now[:notice] = "Note was successfully deleted."
+  #   session[:deletion_notice] = "Note was successfully deleted."
+  #
+  #   DeleteImageJob.perform_later(Current.user.id, @note.id)
+  #   
+  #   respond_to do |format|
+  #     format.html { redirect_to user_notes_path(Current.user) }
+  #     format.turbo_stream
+  #   end
+  # end
 
   private
 

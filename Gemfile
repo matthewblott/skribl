@@ -29,7 +29,14 @@ gem 'turbo-rails'
 group :development, :test do
   gem 'brakeman', require: false
   gem 'bullet'
-  gem 'debug', platforms: %i[ mri ], require: 'debug/prelude'
+  # gem 'debug', platforms: %i[ mri ], require: 'debug/prelude'
+  gem 'debug', platforms: %i[ mri ] 
+  # gem 'debase'
+  # gem 'debase-ruby_core_source'
+  # gem 'ruby-debug-ide'
+  # gem 'mutex_m' 
+  gem 'debase', '>= 0.2.4.1'
+  gem 'ruby-debug-ide', '>= 0.7.0' 
 end
 
 group :development do

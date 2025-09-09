@@ -36,6 +36,32 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # def new_authenticate
+  #   token = Rails.env.test? ? cookies[:session_token] : cookies.signed[:session_token]
+  #   
+  #   if token.present? && (session_record = Session.find_by_id(token))
+  #     begin
+  #       if session_record.user_id && (user = User.find_by(id: session_record.user_id))
+  #         Current.session = session_record
+  #         Current.user = user
+  #         return  # Explicitly return here to avoid any issues
+  #       else
+  #         # Invalid user_id or user not found, clean up the session
+  #         session_record.destroy
+  #         cookies.delete(:session_token)
+  #         redirect_to sign_in_path and return  # Add 'and return'
+  #       end
+  #     rescue => e
+  #       Rails.logger.error("Authentication error: #{e.message}")
+  #       cookies.delete(:session_token)
+  #       redirect_to sign_in_path and return  # Add 'and return'
+  #     end
+  #   else
+  #     cookies.delete(:session_token)
+  #     redirect_to sign_in_path and return  # Add 'and return'
+  #   end
+  # end
+
   def set_current_request_details
     token = Rails.env.test? ? cookies[:session_token] : cookies.signed[:session_token]
 
@@ -59,6 +85,13 @@ class ApplicationController < ActionController::Base
       cookies.delete(:session_token)
     end
   end
+
+  # def new_set_current_request_details
+  #   return unless Current.user # Only set details if user is already authenticated
+  #
+  #   Current.user_agent = request.user_agent
+  #   Current.ip_address = request.ip
+  # end
 
   def set_database_connection
     user = Current.user
