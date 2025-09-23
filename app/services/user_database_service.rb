@@ -9,6 +9,7 @@ class UserDatabaseService
           id uuid NOT NULL PRIMARY KEY,
           title VARCHAR,
           content TEXT,
+          image_saved BOOLEAN,
           created_at DATETIME,
           updated_at DATETIME
         );

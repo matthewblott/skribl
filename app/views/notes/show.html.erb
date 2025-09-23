@@ -1,10 +1,15 @@
 <% content_for :title, 'Note' %>
 
+<%= link_to "Delete", user_note_path(Current.user, @note), method: :delete %>
+
+<%= link_to "Link Only", user_notes_path(Current.user, @note) %>
+
 <%= link_to "Delete",
   user_note_path(Current.user, @note),
   data: {
+    # turbo: false,
     controller: "bridge--delete-note",
-    turbo_frame: "_top",
+    # turbo_frame: "_top",
     turbo_method: :delete,
     # turbo_confirm: "Are you sure?",
     bridge_title: "Delete Note",

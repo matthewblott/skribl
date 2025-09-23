@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="view-transition" content="same-origin">
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -30,6 +31,11 @@
   <body class="<%= 'hotwire-native' if native_app? %>">
 
     <%#= render "shared/links" %>
+
+    
+    <%= turbo_stream_from "foo" %>
+
+    <%# <div id="foo" class="hotwire-native-hidden"></div> %>
 
     <% unless native_app? %>
       <%= render "shared/header" %>

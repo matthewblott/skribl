@@ -61,7 +61,7 @@ Rails.application.configure do
       # address: "smtp.eu.mailgun.org",
       address: 'localhost', 
       # port: 587,
-      port:  2025,
+      port:  1025,
       # authentication: :plain,
       # enable_starttls_auto: true,
     }

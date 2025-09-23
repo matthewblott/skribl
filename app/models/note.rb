@@ -27,6 +27,13 @@ class Note < UserRecord
     end
   end
 
+  after_create_commit -> {
+    broadcast_prepend_to "notes",
+      target: "notes_list",
+      partial: "notes/note",
+      locals: { note: self }
+  } 
+
   def self.connected_to_user?(user)
     return false unless user
     

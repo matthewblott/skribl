@@ -1,37 +1,31 @@
 <% content_for :title, 'My Notes' %>
 
-<%= link_to "First", user_notes_path(Current.user) + "?page=1", role: "button", class: "hotwire-native-hidden" %>
-<% if @pagy.page > 1 %>
-  <%= link_to "Previous", user_notes_path(Current.user) + "?page=" + (@pagy.page - 1).to_s, role: "button", class: "hotwire-native-hidden"  %>
-<% else %>
-  <a href="#" role="button" class="hotwire-native-hidden">Previous</a>
-<% end %>
-<% if @pagy.page == @pagy.last %>
-  <a href="#" role="button" class="hotwire-native-hidden">Next</a>
-<% else %>
-  <%= link_to "Next", user_notes_path(Current.user) + "?page=" + (@pagy.page.next).to_s, role: "button", class: "hotwire-native-hidden" %>
-<% end %>
+<controls>
+  <%= link_to "First", user_notes_path(Current.user) + "?page=1", role: "button", class: "hotwire-native-hidden" %>
+  <% if @pagy.page > 1 %>
+    <%= link_to "Previous", user_notes_path(Current.user) + "?page=" + (@pagy.page - 1).to_s, role: "button", class: "hotwire-native-hidden"  %>
+  <% else %>
+    <a href="#" role="button" class="hotwire-native-hidden">Previous</a>
+  <% end %>
+  <% if @pagy.page == @pagy.last %>
+    <a href="#" role="button" class="hotwire-native-hidden">Next</a>
+  <% else %>
+    <%= link_to "Next", user_notes_path(Current.user) + "?page=" + (@pagy.page.next).to_s, role: "button", class: "hotwire-native-hidden" %>
+  <% end %>
 
-<%= link_to "Last", user_notes_path(Current.user) + "?page=" + (@pagy.last).to_s, role: "button", class: "hotwire-native-hidden" %>
+  <%= link_to "Last", user_notes_path(Current.user) + "?page=" + (@pagy.last).to_s, role: "button", class: "hotwire-native-hidden" %>
 
-<%= link_to "New Note", new_user_note_path(Current.user), 
-  data: {
-    turbo_frame: "_top",
-    controller: "bridge--new-note"
-  },
-  role: "button",
-  class: "hotwire-native-hidden" %>
+  <%= link_to "New Note", new_user_note_path(Current.user), 
+    data: {
+      turbo_frame: "_top",
+      controller: "bridge--new-note"
+    },
+    role: "button",
+    class: "hotwire-native-hidden" %>
+</controls>
 
-<% @notes.each do |note| %>
-  <div>
-    <%= link_to user_note_path(Current.user, note), class: "note" do %>
-      <%= image_tag "/uploads/user_#{Current.user.id}/#{note.id}.png",
-        alt: note.content,
-        title: note.content
-      %> 
-    <% end %>
-  </div>
-  <p>
-    <%#= note.content %>
-  </p>
-<% end %>
+<%= turbo_stream_from "notes" %>
+
+<div id="notes_list">
+  <%= render @notes %>
+</div>

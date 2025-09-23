@@ -8,6 +8,11 @@ class NotesController < ApplicationController
 
     @pagy, @notes = pagy(Note.recent_first)
 
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+
   end
 
   def show
@@ -50,13 +55,18 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    @note.destroy
-    flash[:notice] = "Note was successfully deleted."
-    session[:deletion_notice] = flash[:notice]
-    DeleteImageJob.perform_later(Current.user.id, @note.id)
+    # @note.destroy
+    # flash[:notice] = "Note was successfully deleted."
+    # session[:deletion_notice] = flash[:notice]
+    # DeleteImageJob.perform_later(Current.user.id, @note.id)
 
     # redirect_to user_notes_path(Current.user)
     redirect_to user_notes_path(Current.user, note_deleted: 1)
+
+    # respond_to do |format|
+    #   format.turbo_stream
+    #   format.html { redirect_to user_notes_path(Current.user, note_deleted: 1) }
+    # end
 
   end
 

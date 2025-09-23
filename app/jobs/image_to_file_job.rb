@@ -9,8 +9,24 @@ class ImageToFileJob < ApplicationJob
     file = File.open(file_path, 'wb')
     file.write(Base64.decode64(image_data))
     file.close
-    
-    ImageToTextJob.perform_later(user_id, note_id) 
+
+    user = User.find(user_id)
+    Note.set_database_connection(user)
+    note = Note.find(note_id)
+    note.image_saved = true
+    note.save
+
+    # html_string = "<a href='/uploads/user_#{user_id}/#{note_id}.png'></a>"
+    html_string = "<img src='/uploads/user_#{user_id}/#{note_id}.png'>"
+
+    Turbo::StreamsChannel.broadcast_update_to(
+      :foo,
+      # :notes_list,
+      target: "note_#{note_id}",
+      html: html_string
+    )
+
+    # ImageToTextJob.perform_later(user_id, note_id) 
   end
 
 end
