@@ -16,11 +16,12 @@ class ImageToFileJob < ApplicationJob
     note.image_saved = true
     note.save
 
-    # html_string = "<a href='/uploads/user_#{user_id}/#{note_id}.png'></a>"
-    html_string = "<img src='/uploads/user_#{user_id}/#{note_id}.png'>"
+    html_string = "<a href='/#{user_id}/notes/#{note_id}'>"
+    html_string += "<img src='/uploads/user_#{user_id}/#{note_id}.png'>"
+    html_string += "</a>"
 
     Turbo::StreamsChannel.broadcast_update_to(
-      :foo,
+      :created_note,
       # :notes_list,
       target: "note_#{note_id}",
       html: html_string

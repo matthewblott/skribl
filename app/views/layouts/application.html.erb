@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%#= page_title %>
-
     <title><%= content_for(:title) || "Scribble" %></title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -31,11 +29,8 @@
   <body class="<%= 'hotwire-native' if native_app? %>">
 
     <%#= render "shared/links" %>
-
     
-    <%= turbo_stream_from "foo" %>
-
-    <%# <div id="foo" class="hotwire-native-hidden"></div> %>
+    <%= turbo_stream_from "created_note" %>
 
     <% unless native_app? %>
       <%= render "shared/header" %>

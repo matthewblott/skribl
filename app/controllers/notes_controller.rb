@@ -10,7 +10,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.turbo_stream
+      # format.turbo_stream
     end
 
   end
@@ -32,13 +32,9 @@ class NotesController < ApplicationController
 
     if @note.save
       flash.now[:notice] = "Note was successfully created."
-      # redirect_to new_user_note_path
 
       respond_to do |format|
         format.turbo_stream
-        # format.html { redirect_to notes_path, notice: "Note created." }
-        # format.turbo_stream { render turbo_stream: turbo_stream.replace("new_note", partial: "notes/form", locals: { note: @note }) }
-
       end
 
     else
@@ -55,33 +51,14 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    # @note.destroy
-    # flash[:notice] = "Note was successfully deleted."
-    # session[:deletion_notice] = flash[:notice]
-    # DeleteImageJob.perform_later(Current.user.id, @note.id)
+    @note.destroy
+    flash[:notice] = "Note was successfully deleted."
+    session[:deletion_notice] = flash[:notice]
+    DeleteImageJob.perform_later(Current.user.id, @note.id)
 
-    # redirect_to user_notes_path(Current.user)
-    redirect_to user_notes_path(Current.user, note_deleted: 1)
-
-    # respond_to do |format|
-    #   format.turbo_stream
-    #   format.html { redirect_to user_notes_path(Current.user, note_deleted: 1) }
-    # end
+    redirect_to user_notes_path(Current.user, note_deleted: 1), format: :html
 
   end
-
-  # def destroy
-  #   @note.destroy
-  #   flash.now[:notice] = "Note was successfully deleted."
-  #   session[:deletion_notice] = "Note was successfully deleted."
-  #
-  #   DeleteImageJob.perform_later(Current.user.id, @note.id)
-  #   
-  #   respond_to do |format|
-  #     format.html { redirect_to user_notes_path(Current.user) }
-  #     format.turbo_stream
-  #   end
-  # end
 
   private
 
