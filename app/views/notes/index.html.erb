@@ -1,4 +1,4 @@
-<% content_for :title, 'My Notes' %>
+<% content_for :title, 'Scribbles' %>
 
 <controls>
   <%= link_to "First", user_notes_path(Current.user) + "?page=1", role: "button", class: "hotwire-native-hidden" %>
@@ -15,7 +15,7 @@
 
   <%= link_to "Last", user_notes_path(Current.user) + "?page=" + (@pagy.last).to_s, role: "button", class: "hotwire-native-hidden" %>
 
-  <%= link_to "New Note", new_user_note_path(Current.user), 
+  <%= link_to "New Scribble", new_user_note_path(Current.user), 
     data: {
       turbo_frame: "_top",
       controller: "bridge--new-note"

@@ -1,8 +1,8 @@
-<% content_for :title, 'New Note' %>
+<% content_for :title, 'New Scribble' %>
 
 <div data-controller="note">
 
-  <%= button_tag "Create Note",
+  <%= button_tag "Save",
     data: {
       controller: 'bridge--create-note',
       action: 'click->note#create'
