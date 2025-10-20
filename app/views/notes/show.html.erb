@@ -22,7 +22,7 @@
 
 <div>
 
-  <%= image_tag "/uploads/user_#{Current.user.id}/#{@note.id}.png",
+  <%= image_tag "/uploads/#{Current.user.id}/#{@note.id}.png",
     alt: @note.content,
     title: @note.content
   %> 

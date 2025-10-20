@@ -18,8 +18,11 @@ class User < ApplicationRecord
     UserDatabaseService.delete_database(self)
   end
 
+  # path = Rails.root.join("uploads", "user_#{user_id}", file)
+
   def create_user_image_storage
-    user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
+    # user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
+    user_dir = Rails.root.join('uploads', "#{id.to_s}")
     FileUtils.mkdir_p(user_dir)
     FileUtils.chmod_R(0755, user_dir)
   end
@@ -29,7 +32,8 @@ class User < ApplicationRecord
   end
 
   def delete_user_image_storage
-    user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
+    # user_dir = Rails.root.join('public', 'uploads', "user_#{id.to_s}")
+    user_dir = Rails.root.join('uploads', "#{id.to_s}")
     # debugger
     FileUtils.rm_rf(user_dir)
   end

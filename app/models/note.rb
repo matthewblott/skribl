@@ -21,6 +21,7 @@ class Note < UserRecord
         establish_connection(config)
         connection.reconnect! # Ensure connection is fresh
       end
+      CurrentNoteContext.user_id = user.id
     rescue => e
       Rails.logger.error "Failed to connect to user database: #{e.message}"
       raise e # Re-raise to handle at controller level
@@ -29,7 +30,7 @@ class Note < UserRecord
 
   after_create_commit -> {
     broadcast_prepend_to "notes",
-      target: "notes_list",
+    target: "notes_user_#{CurrentNoteContext.user_id}",
       partial: "notes/note",
       locals: { note: self }
   } 

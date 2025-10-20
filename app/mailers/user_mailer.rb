@@ -28,7 +28,8 @@ class UserMailer < ApplicationMailer
     @user = user
     @image_data = {}
 
-    user_dir = Rails.root.join('public', 'uploads', "user_#{user.id.to_s}")
+    # user_dir = Rails.root.join('public', 'uploads', "user_#{user.id.to_s}")
+    user_dir = Rails.root.join('uploads', "user_#{user.id.to_s}")
 
     notes = Note.where created_at: 384.hours.ago..Time.current
 

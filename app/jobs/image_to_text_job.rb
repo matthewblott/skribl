@@ -3,7 +3,8 @@ class ImageToTextJob < ApplicationJob
 
   def perform(user_id, note_id)
 
-    file_path = Rails.root.join('public', 'uploads', "user_#{user_id}", "#{note_id}.png")
+    # file_path = Rails.root.join('public', 'uploads', "user_#{user_id}", "#{note_id}.png")
+    file_path = Rails.root.join('uploads', "user_#{user_id}", "#{note_id}.png")
 
     response = ImageToTextConverter.convert(file_path)
 

@@ -2,7 +2,7 @@
 
   <% if note.image_saved %>
     <%= link_to user_note_path(Current.user, note), class: "note" do %>
-      <%= image_tag "/uploads/user_#{Current.user.id}/#{note.id}.png",
+      <%= image_tag "/uploads/#{Current.user.id}/#{note.id}.png",
         alt: note.content,
         title: note.content
       %> 

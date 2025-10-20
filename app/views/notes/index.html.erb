@@ -26,6 +26,6 @@
 
 <%= turbo_stream_from "notes" %>
 
-<div id="notes_list">
+<div id="notes_user_<%= Current.user.id %>">
   <%= render @notes %>
 </div>
