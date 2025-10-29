@@ -21,9 +21,9 @@ user = User.create!(
 # Note.set_database_connection(admin)
 #
 # # Delete the old images 
-# FileUtils.remove_dir(Rails.root.join('public', 'uploads', "user_#{admin.id}"))
+# FileUtils.remove_dir(Rails.root.join('uploads', admin.id.to_s))
 #
-# admin_images_dir = Rails.root.join('public', 'uploads', "user_#{admin.id}")
+# admin_images_dir = Rails.root.join('uploads', admin.id.to_s)
 #
 # 30.times do |i|
 #   note = Note.create!(
@@ -42,9 +42,9 @@ user = User.create!(
 # Note.set_database_connection(user)
 #
 # # Delete the old images 
-# FileUtils.remove_dir(Rails.root.join('public', 'uploads', "user_#{user.id}"))
+# FileUtils.remove_dir(Rails.root.join('uploads', user.id.to_s))
 #
-# user_images_dir = Rails.root.join('public', 'uploads', "user_#{user.id}")
+# user_images_dir = Rails.root.join('uploads', user.id.to_s)
 #
 # 20.times do |i|
 #   note = Note.create!(
