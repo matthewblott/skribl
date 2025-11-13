@@ -16,13 +16,12 @@ gem 'rack'
 gem 'rails', '8.0.3'
 gem 'requestjs-rails'
 gem 'rolify'
+gem "rotp", "~> 6.3"
 gem 'solid_cable'
 gem 'solid_cache'
 gem 'solid_queue'
 gem 'sqlite3', '>= 2.1'
 gem 'stimulus-rails'
-gem 'tailwindcss-ruby'
-gem 'tailwindcss-rails'
 gem 'thruster', require: false
 gem 'turbo-rails'
 

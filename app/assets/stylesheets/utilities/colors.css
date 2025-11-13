@@ -1,0 +1,9 @@
+.outline {
+  background-color: transparent;
+  color: var(--pico-primary);
+}
+
+.danger {
+  border-color: var(--pico-form-element-invalid-border-color);
+  color: var(--pico-form-element-invalid-border-color);
+}

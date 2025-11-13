@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_27_115334) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_160116) do
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -38,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_115334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.time "notification_time", default: "2000-01-01 07:00:00", null: false
+    t.string "totp_secret"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

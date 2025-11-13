@@ -16,7 +16,7 @@ development:
   queue:
     <<: *default
     database: storage/development_queue.sqlite3
-    migrations_paths: db/queue_migrate
+    # migrations_paths: db/queue_migrate
   # user_specific:
   #   <<: *default
   #   database: storage/development_user_%{user_id}.sqlite3

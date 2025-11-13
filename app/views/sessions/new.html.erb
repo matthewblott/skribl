@@ -1,17 +1,5 @@
 <% content_for :title, 'Sign in' %>
 
-<% if notice %>
-  <div>
-    <p><%= notice %></p>
-  </div>
-<% end %>
-
-<% if alert %>
-  <div>
-    <p><%= alert %></p>
-  </div>
-<% end %>
-
 <%= form_with(url: sign_in_path, html: { onkeydown: "return event.key !== 'Enter';" }) do |form| %>
   <%= form.label :email %>
   <%= form.email_field :email, 
@@ -31,25 +19,4 @@
     controller: "bridge--sign-in"
   }, class: 'hotwire-native-hidden' %>
 
-
-  <%= link_to "Status", status_path, 
-    data: {
-      turbo_frame: "_top",
-      controller: "bridge--status"
-    },
-    role: "button",
-    class: "hotwire-native-hidden" %>
-
 <% end %>
-
-<sign-up>
-  Don't have an account? <%= link_to "Sign up", sign_up_path %>
-</sign-up>
-
-<%#= link_to "Show a toast", "#", data: {
-  controller: "bridge--toast",
-  action: "bridge--toast#show",
-  bridge_message: "This is a toast message."
-} %>
-
-<%#= link_to "Forgot your password?", new_identity_password_reset_path %>

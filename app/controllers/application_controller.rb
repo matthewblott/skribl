@@ -1,5 +1,6 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < BaseController
   include Pagy::Backend
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   # allow_browser versions: :modern
 
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     token = Rails.env.test? ? cookies[:session_token] : cookies.signed[:session_token]
-    
+
     if token.present? && (session_record = Session.find_by_id(token))
       begin
         if session_record.user_id && (user = User.find_by(id: session_record.user_id))
@@ -20,47 +21,23 @@ class ApplicationController < ActionController::Base
         else
           # Invalid user_id or user not found, clean up the session
           session_record.destroy
-          cookies.delete(:session_token)
-          redirect_to sign_in_path
+          redirect_to_sign_in
         end
       rescue => e
         # Log the error but don't expose it to the user
         Rails.logger.error("Authentication error: #{e.message}")
-        cookies.delete(:session_token)
-        redirect_to sign_in_path
+        redirect_to_sign_in
       end
     else
       # No valid session found
-      cookies.delete(:session_token)
-      redirect_to sign_in_path
+      redirect_to_sign_in
     end
   end
 
-  # def new_authenticate
-  #   token = Rails.env.test? ? cookies[:session_token] : cookies.signed[:session_token]
-  #   
-  #   if token.present? && (session_record = Session.find_by_id(token))
-  #     begin
-  #       if session_record.user_id && (user = User.find_by(id: session_record.user_id))
-  #         Current.session = session_record
-  #         Current.user = user
-  #         return  # Explicitly return here to avoid any issues
-  #       else
-  #         # Invalid user_id or user not found, clean up the session
-  #         session_record.destroy
-  #         cookies.delete(:session_token)
-  #         redirect_to sign_in_path and return  # Add 'and return'
-  #       end
-  #     rescue => e
-  #       Rails.logger.error("Authentication error: #{e.message}")
-  #       cookies.delete(:session_token)
-  #       redirect_to sign_in_path and return  # Add 'and return'
-  #     end
-  #   else
-  #     cookies.delete(:session_token)
-  #     redirect_to sign_in_path and return  # Add 'and return'
-  #   end
-  # end
+  def redirect_to_sign_in
+    cookies.delete(:session_token)
+    redirect_to send_otp_path
+  end
 
   def set_current_request_details
     token = Rails.env.test? ? cookies[:session_token] : cookies.signed[:session_token]
@@ -86,17 +63,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def new_set_current_request_details
-  #   return unless Current.user # Only set details if user is already authenticated
-  #
-  #   Current.user_agent = request.user_agent
-  #   Current.ip_address = request.ip
-  # end
-
   def set_database_connection
     user = Current.user
     return unless user
     Note.set_database_connection(user)
   end
+
 
 end

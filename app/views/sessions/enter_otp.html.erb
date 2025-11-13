@@ -1,0 +1,23 @@
+<% content_for :title, 'Sign in' %>
+
+<%= form_with(url: sign_in_path, html: { onkeydown: "return event.key !== 'Enter';" }) do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, value: @email, class: 'pill' %>
+  </div>
+  <div>
+    <%= f.label :otp_code, "One-Time Code" %>
+    <%= f.text_field :otp_code, class: 'pill' %>
+  </div>
+
+  <%= f.submit "Sign In",
+    data: {
+      controller: "bridge--sign-in"
+    },
+    class: 'hotwire-native-hidden pill' %>
+
+<% end %>
+
+<p>
+  If the code hasn't appeared in your inbox check your spam or try again <%= link_to "here", send_otp_path(email: @email) %>.
+</p>

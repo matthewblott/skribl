@@ -1,10 +1,6 @@
 class RegistrationsController < ApplicationController
   skip_before_action :authenticate
 
-  def new
-    @user = User.new
-  end
-
   def create
     @user = User.new(user_params)
     @user.verified = true
@@ -16,7 +12,7 @@ class RegistrationsController < ApplicationController
       send_email_verification
       # redirect_to root_path, notice: "Welcome! You have signed up successfully"
 
-      flash[:notice] = "Welcome! You have signed up successfully"
+      # flash[:notice] = "Welcome! You have signed up successfully"
       redirect_to sign_in_success_path(user_id: @user.id)
 
     else
@@ -31,7 +27,7 @@ class RegistrationsController < ApplicationController
   end
 
   def send_email_verification
-    UserMailer.with(user: @user).email_verification.deliver_later
+    # UserMailer.with(user: @user).email_verification.deliver_later
   end
 
 end

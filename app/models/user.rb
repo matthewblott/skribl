@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   rolify
+  before_create :generate_totp_secret
 
   after_create :create_user_database
   after_create :create_user_image_storage
@@ -7,6 +8,19 @@ class User < ApplicationRecord
 
   after_destroy :delete_user_database
   after_destroy :delete_user_image_storage
+
+
+  def totp
+    ROTP::TOTP.new(totp_secret, issuer: "Scribble")
+  end
+
+  def generate_totp_secret
+    self.totp_secret ||= ROTP::Base32.random_base32
+  end
+
+  def valid_otp?(code)
+    totp.verify(code, drift_behind: 30)
+  end
 
   private
 

@@ -1,0 +1,39 @@
+<% content_for :title, 'Settings' %>
+
+<h2>Sign in details</h2>
+<p>You are currently signed as <em><%= Current.user&.email %></em>.</p>
+
+<%= button_to "Sign out", 
+    #Current.session, 
+    sessions_path,
+    method: :delete, 
+    data: {
+      controller: "bridge--sign-out"
+    },
+    class: "outline hotwire-native-hidden" %>
+
+<hr class="hotwire-native-hidden">
+
+<h2>Delete account</h2>
+<p>
+This action is not reversible. All information related to this account will be deleted permanently.
+</p>
+
+<%= button_to "Delete my account",
+  settings_path, 
+  method: :delete,
+  data: {
+    controller: "bridge--delete-account",
+    turbo_frame: "_top",
+    action: "click->bridge--delete-account#submit",
+    # turbo_method: :delete,
+    # turbo_confirm: "Are you sure?",
+    bridge_title: "Delete Account",
+    bridge_confirm: "Confirm",
+    bridge_dismiss: "Cancel",
+    bridge_description: "Are you sure you want to delete your account?"
+  },
+  class: "danger outline"
+%>
+
+

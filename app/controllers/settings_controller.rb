@@ -1,4 +1,6 @@
 class SettingsController < ApplicationController
+  def index
+  end
 
   def destroy
     @user = User.find(Current.user.id)

@@ -56,14 +56,8 @@ Rails.application.configure do
     # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      # user_name: Rails.application.credentials.dig(:smtp, :user_name),
-      # password: Rails.application.credentials.dig(:smtp, :password),
-      # address: "smtp.eu.mailgun.org",
       address: 'localhost', 
-      # port: 587,
       port:  1025,
-      # authentication: :plain,
-      # enable_starttls_auto: true,
     }
   when "letter_opener"
     config.action_mailer.delivery_method = :letter_opener

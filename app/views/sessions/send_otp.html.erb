@@ -1,0 +1,15 @@
+<% content_for :title, 'Sign in' %>
+
+<%= form_with(url: validate_otp_path, html: { onkeydown: "return event.key !== 'Enter';" }) do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, value: @email, class: 'pill' %>
+  </div>
+  <%= f.submit "Send OTP",
+    data: {
+      controller: "bridge--send-otp"
+    },
+    class: 'hotwire-native-hidden pill'
+  %>
+
+<% end %>

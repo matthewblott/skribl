@@ -19,6 +19,9 @@ class NotesController < ApplicationController
   end
 
   def new
+    if params[:from_sign_in] == 1.to_s 
+      flash.now[:notice] = "Signed in successfully"
+    end
     @note = Note.new
   end
 

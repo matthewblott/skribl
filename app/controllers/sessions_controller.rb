@@ -1,55 +1,87 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: %i[ new create ]
+  skip_before_action :authenticate, only: %i[ new create send_otp validate_otp enter_otp ]
 
   before_action :set_session, only: :destroy
   before_action :prevent_caching, only: [:sign_in_success]
-
-  def index
-    @sessions = Current.user.sessions.order(created_at: :desc)
+  
+  def send_otp
+    @email = params[:email]
+    @email = 'bar@example.com' if @email.blank?
   end
 
-  def new
-    params[:email_hint] = 'foo@example.com'
+  def validate_otp
+    email = params[:email]
+    user = User.find_by(email: email)
+
+    if user.blank?
+      user = User.new
+      user.email = email
+      user.password = 'password12345'
+      user.password_confirmation = 'password12345'
+      user.verified = true
+      user.save
+    end
+
+    otp_code = user.totp.now
+    UserMailer.with(user:, otp_code:).send_otp.deliver_later
+
+    redirect_to enter_otp_path(email: email)
+  end
+
+  def enter_otp
+    @email = params[:email]
   end
 
   def create
-    user = User.authenticate_by(email: params[:email], password: params[:password])
+    user = User.find_by(email: params[:email])
 
-    if user.nil?
-      redirect_to sign_in_path(email_hint: params[:email]), alert: "That email or password is incorrect"
-      return
-    end
+    if user&.valid_otp?(params[:otp_code])
+      @session = user.sessions.create!
 
-    @session = user.sessions.create!
+      if Rails.env.test?
+        cookies[:session_token] = @session.id
+      else
+        cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
+      end
 
-    if Rails.env.test?
-      cookies[:session_token] = @session.id
+      Current.session = @session
+      Current.user = user
+
+      # The authenticated event is to be sent to Android client
+      # redirect_to new_user_note_path(user), notice: "Signed in successfully"
+      Note.set_database_connection(user)
+      redirect_to sign_in_success_path(user_id: user.id)
     else
-      cookies.signed.permanent[:session_token] = { value: @session.id, httponly: true }
+      flash.now[:alert] = "Invalid OTP."
+      @email = params[:email]
+      render :enter_otp, status: :unprocessable_entity
     end
 
-    Current.session = @session
-    Current.user = user
-
-    Note.set_database_connection(user)
-    # redirect_to user_notes_path(user), notice: "Signed in successfully"
-    flash[:notice] = "Signed in successfully"
-    redirect_to sign_in_success_path(user_id: user.id)
   end
   
   def sign_in_success 
+    @redirect_path = user_notes_path(User.find(params[:user_id]))
     # redirect_to user_notes_path(user), notice: "Signed in successfully"
   end
 
   def destroy
     @session.destroy
-    redirect_to sessions_path, notice: "That session has been logged out"
+    redirect_to send_otp_path, notice: "That session has been logged out"
   end
 
   private
 
+  # def set_session
+  #   @session = Current.user.sessions.find(params[:id])
+  # end
+
   def set_session
-    @session = Current.user.sessions.find(params[:id])
+    session_id = cookies.signed[:session_token] || cookies[:session_token]
+    return unless session_id
+
+    @session = Session.find_by(id: session_id)
+    Current.session = @session
+    Current.user = @session&.user
   end
 
   def prevent_caching

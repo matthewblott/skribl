@@ -3,14 +3,14 @@ import { ocr } from 'ocr'
 
 export default class extends Controller {
 
-  static targets = ['canvas', 'text', 'submit', 'img'];
+  static targets = ['canvas', 'text', 'submit', 'img']
 
   initialize() {
     ocr(this.canvasTarget)
   }
 
   clear() {
-    this.canvasTarget.getContext('2d').clearRect(0, 0, this.canvasTarget.width, this.canvasTarget.height);
+    this.canvasTarget.getContext('2d').clearRect(0, 0, this.canvasTarget.width, this.canvasTarget.height)
   }
 
   async create() {
@@ -25,17 +25,16 @@ export default class extends Controller {
   }
 
   isCanvasDirty() {
-    const ctx = this.canvasTarget.getContext('2d');
-    const imageData = ctx.getImageData(0, 0, this.canvasTarget.width, this.canvasTarget.height).data;
+    const ctx = this.canvasTarget.getContext('2d')
+    const imageData = ctx.getImageData(0, 0, this.canvasTarget.width, this.canvasTarget.height).data
     
     for (let i = 3; i < imageData.length; i += 4) {
       if (imageData[i] > 0) {
-        return true;
+        return true
       }
     }
     
-    return false;
+    return false
   }
 
 }
-
