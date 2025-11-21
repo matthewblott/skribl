@@ -13,7 +13,6 @@
 
   <% if @pagy.next %>
     <%= turbo_frame_tag :pagination, 
-        # src: user_notes_path(page: @pagy.next),
         src: user_notes_path(Current.user, page: @pagy.next),
         loading: "lazy" do %>
       Loading more...
