@@ -3,14 +3,32 @@
 <h2>Sign in details</h2>
 <p>You are currently signed as <em><%= Current.user&.email %></em>.</p>
 
-<%= button_to "Sign out", 
-    #Current.session, 
+<%= form_with url: sessions_path,
+  method: :delete,
+  class: "hidden",
+  html: {
+    id: "sign_out_form",
+  } do %>
+<% end %>
+
+<% unless native_app? %>
+  <%= button_tag "sign out", 
+      data: {
+        action: "click->bridge--sign-out#foo",
+        controller: "bridge--sign-out"
+      },
+      class: "outline pill"
+  %>
+<% else %>
+  <%= button_to "Sign out",
     sessions_path,
-    method: :delete, 
+    method: :delete, # Remove to use turbo 
     data: {
-      controller: "bridge--sign-out"
+      turbo: false,
     },
-    class: "outline hotwire-native-hidden" %>
+    class: "outline pill"
+  %>
+<% end %>
 
 <hr class="hotwire-native-hidden">
 
@@ -33,7 +51,5 @@ This action is not reversible. All information related to this account will be d
     bridge_dismiss: "Cancel",
     bridge_description: "Are you sure you want to delete your account?"
   },
-  class: "danger outline"
+  class: "danger outline pill"
 %>
-
-

@@ -1,0 +1,16 @@
+<% content_for :title, 'Scribbles' %>
+
+<%= turbo_stream_from :notes_after_create_stream %>
+
+<section id="user_<%= Current.user.id %>_notes_element">
+  <% @notes.each do |note| %>
+    <%= render partial: "notes/note", locals: { note: note} %>
+  <% end %>
+  <% if @pagy.next %>
+    <%= turbo_frame_tag :pagination, 
+        src: user_notes_path(Current.user, format: :turbo_stream, page: @pagy.next),
+        loading: "lazy" do %>
+      Loading more...
+    <% end %>
+  <% end %>
+</section>

@@ -8,7 +8,7 @@ class SettingsController < ApplicationController
 
     Current.session.destroy
     flash[:notice] = "Your account has been deleted."
-    redirect_to sign_in_path 
+    redirect_to send_otp_path
   end
 
 end

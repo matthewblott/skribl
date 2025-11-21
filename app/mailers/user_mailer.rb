@@ -35,7 +35,7 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      subject: "Your sign-in code for Scribble"
+      subject: "#{@otp_code} - Your Scribble one-time code"
     )
 
     # Rails.logger.info "DEBUG OTP for #{user.email}: #{otp_code}" # for testing

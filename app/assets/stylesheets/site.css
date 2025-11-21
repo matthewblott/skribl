@@ -15,3 +15,7 @@
 @import url('./components/button.css') layer(button);
 @import url('./components/canvas.css') layer(canvas);
 @import url('./components/note.css') layer(note);
+
+.hidden {
+  display: none;
+}

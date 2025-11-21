@@ -1,45 +1,22 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_note, only: %i[ show edit update destroy ]
+  
   def index
-    if params[:note_deleted] == 1.to_s
-      flash.now[:notice] = "Note was successfully deleted."
+    @pagy, @notes = pagy(Note.order(created_at: :desc), items: 10)
+    
+    if turbo_frame_request?
+      render partial: "notes/notes_frame", locals: { note_view_models: @notes, pagy: @pagy }
     end
-
-    @pagy, @notes = pagy(Note.recent_first)
-
-    respond_to do |format|
-      format.html
-      # format.turbo_stream
-    end
-
-  end
-
-  def show
   end
 
   def new
-    if params[:from_sign_in] == 1.to_s 
-      flash.now[:notice] = "Signed in successfully"
-    end
     @note = Note.new
-  end
-
-  def edit
   end
 
   def create
     @note = Note.new(note_params)
-
-    ImageToFileJob.perform_later(Current.user.id, @note.id, @note.img) # if @note.persisted?
-
     if @note.save
-      flash.now[:notice] = "Note was successfully created."
-
-      respond_to do |format|
-        format.turbo_stream
-      end
-
+      redirect_to user_note_path(Current.user, @note), notice: "note was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -47,30 +24,24 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      redirect_to user_notes_path(Current.user), notice: 'Note was successfully updated.'
+      redirect_to user_note_path(Current.user, @note), notice: "note was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @note.destroy
-    flash[:notice] = "Note was successfully deleted."
-    session[:deletion_notice] = flash[:notice]
-    DeleteImageJob.perform_later(Current.user.id, @note.id)
-
-    redirect_to user_notes_path(Current.user, note_deleted: 1), format: :html
-
+    @note.destroy!
+    redirect_to user_notes_path(Current.user), notice: "note was successfully destroyed.", status: :see_other
   end
 
   private
-
-  def set_note
-    @note = Note.find(params[:id])
-  end
+    def set_note
+      @note = Note.find(params.expect(:id))
+    end
 
   def note_params
-    # Title is now optional, but we still permit it in case it's provided
-    params.require(:note).permit(:title, :content, :img)
+    params.expect(note: [ :content ])
   end
 end
+

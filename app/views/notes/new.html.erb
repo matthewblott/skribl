@@ -1,1 +1,9 @@
-<%= render "form", note: Note.new %>
+<h1>New note</h1>
+
+<controls>
+  <%= button_tag "Create", form: :note_form, formaction: user_notes_path(Current.user) %>
+  <%= link_to "Back", user_notes_path, role: "button" %>
+</controls>
+
+<%= render "form", disabled: false %>
+

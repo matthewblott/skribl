@@ -1,41 +1,30 @@
-<% content_for :title, 'New Scribble' %>
+<%= form_with(model: [Current.user, @note], id: :note_form) do |form| %>
 
-<div data-controller="note">
+  <fieldset <%= :disabled if disabled %>>
 
-  <%= button_tag "Save",
-    data: {
-      controller: 'bridge--create-note',
-      action: 'click->note#create'
-    },
-    class: 'hotwire-native-hidden'
-  %>
+  <% if @note.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
 
-  <%= button_tag "Clear",
-    data: {
-      action: 'click->note#clear'
-    },
-    class: 'outline' %>
-
-  <canvas data-note-target="canvas"></canvas>
-
-  <%= form_with(
-    model: [Current.user, @note],
-    html: {
-      id: 'note_form'
-    }) do |form| %>
-
-    <%= form.hidden_field :img,
-      data: {
-        note_target: 'img'
-      } %>
-
-    <%= form.submit style: 'display: none',
-      data: {
-        note_target: 'submit',
-        search_field_target: 'submit'
-      } %> 
-
+      <ul>
+        <% @note.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-</div>
+  <div>
+    <%= form.label :content, style: "display: block" %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div>
+    <%#= form.label :body, style: "display: block" %>
+    <%#= form.text_area :body %>
+  </div>
+
+  </fieldset>
+
+<% end %>
 

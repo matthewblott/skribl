@@ -7,7 +7,6 @@ class UserDatabaseService
       db.execute <<-SQL
         CREATE TABLE IF NOT EXISTS notes (
           id uuid NOT NULL PRIMARY KEY,
-          title VARCHAR,
           content TEXT,
           image_saved BOOLEAN,
           created_at DATETIME,

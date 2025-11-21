@@ -1,0 +1,12 @@
+<h1>Editing note</h1>
+
+<controls>
+  <%= button_tag :Update,
+    form: :note_form,
+    formaction: user_note_path(Current.user, @note)
+  %>
+
+  <%= link_to :Back, user_note_path(@note) %>
+</controls>
+
+<%= render "form", note: @note, disabled: false %>

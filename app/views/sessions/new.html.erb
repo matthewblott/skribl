@@ -1,9 +1,10 @@
 <% content_for :title, 'Sign in' %>
 
 <%= form_with(url: sign_in_path, html: { onkeydown: "return event.key !== 'Enter';" }) do |form| %>
-  <%= form.label :email %>
+  <%= form.label :email, class: 'hidden' %>
   <%= form.email_field :email, 
-      value: params[:email_hint], 
+    #value: params[:email_hint], 
+      placeholder: "Email",
       required: true, 
       autofocus: true, 
       autocomplete: "email" %>

@@ -1,14 +1,8 @@
-<div id="<%= dom_id(note) %>">
-
-  <% if note.image_saved %>
-    <%= link_to user_note_path(Current.user, note), class: "note" do %>
-      <%= image_tag "/uploads/#{Current.user.id}/#{note.id}.png",
-        alt: note.content,
-        title: note.content
-      %> 
-    <% end %>
-  <% else %>
-    <p><%#= Time.now.to_s %></p>
-  <% end %>
-
+<div id="<%= dom_id note %>">
+  <div>
+    <%= link_to note.content, user_note_path(Current.user, note) %>
+  </div>
+  <div>
+    <%= note.content %>
+  </div>
 </div>

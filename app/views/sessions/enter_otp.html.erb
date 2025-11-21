@@ -1,16 +1,28 @@
-<% content_for :title, 'Sign in' %>
+<% content_for :title, 'Enter Code' %>
+
+<%= button_tag "Placeholder",
+  data: {
+    controller: 'bridge--ios-placeholder'
+  },
+  class: 'hotwire-native-hidden hidden' %>
+
 
 <%= form_with(url: sign_in_path, html: { onkeydown: "return event.key !== 'Enter';" }) do |f| %>
   <div>
-    <%= f.label :email %>
-    <%= f.email_field :email, value: @email, class: 'pill' %>
+    <%= f.label :email, class: 'hidden' %>
+    <%= f.email_field :email, value: @email, class: 'pill hidden' %>
   </div>
   <div>
-    <%= f.label :otp_code, "One-Time Code" %>
-    <%= f.text_field :otp_code, class: 'pill' %>
+    <p>
+    Enter the code we sent to <strong><%= @email %></strong> and press Submit to sign in.
+    </p>
+    <%= f.label :otp_code, "One-Time Code", class: 'hidden' %>
+    <%= f.text_field :otp_code,
+      placeholder: "123456",
+      class: 'pill' %>
   </div>
 
-  <%= f.submit "Sign In",
+  <%= f.submit "Submit",
     data: {
       controller: "bridge--sign-in"
     },

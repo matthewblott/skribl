@@ -5,6 +5,10 @@ class SessionsController < ApplicationController
   before_action :prevent_caching, only: [:sign_in_success]
   
   def send_otp
+    if params[:signed_out] == 1.to_s
+      flash.now[:notice] = "Signed out successfully"
+    end
+
     @email = params[:email]
     @email = 'bar@example.com' if @email.blank?
   end
@@ -60,20 +64,17 @@ class SessionsController < ApplicationController
   end
   
   def sign_in_success 
-    @redirect_path = user_notes_path(User.find(params[:user_id]))
-    # redirect_to user_notes_path(user), notice: "Signed in successfully"
+    flash.now[:notice] = "Signed in successfully"
+    user = User.find(params[:user_id])
+    @redirect_path = new_user_note_path(user)
   end
 
   def destroy
     @session.destroy
-    redirect_to send_otp_path, notice: "That session has been logged out"
+    redirect_to send_otp_path(signed_out: 1), notice: "That session has been logged out"
   end
 
   private
-
-  # def set_session
-  #   @session = Current.user.sessions.find(params[:id])
-  # end
 
   def set_session
     session_id = cookies.signed[:session_token] || cookies[:session_token]

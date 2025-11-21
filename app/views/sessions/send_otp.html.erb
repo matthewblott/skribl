@@ -1,11 +1,27 @@
-<% content_for :title, 'Sign in' %>
+<% content_for :title, 'Send Code' %>
+
+<%= button_tag "Placeholder",
+  data: {
+    controller: 'bridge--ios-placeholder',
+    action: 'click->note#clear'
+  },
+  class: 'hotwire-native-hidden hidden' %>
+
+
+<p>
+  Enter your email address and press Submit to receive a code for signing in.
+</p>
 
 <%= form_with(url: validate_otp_path, html: { onkeydown: "return event.key !== 'Enter';" }) do |f| %>
   <div>
-    <%= f.label :email %>
-    <%= f.email_field :email, value: @email, class: 'pill' %>
+    <%= f.label :email, class: 'hidden' %>
+    <%= f.email_field :email,
+      value: @email,
+      placeholder: "hello@example.com",
+      class: 'pill'
+    %>
   </div>
-  <%= f.submit "Send OTP",
+  <%= f.submit "Submit",
     data: {
       controller: "bridge--send-otp"
     },

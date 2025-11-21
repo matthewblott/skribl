@@ -1,4 +1,11 @@
-<h1>Scribble</h1>
+<h1 class="hotwire-native-hidden">Scribble</h1>
+
+<%= button_tag "Placeholder",
+  data: {
+    controller: 'bridge--ios-placeholder',
+    action: 'click->note#clear'
+  },
+  class: 'hotwire-native-hidden hidden' %>
 
 <script>
   setTimeout(() => {

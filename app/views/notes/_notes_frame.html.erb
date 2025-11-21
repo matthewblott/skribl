@@ -1,0 +1,12 @@
+<%= turbo_frame_tag :pagination do %>
+  <%= render note_view_models %>
+  
+  <% if pagy.next %>
+    <%= turbo_frame_tag :pagination, 
+        src: user_notes_path(page: pagy.next),
+        loading: "lazy" do %>
+      Loading more...
+    <% end %>
+  <% end %>
+<% end %>
+
