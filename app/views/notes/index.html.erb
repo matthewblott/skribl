@@ -1,4 +1,4 @@
-<%= turbo_stream_from :notes_after_create_stream %>
+<%= turbo_stream_from :notes_after_create_stream, signed: true %>
 
 <controls>
   <%= link_to :New, new_user_note_path(Current.user, @note) %>
@@ -6,7 +6,7 @@
 
 <hr>
 
-<section id="notes_element">
+<section id="notes_user_<%= CurrentNoteContext.user_id %>_element">
   <% @notes.each do |note| %>
     <%= render partial: "notes/note", locals: { note: note } %>
   <% end %>

@@ -12,14 +12,6 @@
 <% end %>
 
 <% unless native_app? %>
-  <%= button_tag "sign out", 
-      data: {
-        action: "click->bridge--sign-out#foo",
-        controller: "bridge--sign-out"
-      },
-      class: "outline pill"
-  %>
-<% else %>
   <%= button_to "Sign out",
     sessions_path,
     method: :delete, # Remove to use turbo 
@@ -27,6 +19,14 @@
       turbo: false,
     },
     class: "outline pill"
+  %>
+<% else %>
+  <%= button_tag "sign out", 
+      data: {
+        action: "click->bridge--sign-out#foo",
+        controller: "bridge--sign-out"
+      },
+      class: "outline pill"
   %>
 <% end %>
 

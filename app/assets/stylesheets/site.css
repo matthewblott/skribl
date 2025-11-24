@@ -9,12 +9,13 @@
 
 @import url('./utilities/spacing.css') layer(spacing);
 @import url('./utilities/colors.css') layer(colors);
-@import url('./utilities/pill.css') layer(pill);
 @import url('./utilities/hotwire-native.css') layer(hotwire-native);
 
 @import url('./components/button.css') layer(button);
 @import url('./components/canvas.css') layer(canvas);
 @import url('./components/note.css') layer(note);
+
+@import url('./utilities/pill.css') layer(pill);
 
 .hidden {
   display: none;
