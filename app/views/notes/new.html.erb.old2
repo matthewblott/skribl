@@ -1,0 +1,14 @@
+<% content_for :title, 'New Scribble' %>
+
+<div data-controller="note">
+  <controls role="group" class="hotwire-native-hidden">
+    <button name="button" type="submit" data-controller="bridge--create-note" data-action="click-&gt;note#create" class="hotwire-native-hidden">Save</button>
+
+    <button name="button" type="submit">Clear</button>
+
+    <a role="button" href="/4/notes">Back</a>
+
+  </controls>
+  <canvas data-note-target="canvas"></canvas>
+
+</div>

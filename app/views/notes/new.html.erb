@@ -1,9 +1,45 @@
-<h1>New note</h1>
+<% content_for :title, 'New Scribble' %>
 
-<controls>
-  <%= button_tag "Create", form: :note_form, formaction: user_notes_path(Current.user) %>
-  <%= link_to "Back", user_notes_path, role: "button" %>
-</controls>
+  <%= form_with(
+    model: [Current.user, @note],
+    html: {
+      id: 'note_form'
+    }) do |form| %>
 
-<%= render "form", disabled: false %>
+    <%= form.hidden_field :img,
+      data: {
+        note_target: 'img'
+      } %>
+
+    <%= form.submit style: 'display: none',
+      data: {
+        note_target: 'submit',
+        search_field_target: 'submit'
+      } %> 
+
+  <% end %>
+
+<div data-controller="note">
+  <controls role="group" class="hotwire-native-hidden">
+    <%= button_tag "Save",
+      data: {
+        controller: 'bridge--create-note',
+        action: 'click->note#create'
+      },
+      class: 'hotwire-native-hidden'
+    %>
+
+    <%= button_tag "Clear",
+      data: {
+        controller: 'bridge--clear-canvas',
+        action: 'click->note#clear'
+      },
+      class: 'outline hotwire-native-hidden' %>
+
+    <%= link_to "Back", user_notes_path, role: "button" %>
+
+  </controls>
+  <canvas data-note-target="canvas"></canvas>
+
+</div>
 

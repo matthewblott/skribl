@@ -27,8 +27,6 @@
   </head>
 
   <body class="<%= 'hotwire-native' if native_app? %>">
-
-    <%#= render "shared/links" %>
     
     <%= turbo_stream_from "created_note" %>
 

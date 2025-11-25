@@ -1,22 +1,37 @@
-<h1>note</h1>
+<% content_for :title, 'Scribble' %>
 
 <% turbo_page_requires_reload %>
 
 <%= turbo_stream_from @note %>
 
-<controls>
-  <%= link_to :Edit, edit_user_note_path(Current.user) %>
-  <%= link_to :Back, user_notes_path(Current.user) %>
-  <%= button_to "Delete",
-    user_note_path(Current.user, @note),
-    method: :delete, # Remove to use turbo 
-    data: {
-      turbo: false,
-      turbo_method: :delete, # Only used with turbo
-      turbo_confirm: "Are you sure?" # Only used with turbo
-    }
-  %>
+<controls role="group" class="hotwire-native-hidden">
 
+  <%= button_tag type: :submit,
+    form: "delete_note_#{@note.id}",
+    data: {
+      controller: "bridge--delete-note",
+      # confirm: "Delete this post?",
+      turbo: false,
+      bridge_title: "Delete",
+      bridge_confirm: "Confirm",
+      bridge_dismiss: "Cancel",
+      bridge_description: "Are you sure you want to delete this note?"
+    },
+    class: "hotwire-native-hidden" do %>
+    Delete
+  <% end %>
+  <%= link_to "Back", user_notes_path, role: "button" %>
 </controls>
 
-<%= render "form", disabled: true %>
+<div>
+  <%= image_tag "/uploads/#{Current.user.id}/#{@note.id}.png",
+    alt: @note.content,
+    title: @note.content
+  %> 
+</div>
+
+<%= form_with url: user_note_path(Current.user, @note),
+  method: :delete,
+  id: "delete_note_#{@note.id}",
+  html: { style: "display:none;" } do %>
+<% end %>

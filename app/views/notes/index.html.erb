@@ -1,10 +1,11 @@
+<% content_for :title, 'Scribbles' %>
+
 <%= turbo_stream_from :notes_after_create_stream, signed: true %>
 
-<controls>
-  <%= link_to :New, new_user_note_path(Current.user, @note) %>
+<controls role="group" class="hotwire-native-hidden">
+  <%= link_to :New, new_user_note_path(Current.user, @note), role: "button" %>
+  <%= link_to :Settings, settings_path, role: "button" %>
 </controls>
-
-<hr>
 
 <section id="notes_user_<%= CurrentNoteContext.user_id %>_element">
   <% @notes.each do |note| %>
