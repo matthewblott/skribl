@@ -1,13 +1,13 @@
 <% content_for :title, 'Scribbles' %>
 
-<%= turbo_stream_from :notes_after_create_stream, signed: true %>
+<%= turbo_stream_from :user_notes_stream, signed: true %>
 
 <controls role="group" class="hotwire-native-hidden">
   <%= link_to :New, new_user_note_path(Current.user, @note), role: "button" %>
   <%= link_to :Settings, settings_path, role: "button" %>
 </controls>
 
-<section id="notes_user_<%= CurrentNoteContext.user_id %>_element">
+<section id="user_<%= Current.user.id %>_notes">
   <% @notes.each do |note| %>
     <%= render partial: "notes/note", locals: { note: note } %>
   <% end %>

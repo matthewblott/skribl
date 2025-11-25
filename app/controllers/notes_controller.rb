@@ -34,11 +34,7 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy!
-    # flash[:notice] = "Note was successfully deleted."
-    # session[:deletion_notice] = flash[:notice]
     DeleteImageJob.perform_later(Current.user.id, @note.id)
-
-    # redirect_to user_notes_path(Current.user, note_deleted: 1), format: :html
     redirect_to user_notes_path(Current.user), notice: "note was successfully destroyed.", status: :see_other
   end
 

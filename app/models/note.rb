@@ -37,10 +37,14 @@ class Note < UserRecord
       false
     end
   end
-
+  
+  # After the note is created there is no image yet so a placeholder
+  # needs to be appended to the DOM with the note id. This acts as the
+  # identifier for the where to attach the new image when the image_to_file
+  # job is run.
   after_create_commit -> {
-    broadcast_prepend_to :notes_after_create_stream,
-    target: "notes_user_#{CurrentNoteContext.user_id}_element",
+    broadcast_prepend_to :user_notes_stream,
+      target: "user_#{CurrentNoteContext.user_id}_notes",
       partial: "notes/note",
       locals: { note: self }
   } 
