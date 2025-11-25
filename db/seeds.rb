@@ -46,7 +46,7 @@ FileUtils.remove_dir(Rails.root.join('uploads', user.id.to_s))
 
 user_images_dir = Rails.root.join('uploads', user.id.to_s)
 
-80.times do |i|
+20.times do |i|
   note = Note.create!(
     content: "Jane's note #{i+1}: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember."
   )

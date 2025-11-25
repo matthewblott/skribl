@@ -1,5 +1,27 @@
 <% content_for :title, 'New Scribble' %>
 
+<div data-controller="note">
+  <controls role="group" class="hotwire-native-hidden">
+
+    <%= button_tag "Clear",
+      data: {
+        controller: 'bridge--clear-canvas',
+        action: 'click->note#clear'
+      },
+      class: 'outline hotwire-native-hidden' %>
+
+    <%= button_tag "Save",
+      data: {
+        controller: 'bridge--create-note',
+        action: 'click->note#create'
+      },
+      class: 'hotwire-native-hidden'
+    %>
+
+    <%= link_to "Back", user_notes_path, role: "button" %>
+  </controls>
+  <canvas data-note-target="canvas"></canvas>
+
   <%= form_with(
     model: [Current.user, @note],
     html: {
@@ -19,27 +41,4 @@
 
   <% end %>
 
-<div data-controller="note">
-  <controls role="group" class="hotwire-native-hidden">
-    <%= button_tag "Save",
-      data: {
-        controller: 'bridge--create-note',
-        action: 'click->note#create'
-      },
-      class: 'hotwire-native-hidden'
-    %>
-
-    <%= button_tag "Clear",
-      data: {
-        controller: 'bridge--clear-canvas',
-        action: 'click->note#clear'
-      },
-      class: 'outline hotwire-native-hidden' %>
-
-    <%= link_to "Back", user_notes_path, role: "button" %>
-
-  </controls>
-  <canvas data-note-target="canvas"></canvas>
-
 </div>
-

@@ -39,7 +39,6 @@ class Note < UserRecord
   end
 
   after_create_commit -> {
-    # Possibly the notes stream should be named dynamically
     broadcast_prepend_to :notes_after_create_stream,
     target: "notes_user_#{CurrentNoteContext.user_id}_element",
       partial: "notes/note",

@@ -1,7 +1,7 @@
 <div id="<%= dom_id note %>">
 
   <% if note.image_saved %>
-    <%= render partial: "notes/note_link", locals: { user_id: Current.user.id, note_id: note.id } %>
+    <%= render partial: "notes/note_link", locals: { note_id: note.id } %>
   <% else %>
     <%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
   <% end %>

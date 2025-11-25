@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <title>New Scribble</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="view-transition" content="same-origin">
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="o1qS9ygHivKI726qTKfWHWQF0rTEflhsSjtfFVoh-lBDwejhVm6n2e2ORHHgES6QlMDWUEIWU-VRL8QOUjT2Zg" />
+    <meta name="hotwire-spark:html-reload-method" content="morph">
+    <meta name="hotwire-spark:cable-server-path" content="/hotwire-spark"><script src="/assets/hotwire_spark-d7e0ee73.js" defer="defer"></script>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="stylesheet" href="/assets/base/layout-890192bb.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/base/variables-22c816b3.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/components/button-c05dc703.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/components/canvas-0b759538.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/components/note-b60e36aa.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/site-a5786fdb.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/utilities/colors-122d4936.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/utilities/hotwire-native-64580951.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/utilities/misc-4822e04c.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/utilities/pill-e42d2f40.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/utilities/spacing-fe089c19.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/vendor/pico.classless.blue-f64c6cd1.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/vendor/pico.classless.blue.min-9e72c47c.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/vendor/pico-d7784f3a.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/vendor/pico.fluid.classless.blue-e6bef9d7.css" data-turbo-track="reload" />
+    <link rel="stylesheet" href="/assets/vendor/pico.fluid.classless.blue.min-399bcd52.css" data-turbo-track="reload" />
+    <link rel="modulepreload" href="/assets/requestjs-3775eb3a.js">
+    <link rel="modulepreload" href="/assets/turbo.min-ad2c7b86.js">
+    <link rel="modulepreload" href="/assets/@hotwired--stimulus-132cbc23.js">
+    <link rel="modulepreload" href="/assets/stimulus-loading-1fc53fe7.js">
+    <link rel="modulepreload" href="/assets/@hotwired--hotwire-native-bridge-59563498.js">
+    <link rel="modulepreload" href="/assets/ocr-597c42a2.js">
+    <link rel="modulepreload" href="/assets/controllers/alert_controller-73eadf5a.js">
+    <link rel="modulepreload" href="/assets/controllers/application-fab0f35b.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/alert_controller-af35c64a.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/change_tab_controller-f6baaf4c.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/clear_canvas_controller-55b6574b.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/create_note_controller-8fc7c04a.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/delete_account_controller-339da4a4.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/delete_note_controller-dc8f4054.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/enter_otp_controller-a939c166.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/hide_tabbar_controller-62ba09f4.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/ios_placeholder_controller-212f3ed6.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/new_note_controller-128f802a.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/select_sign_in_controller-72524dfa.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/send_otp_controller-e3cf3517.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/show_tabbar_controller-59e04bdc.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/sign_in_controller-e326225a.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/sign_in_success_controller-e9519ff0.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/sign_out_controller-0db72bf1.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/signed_out_controller-ae2b3fcd.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/status_controller-f0f4757b.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/test_controller-0860b9c1.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/toast_controller-f53af074.js">
+    <link rel="modulepreload" href="/assets/controllers/bridge/view_notes_from_index_controller-113e8ad5.js">
+    <link rel="modulepreload" href="/assets/controllers/index-ee64e1f1.js">
+    <link rel="modulepreload" href="/assets/controllers/note_controller-9d16544b.js">
+
+    <script type="importmap" data-turbo-track="reload">
+      {
+        "imports": {
+          "@rails/request.js": "/assets/requestjs-3775eb3a.js",
+          "application": "/assets/application-32d47011.js",
+          "@hotwired/turbo-rails": "/assets/turbo.min-ad2c7b86.js",
+          "@hotwired/stimulus": "/assets/@hotwired--stimulus-132cbc23.js",
+          "@hotwired/stimulus-loading": "/assets/stimulus-loading-1fc53fe7.js",
+          "@hotwired/hotwire-native-bridge": "/assets/@hotwired--hotwire-native-bridge-59563498.js",
+          "ocr": "/assets/ocr-597c42a2.js",
+          "controllers/alert_controller": "/assets/controllers/alert_controller-73eadf5a.js",
+          "controllers/application": "/assets/controllers/application-fab0f35b.js",
+          "controllers/bridge/alert_controller": "/assets/controllers/bridge/alert_controller-af35c64a.js",
+          "controllers/bridge/change_tab_controller": "/assets/controllers/bridge/change_tab_controller-f6baaf4c.js",
+          "controllers/bridge/clear_canvas_controller": "/assets/controllers/bridge/clear_canvas_controller-55b6574b.js",
+          "controllers/bridge/create_note_controller": "/assets/controllers/bridge/create_note_controller-8fc7c04a.js",
+          "controllers/bridge/delete_account_controller": "/assets/controllers/bridge/delete_account_controller-339da4a4.js",
+          "controllers/bridge/delete_note_controller": "/assets/controllers/bridge/delete_note_controller-dc8f4054.js",
+          "controllers/bridge/enter_otp_controller": "/assets/controllers/bridge/enter_otp_controller-a939c166.js",
+          "controllers/bridge/hide_tabbar_controller": "/assets/controllers/bridge/hide_tabbar_controller-62ba09f4.js",
+          "controllers/bridge/ios_placeholder_controller": "/assets/controllers/bridge/ios_placeholder_controller-212f3ed6.js",
+          "controllers/bridge/new_note_controller": "/assets/controllers/bridge/new_note_controller-128f802a.js",
+          "controllers/bridge/select_sign_in_controller": "/assets/controllers/bridge/select_sign_in_controller-72524dfa.js",
+          "controllers/bridge/send_otp_controller": "/assets/controllers/bridge/send_otp_controller-e3cf3517.js",
+          "controllers/bridge/show_tabbar_controller": "/assets/controllers/bridge/show_tabbar_controller-59e04bdc.js",
+          "controllers/bridge/sign_in_controller": "/assets/controllers/bridge/sign_in_controller-e326225a.js",
+          "controllers/bridge/sign_in_success_controller": "/assets/controllers/bridge/sign_in_success_controller-e9519ff0.js",
+          "controllers/bridge/sign_out_controller": "/assets/controllers/bridge/sign_out_controller-0db72bf1.js",
+          "controllers/bridge/signed_out_controller": "/assets/controllers/bridge/signed_out_controller-ae2b3fcd.js",
+          "controllers/bridge/status_controller": "/assets/controllers/bridge/status_controller-f0f4757b.js",
+          "controllers/bridge/test_controller": "/assets/controllers/bridge/test_controller-0860b9c1.js",
+          "controllers/bridge/toast_controller": "/assets/controllers/bridge/toast_controller-f53af074.js",
+          "controllers/bridge/view_notes_from_index_controller": "/assets/controllers/bridge/view_notes_from_index_controller-113e8ad5.js",
+          "controllers": "/assets/controllers/index-ee64e1f1.js",
+          "controllers/note_controller": "/assets/controllers/note_controller-9d16544b.js"
+        }
+      }
+    </script>
+
+    <link rel="modulepreload" href="/assets/application-32d47011.js">
+
+    <script type="module">import "application"</script>
+  </head>
+  <body class="">
+    <turbo-cable-stream-source channel="Turbo::StreamsChannel" signed-stream-name="ImNyZWF0ZWRfbm90ZSI=--4c450d5860c4415c88584127e32cfcd2c7ed8bafa1372a4a11a0ae54db996704"></turbo-cable-stream-source>
+    <header class="hotwire-native-hidden">
+      <h1>
+        New Scribble
+      </h1>
+    </header>
+    <div id="alerts">
+    </div>
+    <main>
+      <div data-controller="note">
+        <controls role="group">
+          <button name="button" type="submit" data-controller="bridge--create-note" data-action="click-&gt;note#create" class="hotwire-native-hidden">Save</button>
+          <button name="button" type="submit" data-controller="bridge--clear-canvas" data-action="click-&gt;note#clear" class="outline hotwire-native-hidden">Clear</button>
+          <a role="button" href="/4/notes">Back</a>
+        </controls>
+        <canvas data-note-target="canvas"></canvas>
+      </div>
+    </main>
+  </body>
+</html>

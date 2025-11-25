@@ -7,3 +7,15 @@ button {
   }
 }
 
+[role="group"] > :is(button, a[role="button"]):nth-of-type(1) {
+  border-radius: 999em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+[role="group"] > :is(button, a[role="button"]):last-child {
+  border-radius: 999em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
