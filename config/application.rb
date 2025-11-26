@@ -40,5 +40,8 @@ module Web
     config.generators.system_tests = nil
     config.active_job.scheduled_jobs = Rails.application.config_for(:schedule)
     config.solid_queue.connects_to = { database: { writing: :queue } }
+    
+    config.propshaft.resolve_css_imports = true
+
   end
 end

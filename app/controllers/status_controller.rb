@@ -9,9 +9,6 @@ class StatusController < ApplicationController
   def signed_in
     render json: { signed_in: Current.user.present? }
   end
-  
-  def status
-  end
 
   private
 

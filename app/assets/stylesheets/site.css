@@ -1,15 +1,24 @@
-@layer framework
-, layout, spacing, colors, pill
-, button, canvas, note;
+@layer
+  variables
+, pico 
+, layout
+, spacing
+, colors
+, misc
+, button
+, canvas
+, note
+, pill
+, hotwire-native;
 
-@import url('./vendor/pico.css') layer(framework);
-@import url('./base/variables.css');
+@import url('./base/variables.css') layer(variables);
+
+@import url('./vendor/pico.css') layer(pico);
 
 @import url('./base/layout.css') layer(layout);
 
 @import url('./utilities/spacing.css') layer(spacing);
 @import url('./utilities/colors.css') layer(colors);
-@import url('./utilities/hotwire-native.css') layer(hotwire-native);
 @import url('./utilities/misc.css') layer(misc);
 
 @import url('./components/button.css') layer(button);
@@ -17,6 +26,7 @@
 @import url('./components/note.css') layer(note);
 
 @import url('./utilities/pill.css') layer(pill);
+@import url('./utilities/hotwire-native.css') layer(hotwire-native);
 
 .hidden {
   display: none;

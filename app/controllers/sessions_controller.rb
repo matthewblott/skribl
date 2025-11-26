@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: %i[ new create send_otp validate_otp enter_otp ]
+  skip_before_action :authenticate, only: %i[ create send_otp validate_otp enter_otp ]
 
   before_action :set_session, only: :destroy
   before_action :prevent_caching, only: [:sign_in_success]
