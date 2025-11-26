@@ -1,3 +1,0 @@
-schedule_user_notifications:
-  every: '1m'
-  class: 'ScheduleUserNotificationsJob'

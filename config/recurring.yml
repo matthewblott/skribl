@@ -1,13 +1,7 @@
-# examples:
-#   periodic_cleanup:
-#     class: CleanSoftDeletedRecordsJob
-#     queue: background
-#     args: [ 1000, { batch_size: 500 } ]
-#     schedule: every hour
-#   periodic_cleanup_with_command:
-#     command: "SoftDeletedRecord.due.delete_all"
-#     priority: 2
-#     schedule: at 5am every day
+delete_images_job:
+  class: DeleteImagesJob
+  queue: background
+  schedule: every 5 minutes
 
 production:
   clear_solid_queue_finished_jobs:

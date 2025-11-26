@@ -38,10 +38,8 @@ module Web
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-    config.active_job.scheduled_jobs = Rails.application.config_for(:schedule)
+    config.active_job.scheduled_jobs = Rails.application.config_for(:recurring)
     config.solid_queue.connects_to = { database: { writing: :queue } }
-    
-    config.propshaft.resolve_css_imports = true
 
   end
 end
