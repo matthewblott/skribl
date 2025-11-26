@@ -18,8 +18,10 @@
     <%= f.email_field :email,
       value: @email,
       placeholder: "hello@example.com",
-      class: 'pill'
-    %>
+      class: 'pill',
+      autocomplete: 'off',
+      required: true
+     %>
   </div>
   <%= f.submit "Submit",
     data: {

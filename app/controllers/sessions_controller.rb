@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     end
 
     @email = params[:email]
-    @email = 'bar@example.com' if @email.blank?
+    @email = 'jane@example.com' if @email.blank?
   end
 
   def validate_otp

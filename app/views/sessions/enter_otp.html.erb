@@ -19,7 +19,10 @@
     <%= f.label :otp_code, "One-Time Code", class: 'hidden' %>
     <%= f.text_field :otp_code,
       placeholder: "123456",
-      class: 'pill' %>
+      class: 'pill',
+      autocomplete: 'off',
+      required: true
+     %>
   </div>
 
   <%= f.submit "Submit",
