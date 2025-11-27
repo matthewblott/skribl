@@ -27,7 +27,8 @@ admin_images_dir = Rails.root.join('uploads', admin.id.to_s)
 
 30.times do |i|
   note = Note.create!(
-    content: "Admin note #{i+1}: This is a sample note created by the admin user. It contains some important information that needs to be remembered."
+    content: "Admin note #{i+1}: This is a sample note created by the admin user. It contains some important information that needs to be remembered.",
+    image_saved: true
   )
 
   filename = "#{note.id}.png"
@@ -48,7 +49,8 @@ user_images_dir = Rails.root.join('uploads', user.id.to_s)
 
 20.times do |i|
   note = Note.create!(
-    content: "Jane's note #{i+1}: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember."
+    content: "Jane's note #{i+1}: This is a sample note created by Jane. It contains personal thoughts and ideas that Jane wants to remember.",
+    image_saved: true
   )
 
   filename = "#{note.id}.png"

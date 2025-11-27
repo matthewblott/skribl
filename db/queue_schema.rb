@@ -31,7 +31,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_160116) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-ActiveRecord::Schema[8.0].define(version: 1) do
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.string "queue_name", null: false
