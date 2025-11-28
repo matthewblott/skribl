@@ -1,9 +1,13 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: %i[ create send_otp validate_otp enter_otp ]
+  skip_before_action :authenticate, only: %i[ create send_otp validate_otp enter_otp signed_in ]
 
   before_action :set_session, only: :destroy
   before_action :prevent_caching, only: [:sign_in_success]
-  
+
+  def signed_in
+    render json: { signed_in: Current.user.present? }
+  end
+
   def send_otp
     if params[:signed_out] == 1.to_s
       flash.now[:notice] = "Signed out successfully"

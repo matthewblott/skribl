@@ -1,6 +1,6 @@
 @layer
-  variables
-, pico 
+  pico 
+, variables
 , layout
 , spacing
 , colors
@@ -11,10 +11,8 @@
 , pill
 , hotwire-native;
 
-@import url('./base/variables.css') layer(variables);
-
 @import url('./vendor/pico.css') layer(pico);
-
+@import url('./base/variables.css') layer(variables);
 @import url('./base/layout.css') layer(layout);
 
 @import url('./utilities/spacing.css') layer(spacing);
@@ -30,4 +28,60 @@
 
 .hidden {
   display: none;
+}
+
+.foo {
+  opacity: 0.03;
+  padding-bottom: 10px;
+}
+
+.bar {
+  opacity: 0.04;
+  padding-bottom: 10px;
+}
+
+.baz {
+  opacity: 0.4;
+  padding-bottom: 10px;
+}
+
+span {
+  color: lightgrey; 
+  font-size: 1.5em; 
+  font-style: italic;
+  opacity: 0.4;
+  
+}
+
+.notes-new {
+  main {
+    padding: 0 !important;
+  }
+}
+
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  margin: 0;
+}
+
+
+a {
+  /* padding: 0 1rem; */
+  padding-bottom: 0.2rem;
+  text-decoration: none;
+  border-radius: 999rem;
+
+  background-color: lightyellow;
+  background-color: var(--pico-primary);
+  border-width: 1px;
+  background-color: grey;
+  background-color: white;
+  border-color: var(--pico-primary);
+
+  /* border-style: solid; */
+  color: inherit;
+  color: white;
+  color: var(--pico-primary);
+  white-space: nowrap;
 }

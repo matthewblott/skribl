@@ -20,7 +20,12 @@
     class: "hotwire-native-hidden" do %>
     Delete
   <% end %>
-  <%= link_to "Back", user_notes_path, role: "button" %>
+  <%= link_to "Back",
+    user_notes_path,
+    data: {
+      # controller: "bridge--cancel-delete"
+    },
+    role: "button" %>
 </controls>
 
 <div>

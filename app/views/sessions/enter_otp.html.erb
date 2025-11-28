@@ -34,5 +34,11 @@
 <% end %>
 
 <p>
-  If the code hasn't appeared in your inbox check your spam or try again <%= link_to "here", send_otp_path(email: @email) %>.
+  If the code hasn't appeared in your inbox check your spam or <%= link_to "press here", send_otp_path(email: @email) %> and try again.
 </p>
+
+
+<%= image_tag "text.png", alt: "Scribble Logo", class: "foo" %>
+<%= image_tag "text.png", alt: "Scribble Logo", class: "baz" %>
+<%= image_tag "text.png", alt: "Scribble Logo", class: "foo" %>
+<%= image_tag "text.png", alt: "Scribble Logo", class: "foo" %>

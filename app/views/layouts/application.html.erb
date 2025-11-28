@@ -2,10 +2,12 @@
 <html>
   <head>
     <title><%= content_for(:title) || "Scribble" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%# <meta name="viewport" content="width=device-width,initial-scale=1"> %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="view-transition" content="same-origin">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= yield :head %>
@@ -17,12 +19,11 @@
 
     <%= javascript_importmap_tags %>
   </head>
-
-  <body class="<%= 'hotwire-native' if native_app? %>">
+  <body class="<%= "#{controller_name}-#{action_name} " %><%= 'hotwire-native' if native_app? %>">
     <% unless native_app? %>
       <%= render "shared/header" %>
     <% end %>
-    <div id="alerts" style="padding: 1rem">
+    <div id="alerts" style="padding: 0">
       <%= render "shared/alerts" %>
     </div>
     <main>
