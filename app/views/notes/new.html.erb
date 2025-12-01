@@ -2,7 +2,6 @@
 
 <div data-controller="note">
   <controls role="group" class="hotwire-native-hidden">
-
     <%= button_tag "Clear",
       data: {
         controller: 'bridge--clear-canvas',
@@ -18,7 +17,7 @@
       class: 'hotwire-native-hidden'
     %>
 
-    <%= link_to "Back", user_notes_path, role: "button" %>
+    <%= link_to "Scribbles", user_notes_path, role: "button" %>
   </controls>
   <canvas data-note-target="canvas"></canvas>
 

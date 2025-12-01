@@ -1,6 +1,14 @@
 <% content_for :title, 'Settings' %>
 
+<controls role="group" class="hotwire-native-hidden">
+  <%= link_to :New, new_user_note_path(Current.user, Note.new), role: "button" %>
+  <%= link_to "Scribbles", user_notes_path(Current.user), role: "button" %>
+</controls>
+
+<hr class="hotwire-native-hidden">
+
 <h2>Sign in details</h2>
+
 <p>You are currently signed as <em><%= Current.user&.email %></em>.</p>
 
 <%= form_with url: sessions_path,
@@ -14,19 +22,13 @@
 
 <% unless native_app? %>
 
-  <controls role="group" class="hotwire-native-hidden">
-
-    <%= button_tag "Sign out", 
-        data: {
-          turbo: false,
-        },
-        form: "sign_out_form",
-        class: "outline"
-    %>
-
-    <%= link_to "Back", user_notes_path(Current.user.id), role: "button" %>
-
-  </controls>
+  <%= button_tag "Sign out", 
+    data: {
+      turbo: false,
+    },
+    form: "sign_out_form",
+    class: "outline hotwire-native-hidden pill"
+  %>
 
 <% else %>
   <%= button_tag "Sign out", 

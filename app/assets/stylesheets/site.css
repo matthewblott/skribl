@@ -53,11 +53,16 @@ span {
   
 }
 
-.notes-new {
+/* .notes-new { */
+/*   main { */
+/*     padding: 0 !important; */
+/*   } */
+/* } */
+
+
   main {
     padding: 0 !important;
   }
-}
 
 body {
   padding-top: env(safe-area-inset-top);
