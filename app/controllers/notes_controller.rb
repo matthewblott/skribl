@@ -33,7 +33,12 @@ class NotesController < ApplicationController
 
   def destroy_multiple
     @deleted_ids = Array(params[:ids])
+
     Note.where(id: params[:ids]).destroy_all
+
+    @deleted_ids.each do |id|
+      DeleteImageJob.perform_later(Current.user.id, id)
+    end
 
     respond_to do |format|
       format.turbo_stream
