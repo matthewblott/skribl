@@ -13,10 +13,18 @@
       }
     %>
 
+    <%= button_tag 'Select all',
+      data: {
+        controller: "bridge--toggle-note-selection"
+      },
+      class: "hotwire-native-hidden" do %>
+    <% end %>
+
     <%= button_tag "Delete",
       id: "delete-button",
       type: "submit",
       data: {
+        controller: "bridge--delete-note",
         action: "notes#bulkDelete",
         notes_target: "deleteButton"
       },
