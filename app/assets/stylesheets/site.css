@@ -67,21 +67,6 @@ body {
 
 
 a {
-  /* padding: 0 1rem; */
-  padding-bottom: 0.2rem;
   text-decoration: none;
-  border-radius: 999rem;
-
-  background-color: lightyellow;
-  background-color: var(--pico-primary);
-  border-width: 1px;
-  background-color: grey;
-  background-color: white;
-  border-color: var(--pico-primary);
-
-  /* border-style: solid; */
-  color: inherit;
-  color: white;
-  color: var(--pico-primary);
   white-space: nowrap;
 }

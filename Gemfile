@@ -35,7 +35,7 @@ group :development, :test do
   # gem 'ruby-debug-ide'
   # gem 'mutex_m' 
   gem 'debase', '>= 0.2.4.1'
-  gem 'ruby-debug-ide', '>= 0.7.0' 
+  gem 'ruby-debug-ide', '>= 0.7.0' # for RubyMine
 end
 
 group :development do
