@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   delete "settings", to: "settings#destroy"
 
   scope '/:user_id', as: 'user' do
-    resources :notes
+    resources :notes do
+      delete '/', action: :destroy_multiple, on: :collection
+    end
   end
 
   get "/uploads/:user_id/:filename.png", to: "user_uploads#show", as: :user_upload

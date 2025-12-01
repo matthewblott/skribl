@@ -1,9 +1,0 @@
-<h1>Daily Notification</h1>
-
-<ul>
-  <% @image_data.each do |filename, base64_data| %>
-    <li>
-      <%= image_tag base64_data, alt: 'Image' %>
-    </li>  
-  <% end %>
-</ul>

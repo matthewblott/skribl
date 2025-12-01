@@ -1,0 +1,4 @@
+<% @deleted_ids.each do |id| %>
+  <%= turbo_stream.remove "note_#{id}" %>
+<% end %>
+

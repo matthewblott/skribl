@@ -1,5 +1,4 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: %i[ show destroy ]
   
   def index
     if params[:note_deleted] == 1.to_s
@@ -32,17 +31,18 @@ class NotesController < ApplicationController
     end
   end
 
-  def destroy
-    @note.destroy!
-    DeleteImageJob.perform_later(Current.user.id, @note.id)
-    redirect_to user_notes_path(Current.user), notice: "note was successfully destroyed.", status: :see_other
+  def destroy_multiple
+    @deleted_ids = Array(params[:ids])
+    Note.where(id: params[:ids]).destroy_all
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to user_notes_path(Current.user), notice: "Deleted" }
+    end
+
   end
 
   private
-
-    def set_note
-      @note = Note.find(params.expect(:id))
-    end
 
   def note_params
     params.require(:note).permit(:content, :img)

@@ -1,6 +1,5 @@
 <%= turbo_frame_tag :pagination do %>
   <%= render notes_view_models %>
-  
   <% if pagy.next %>
     <%= turbo_frame_tag :pagination, 
         src: user_notes_path(page: pagy.next),

@@ -70,3 +70,13 @@ a {
   text-decoration: none;
   white-space: nowrap;
 }
+
+
+.selected {
+  background-color: lightyellow;
+}
+
+[id^="note_"] {
+  cursor: pointer;  
+  cursor: default;  
+}

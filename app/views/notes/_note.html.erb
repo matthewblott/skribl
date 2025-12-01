@@ -1,7 +1,11 @@
-<div id="<%= dom_id note %>">
+<div id="<%= dom_id note %>" data-action="click->notes#select">
 
   <% if note.image_saved %>
-    <%= render partial: "notes/note_link", locals: { note_id: note.id } %>
+    <% #unless user_id  %>
+    <% #else %>
+      <%= image_tag "/uploads/#{CurrentNoteContext.user_id}/#{note.id}.png" %> 
+    <% #end %>
+
   <% else %>
     <%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
   <% end %>
