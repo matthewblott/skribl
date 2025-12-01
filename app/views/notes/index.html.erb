@@ -10,15 +10,16 @@
     <%= button_tag "Select all",
       data: {
         action: 'notes#toggleSelection'
-      }
+      },
+      class: "hotwire-native-hidden"
     %>
 
-    <%= button_tag 'Select all',
+    <%#= button_tag 'Select all',
       data: {
         controller: "bridge--toggle-note-selection"
       },
-      class: "hotwire-native-hidden" do %>
-    <% end %>
+      class: "hotwire-native-hidden"
+    %>
 
     <%= button_tag "Delete",
       id: "delete-button",
@@ -40,19 +41,18 @@
     id: "delete-form" do |f| %>
   <% end %>
 
-
-<section id="user_<%= Current.user.id %>_notes">
-  <% @notes.each do |note| %>
-    <%= render partial: "notes/note", locals: { note: note } %>
-  <% end %>
-
-  <% if @pagy.next %>
-    <%= turbo_frame_tag :pagination, 
-        src: user_notes_path(Current.user, page: @pagy.next),
-        loading: "lazy" do %>
-      Loading more...
+  <section id="user_<%= Current.user.id %>_notes">
+    <% @notes.each do |note| %>
+      <%= render partial: "notes/note", locals: { note: note } %>
     <% end %>
-  <% end %>
-</section>
+
+    <% if @pagy.next %>
+      <%= turbo_frame_tag :pagination, 
+          src: user_notes_path(Current.user, page: @pagy.next),
+          loading: "lazy" do %>
+        Loading more...
+      <% end %>
+    <% end %>
+  </section>
 
 </div>
