@@ -26,7 +26,8 @@
       type: "submit",
       data: {
         controller: "bridge--delete-note",
-        action: "notes#bulkDelete",
+        # action: "notes#bulkDelete",
+        action: "click->bridge--delete-post#triggerDelete notes#bulkDelete",
         notes_target: "deleteButton"
       },
       form: "delete-form" %>

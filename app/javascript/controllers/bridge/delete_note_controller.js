@@ -33,4 +33,20 @@ export default class extends BridgeComponent {
     this.send('disconnect')
   }
 
+  #toggleEnabled() {
+    this.send("toggleEnabled", {}, () => {
+      // console.log('Toggle executed')
+    })
+  }
+
+  triggerDelete(e) {
+    e.preventDefault()
+    const notesEl = document.querySelector("[data-controller~='notes']")
+    const notesController = this.application.getControllerForElementAndIdentifier(notesEl, "notes")
+
+    if (notesController) {
+      notesController.bulkDelete(e)
+    }
+  }
+
 }

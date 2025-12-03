@@ -21,10 +21,10 @@ class User < ApplicationRecord
     totp.verify(code, drift_behind: 30)
   end
 
-  def reset
-    delete_user_image_storage
-    create_user_image_storage
-  end
+  # def reset
+  #   delete_user_image_storage
+  #   create_user_image_storage
+  # end
 
   private
 

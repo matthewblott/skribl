@@ -40,14 +40,14 @@
   %>
 <% end %>
 
-<hr class="hotwire-native-hidden">
+<%# <hr class="hotwire-native-hidden"> %>
 
-<h2>Delete scribbles</h2>
-<p>
-Any scribbles created are stored for 30 days but you can delete them immediately if you want.  
-</p>
+<%# <h2>Delete scribbles</h2> %>
+<%# <p> %>
+<%# Scribbles created are stored for 30 days but you can delete them immediately if you want.   %>
+<%# </p> %>
 
-<%= button_to "Delete my scribbles",
+<%#= button_to "Delete my scribbles",
   settings_path, 
   method: :delete,
   data: {

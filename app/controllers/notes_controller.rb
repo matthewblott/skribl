@@ -47,10 +47,10 @@ class NotesController < ApplicationController
 
   end
 
-  def destroy_all
-    Note.destroy_all 
-    Current.user.reset
-  end 
+  # def destroy_all
+  #   Note.destroy_all 
+  #   Current.user.reset
+  # end 
 
   private
 
