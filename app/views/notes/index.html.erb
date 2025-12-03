@@ -2,58 +2,63 @@
 
 <%= turbo_stream_from :user_notes_stream, signed: true %>
 
-<div data-controller="notes" data-notes-target="controller">
-  <controls role="group" class="hotwire-native-hidden">
-    <%= link_to :New, new_user_note_path(Current.user, @note), role: "button" %>
-    <%= link_to :Settings, settings_path, role: "button" %>
 
-    <%= button_tag "Select all",
-      data: {
-        action: 'notes#toggleSelection'
-      },
-      class: "hotwire-native-hidden"
-    %>
+<controls role="group" class="hotwire-native-hidden">
+  <%= link_to :New, new_user_note_path(Current.user, @note), role: "button" %>
+  <%= link_to :Settings, settings_path, role: "button" %>
 
-    <%#= button_tag 'Select all',
-      data: {
-        controller: "bridge--toggle-note-selection"
-      },
-      class: "hotwire-native-hidden"
-    %>
-
-    <%= button_tag "Delete",
-      id: "delete-button",
-      type: "submit",
-      data: {
-        controller: "bridge--delete-note",
-        # action: "notes#bulkDelete",
-        action: "click->bridge--delete-post#triggerDelete notes#bulkDelete",
-        notes_target: "deleteButton"
-      },
-      form: "delete-form" %>
-
-  </controls>
-
-  <%= form_with url: user_notes_path(Current.user),
-    method: :delete,
+  <%= button_tag "Select all",
     data: {
-      notes_target: 'deleteForm'
+      # controller: "bridge--toggle-note-selection"
+      controller: "ui--toggle-selection",
+      action: "ui--toggle-selection#toggle"
     },
-    id: "delete-form" do |f| %>
+    class: "hotwire-native-hidden"
+  %>
+
+  <%= button_tag "Delete",
+    data: {
+      controller: "ui--delete-button",
+      action: "
+        ui--delete-button#submit
+        ui--delete-form:updated@window->ui--delete-button#update
+        ui--items:updated@window->ui--delete-button#update
+      "
+    },
+    disabled: true,
+    form: "delete-form"
+  %>
+</controls>
+
+<%= form_with url: user_notes_path(Current.user),
+  method: :delete,
+  data: {
+    controller: 'ui--delete-form',
+    action: "
+      ui--delete-button:submit@window->ui--delete-form#submit
+      ui--items:updated@window->ui--delete-form#update
+    "
+  },
+  id: "delete-form" do |f| %>
+<% end %>
+
+<section id="user_<%= Current.user.id %>_notes">
+  <div
+    data-controller="ui--items"
+    data-action="
+      ui--items#toggle
+      ui--toggle-selection:toggle@window->ui--items#toggle
+    "
+  >
+  <% @notes.each do |note| %>
+    <%= render partial: "notes/note", locals: { note: note } %>
   <% end %>
 
-  <section id="user_<%= Current.user.id %>_notes">
-    <% @notes.each do |note| %>
-      <%= render partial: "notes/note", locals: { note: note } %>
+  <% if @pagy.next %>
+    <%= turbo_frame_tag :pagination, 
+        src: user_notes_path(Current.user, page: @pagy.next),
+        loading: "lazy" do %>
+      Loading more...
     <% end %>
-
-    <% if @pagy.next %>
-      <%= turbo_frame_tag :pagination, 
-          src: user_notes_path(Current.user, page: @pagy.next),
-          loading: "lazy" do %>
-        Loading more...
-      <% end %>
-    <% end %>
-  </section>
-
-</div>
+  <% end %>
+</section>

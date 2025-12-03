@@ -1,13 +1,7 @@
-<div id="<%= dom_id note %>" data-action="click->notes#select">
-
+<div id="<%= dom_id note %>" data-action="click->ui--items#select">
   <% if note.image_saved %>
-    <% #unless user_id  %>
-    <% #else %>
-      <%= image_tag "/uploads/#{CurrentNoteContext.user_id}/#{note.id}.png" %> 
-    <% #end %>
-
+    <%= image_tag "/uploads/#{CurrentNoteContext.user_id}/#{note.id}.png" %> 
   <% else %>
     <%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
   <% end %>
-
 </div>
