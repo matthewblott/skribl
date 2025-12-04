@@ -17,7 +17,6 @@ class SessionsController < ApplicationController
     email = params[:email]
     user = User.find_by(email: email)
 
-
     if user.blank?
       user = User.new
       user.email = email
@@ -66,12 +65,6 @@ class SessionsController < ApplicationController
   end
   
   def sign_in_success 
-    # user = User.find(params[:user_id])
-    # if user.id != Current.user.id
-    #   render :sign_in_success, status: :unprocessable_entity
-    #   return
-    # end
-
     flash[:notice] = "Signed in successfully"
     @redirect_path = new_user_note_path(Current.user)
   end
