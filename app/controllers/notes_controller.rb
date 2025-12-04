@@ -1,10 +1,6 @@
 class NotesController < ApplicationController
   
   def index
-    if params[:note_deleted] == 1.to_s
-      flash.now[:notice] = "Note was successfully deleted."
-    end
-  
     @pagy, @notes = pagy_countless(Note.recent_first, items: 20)
     
     if turbo_frame_request?
@@ -25,7 +21,8 @@ class NotesController < ApplicationController
     ImageToFileJob.perform_later(Current.user.id, @note.id, @note.img) # if @note.persisted?
   
     if @note.save
-      flash.now[:notice] = "Note was successfully created."
+      flash[:notice] = "Note was successfully created."
+      redirect_to new_user_note_path(Current.user)
     else
       render :new, status: :unprocessable_entity
     end
@@ -42,15 +39,13 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to user_notes_path(Current.user), notice: "Deleted" }
+      format.html {
+        flash[:notice] = "Note was successfully deleted."
+        redirect_to user_notes_path(Current.user)
+      }
     end
 
   end
-
-  # def destroy_all
-  #   Note.destroy_all 
-  #   Current.user.reset
-  # end 
 
   private
 

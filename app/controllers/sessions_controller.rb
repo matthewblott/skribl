@@ -9,10 +9,6 @@ class SessionsController < ApplicationController
   end
 
   def send_otp
-    if params[:signed_out] == 1.to_s
-      flash.now[:notice] = "Signed out successfully"
-    end
-
     @email = params[:email]
     @email = 'jane@example.com' if @email.blank?
   end
@@ -20,6 +16,7 @@ class SessionsController < ApplicationController
   def validate_otp
     email = params[:email]
     user = User.find_by(email: email)
+
 
     if user.blank?
       user = User.new
@@ -32,6 +29,8 @@ class SessionsController < ApplicationController
 
     otp_code = user.totp.now
     UserMailer.with(user:, otp_code:).send_otp.deliver_later
+
+    flash[:notice] = "OTP has been sent to #{email}"
 
     redirect_to enter_otp_path(email: email)
   end
@@ -56,7 +55,6 @@ class SessionsController < ApplicationController
       Current.user = user
 
       # The authenticated event is to be sent to Android client
-      # redirect_to new_user_note_path(user), notice: "Signed in successfully"
       Note.set_database_connection(user)
       redirect_to sign_in_success_path(user_id: user.id)
     else
@@ -68,14 +66,20 @@ class SessionsController < ApplicationController
   end
   
   def sign_in_success 
-    flash.now[:notice] = "Signed in successfully"
-    user = User.find(params[:user_id])
-    @redirect_path = new_user_note_path(user)
+    # user = User.find(params[:user_id])
+    # if user.id != Current.user.id
+    #   render :sign_in_success, status: :unprocessable_entity
+    #   return
+    # end
+
+    flash[:notice] = "Signed in successfully"
+    @redirect_path = new_user_note_path(Current.user)
   end
 
   def destroy
     @session.destroy
-    redirect_to send_otp_path(signed_out: 1), notice: "That session has been logged out"
+    flash[:notice] = "That session has been logged out"
+    redirect_to send_otp_path
   end
 
   private

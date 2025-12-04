@@ -9,8 +9,10 @@
 
   <%= button_tag "Select all",
     data: {
-      # controller: "bridge--toggle-note-selection"
-      controller: "ui--toggle-selection",
+      controller: "
+        ui--toggle-selection
+        bridge--toggle-note-selection
+      ",
       action: "ui--toggle-selection#toggle"
     },
     class: "hotwire-native-hidden"
@@ -18,7 +20,10 @@
 
   <%= button_tag "Delete",
     data: {
-      controller: "ui--delete-button",
+      controller: "
+        ui--delete-button
+        bridge--delete-note
+      ",
       action: "
         ui--delete-button#submit
         ui--delete-form:updated@window->ui--delete-button#update
@@ -33,7 +38,9 @@
 <%= form_with url: user_notes_path(Current.user),
   method: :delete,
   data: {
-    controller: 'ui--delete-form',
+    controller: "
+      ui--delete-form
+    ",
     action: "
       ui--delete-button:submit@window->ui--delete-form#submit
       ui--items:updated@window->ui--delete-form#update
