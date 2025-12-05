@@ -7,6 +7,6 @@ export default class extends Controller {
   }
 
   update({ detail }) {
-    this.element.disabled = detail.length === 0
+    this.element.disabled = detail.selectedIds.length === 0
   }
 }

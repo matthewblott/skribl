@@ -10,7 +10,7 @@ export default class extends BridgeComponent {
 
   disconnect() {
     super.disconnect()
-    this.#removeButton()
+    this.removeButton()
   }
 
   #addButton() {
@@ -22,31 +22,55 @@ export default class extends BridgeComponent {
     const destructive = element.bridgeAttribute('destructive') == 'true'
     const confirm = element.bridgeAttribute('confirm') || 'OK'
     const dismiss = element.bridgeAttribute('dismiss') || 'Cancel'
-    const data = {title, description, destructive, confirm, dismiss, iosImage, androidImage}
+    const enabled = false
+
+    const data = {
+      title,
+      description,
+      destructive,
+      confirm,
+      dismiss,
+      enabled,
+      iosImage,
+      androidImage,
+      enabled
+    }
 
     this.send('connect', data, () => {
-      this.element.click()
+      this.dispatch("submit")
     })
   }
 
-  #removeButton() {
+  removeButton() {
     this.send('disconnect')
   }
 
-  #toggleEnabled() {
-    this.send("toggleEnabled", {}, () => {
-      // console.log('Toggle executed')
-    })
-  }
+  update({ detail }) {
+    const element = this.bridgeElement
+    const iosImage = element.bridgeAttribute('ios-image')
+    const androidImage = element.bridgeAttribute('android-image')
+    const title = element.title || 'Are you sure?'
+    const description = element.bridgeAttribute('description')
+    const destructive = element.bridgeAttribute('destructive') == 'true'
+    const confirm = element.bridgeAttribute('confirm') || 'OK'
+    const dismiss = element.bridgeAttribute('dismiss') || 'Cancel'
+    const enabled = detail.selectedIds.length > 0
 
-  triggerDelete(e) {
-    e.preventDefault()
-    const notesEl = document.querySelector("[data-controller~='notes']")
-    const notesController = this.application.getControllerForElementAndIdentifier(notesEl, "notes")
-
-    if (notesController) {
-      notesController.bulkDelete(e)
+    const data = {
+      title,
+      description,
+      destructive,
+      confirm,
+      dismiss,
+      enabled,
+      iosImage,
+      androidImage,
+      enabled
     }
+
+    this.send("toggleEnabled", data, () => {
+      console.log('Toggle executed')
+    })
   }
 
 }

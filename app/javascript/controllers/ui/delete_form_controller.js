@@ -4,8 +4,7 @@ export default class extends Controller {
 
   update({ detail }) {
     this.#removeAllFields()
-
-    detail.forEach(id => {
+    detail.selectedIds.forEach(id => {
       this.addField(id)
     })
   }

@@ -4,6 +4,10 @@ export default class extends Controller {
 
   connect() {
     this.itemName = 'note'
+    // Hack to update on page load
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   this.update()
+    // })
   }
 
   toggle({ detail }) {
@@ -29,9 +33,17 @@ export default class extends Controller {
 
   update() {
     const allItems = this.#getItems()
-    const elements = Array.from(allItems).filter(el => el.hasAttribute('selected'))
-    const selectedIds = Array.from(elements).map(el => this.#getId(el.id))
-    this.dispatch("updated", { detail: selectedIds }) 
+    const selectedElements = Array.from(allItems).filter(el => el.hasAttribute('selected'))
+    const unselectedElements = Array.from(allItems).filter(el => !el.hasAttribute('selected'))
+    const selectedIds = Array.from(selectedElements).map(el => this.#getId(el.id))
+    const unselectedIds = Array.from(unselectedElements).map(el => this.#getId(el.id))
+
+    this.dispatch("update", {
+      detail: {
+        selectedIds: selectedIds,
+        unselectedIds: unselectedIds
+      } 
+    }) 
   }
 
   #getId (str) {

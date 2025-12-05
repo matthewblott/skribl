@@ -1,4 +1,3 @@
-<% #"notes_user_#{Current.user.id}_element" %>
 <%= turbo_stream.append "notes_element" do %>
   <%= render @notes %>
 <% end %>
