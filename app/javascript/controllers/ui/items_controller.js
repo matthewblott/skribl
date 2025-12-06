@@ -4,10 +4,6 @@ export default class extends Controller {
 
   connect() {
     this.itemName = 'note'
-    // Hack to update on page load
-    // document.addEventListener('DOMContentLoaded', () => {
-    //   this.update()
-    // })
   }
 
   toggle({ detail }) {

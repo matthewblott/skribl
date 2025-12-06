@@ -47,6 +47,10 @@ class Note < UserRecord
       target: "user_#{CurrentNoteContext.user_id}_notes",
       partial: "notes/note",
       locals: { note: self }
+    broadcast_replace_to :user_note_dispatcher_stream,
+      target: "user_#{CurrentNoteContext.user_id}_note_dispatcher",
+      partial: "notes/note_dispatcher",
+      locals: { note: self }
   } 
 
   private

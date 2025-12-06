@@ -1,6 +1,7 @@
 <% content_for :title, 'Scribbles' %>
 
 <%= turbo_stream_from :user_notes_stream, signed: true %>
+<%= turbo_stream_from :user_note_dispatcher_stream, signed: true %>
 
 <controls role="group" class="hotwire-native-hidden">
   <%= link_to :New, new_user_note_path(Current.user, @note), role: "button" %>
@@ -9,11 +10,12 @@
     data: {
       controller: "
         ui--toggle-selection
-        bridge--toggle-note-selection
+        bridge--toggle-selection
       ",
     action: "
       ui--toggle-selection#toggle
       ui--items:update@window->ui--toggle-selection#update
+      ui--items:update@window->bridge--toggle-selection#update
     "
     },
     class: "hotwire-native-hidden"
@@ -27,14 +29,16 @@
       ",
       action: "
         ui--delete-button#submit
-        ui--items:update@window->bridge--delete-note#update
         ui--items:update@window->ui--delete-button#update
+        ui--items:update@window->bridge--delete-note#update
       "
     },
     disabled: true,
     form: "delete-form"
   %>
 </controls>
+
+<div id="user_<%= Current.user.id %>_note_dispatcher" data-controller="ui--item-dispatcher"></div>
 
 <%= form_with url: user_notes_path(Current.user),
   method: :delete,
@@ -55,7 +59,8 @@
   data-action="
     ui--items#toggle
     ui--toggle-selection:toggle@window->ui--items#toggle
-    turbo:render->ui--items#update
+    ui--item-dispatcher:update@window->ui--items#update
+    bridge--toggle-selection:connect@window->ui--items#update
   "
 >
   <% @notes.each do |note| %>
