@@ -54,6 +54,7 @@
   },
   id: "delete-form" %>
 
+<% # This is where the state for the controls are determined %>
 <section id="user_<%= Current.user.id %>_notes"
   data-controller="ui--items"
   data-action="
@@ -75,3 +76,10 @@
     <% end %>
   <% end %>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.dispatchEvent(new Event("stimulus:update"))
+    console.log("DOM fully loaded and parsed") 
+  })
+</script>
