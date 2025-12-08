@@ -7,23 +7,16 @@ export default class extends BridgeComponent {
     // this.allSelected = false
     super.connect()
     this.#addButton()
+    this.dispatch("connect")
   }
 
   update({ detail }) {
-    // if(detail.selectedIds.length === 0 && detail.unselectedIds.length === 0) {
-    //   this.element.innerHTML = 'Select all'
-    //   this.allSelected = false
-    // }
-    // else {
-    //   this.element.innerHTML = this.allSelected ? 'Deselect all' : 'Select all'
-    // }
-    // this.element.disabled = detail.selectedIds.length === 0
-
+    const isNoIds = detail.selectedIds.length === 0 && detail.unselectedIds.length === 0
     const title = 'Select all'
-    const enabled = detail.selectedIds.length > 0
+    const enabled = !isNoIds
     const data = {title, enabled}
 
-    this.send('enable', data, (e) => {
+    this.send('update', data, (e) => {
       console.log('update')
     })
   }
