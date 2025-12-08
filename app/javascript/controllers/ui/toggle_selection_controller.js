@@ -3,18 +3,21 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   connect() {
     this.allSelected = false
+    this.dispatch("connect")
   }
 
   update({ detail }) {
-    if(detail.selectedIds.length === 0 && detail.unselectedIds.length === 0) {
+    const isNoIds = detail.selectedIds.length === 0 && detail.unselectedIds.length === 0
+
+    if(isNoIds) {
       this.element.innerHTML = 'Select all'
       this.allSelected = false
-      this.element.disabled = true
     }
     else {
       this.element.innerHTML = this.allSelected ? 'Deselect all' : 'Select all'
-      this.element.disabled = false
     }
+
+    this.element.disabled = isNoIds
   }
 
   toggle() {

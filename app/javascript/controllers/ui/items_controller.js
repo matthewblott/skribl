@@ -4,8 +4,6 @@ export default class extends Controller {
 
   connect() {
     this.itemName = 'note'
-    // this.update()
-    window.addEventListener("stimulus:update", () => this.update())
   }
 
   toggle({ detail }) {
