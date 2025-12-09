@@ -4,7 +4,11 @@
   <controls role="group" class="hotwire-native-hidden">
     <%= button_tag "Clear",
       data: {
-        controller: 'bridge--clear-canvas',
+        controller: "
+          ui--clar-canvas
+          bridge--clear-canvas
+        ",
+        note_target: 'clear',
         action: 'click->note#clear'
       },
       class: 'outline hotwire-native-hidden' %>
@@ -12,7 +16,8 @@
     <%= button_tag "Save",
       data: {
         controller: 'bridge--create-note',
-        action: 'click->note#create'
+        action: 'click->note#create',
+        note_target: 'save'
       },
       class: 'hotwire-native-hidden'
     %>

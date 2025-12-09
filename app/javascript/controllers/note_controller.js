@@ -3,14 +3,31 @@ import { ocr } from 'ocr'
 
 export default class extends Controller {
 
-  static targets = ['canvas', 'text', 'submit', 'img']
+  static targets = ['canvas', 'text', 'submit', 'img', 'clear', 'save']
+
+  connect() {
+    this.canvasTarget.addEventListener("canvas:dirty", this.onDirty)
+  }
+
+  disconnect() {
+    this.canvasTarget.removeEventListener("canvas:dirty", this.onDirty)
+  }
+
+  onDirty = () => {
+    this.clearTarget.disabled = false
+    this.saveTarget.disabled = false 
+  }
 
   initialize() {
     ocr(this.canvasTarget)
+    this.clearTarget.disabled = true
+    this.saveTarget.disabled = true
   }
 
   clear() {
     this.canvasTarget.getContext('2d').clearRect(0, 0, this.canvasTarget.width, this.canvasTarget.height)
+    this.clearTarget.disabled = true
+    this.saveTarget.disabled = true
   }
 
   async create() {
