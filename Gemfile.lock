@@ -343,6 +343,7 @@ GEM
     ruby-vips (2.2.5)
       ffi (~> 1.12)
       logger
+    rubyzip (3.2.2)
     securerandom (0.4.1)
     shellany (0.0.1)
     shoulda-matchers (6.5.0)
@@ -447,6 +448,7 @@ DEPENDENCIES
   rotp (~> 6.3)
   rspec-rails
   ruby-debug-ide (>= 0.7.0)
+  rubyzip (~> 3.2)
   shoulda-matchers (~> 6.4)
   solid_cable
   solid_cache

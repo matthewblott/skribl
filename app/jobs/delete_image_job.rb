@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'zip'
+
 class DeleteImageJob < ApplicationJob
   queue_as :default
 

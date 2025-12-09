@@ -3,17 +3,6 @@
 <%= turbo_stream_from :user_notes_stream, signed: true %>
 <%= turbo_stream_from :user_note_dispatcher_stream, signed: true %>
 
-<script>
-
-  (function() {
-    document.addEventListener("turbo:load", () => {
-      // alert('hi')
-      // window.dispatchEvent(new Event("stimulus:update"))
-    })
-  })()
-
-</script>
-
 <controls role="group" class="hotwire-native-hidden">
   <%= link_to :New, new_user_note_path(Current.user, @note), role: "button" %>
   <%= link_to :Settings, settings_path, role: "button" %>
@@ -88,13 +77,3 @@
     <% end %>
   <% end %>
 </section>
-
-<script>
-  if (document.readyState === "loading") {
-    // document.addEventListener("DOMContentLoaded", () => {
-    //   window.dispatchEvent(new Event("stimulus:update"))
-    }
-  } else {
-    // window.dispatchEvent(new Event("stimulus:update"))
-  }
-</script>

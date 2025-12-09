@@ -28,8 +28,6 @@ export default class extends BridgeComponent {
     const data = {title, enabled}
 
     this.send('update', data, (e) => {
-      // this.allSelected = !this.allSelected
-      // console.log('update')
     })
 
   }
@@ -45,7 +43,6 @@ export default class extends BridgeComponent {
     const data = {title, enabled}
 
     this.send('connect', data, (e) => {
-      // Need to set this.allSelected here
       if(e.data.info  === 'user tapped native button') {
         this.allSelected = !this.allSelected
       }
