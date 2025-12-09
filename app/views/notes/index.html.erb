@@ -90,15 +90,11 @@
 </section>
 
 <script>
-  //document.addEventListener("DOMContentLoaded", () => {
-  //  window.dispatchEvent(new Event("stimulus:update"))
-  //})
-
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      window.dispatchEvent(new Event("stimulus:update"))
-    })
+    // document.addEventListener("DOMContentLoaded", () => {
+    //   window.dispatchEvent(new Event("stimulus:update"))
+    }
   } else {
-    window.dispatchEvent(new Event("stimulus:update"))
+    // window.dispatchEvent(new Event("stimulus:update"))
   }
 </script>

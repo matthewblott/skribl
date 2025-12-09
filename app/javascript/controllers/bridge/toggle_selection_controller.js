@@ -4,7 +4,7 @@ export default class extends BridgeComponent {
   static component = 'toggle-selection'
 
   connect() {
-    // this.allSelected = false
+    this.allSelected = false
     super.connect()
     this.#addButton()
     this.dispatch("connect")
@@ -12,19 +12,27 @@ export default class extends BridgeComponent {
 
   update({ detail }) {
     const isNoIds = detail.selectedIds.length === 0 && detail.unselectedIds.length === 0
-    const title = 'Select all'
+
+    if(isNoIds) {
+      this.element.innerHTML = 'Select all'
+      this.allSelected = false
+    }
+    else {
+      this.element.innerHTML = this.allSelected ? 'Deselect all' : 'Select all'
+    }
+
+    this.element.disabled = isNoIds
+
+    const title = this.element.innerHTML
     const enabled = !isNoIds
     const data = {title, enabled}
 
     this.send('update', data, (e) => {
-      console.log('update')
+      // this.allSelected = !this.allSelected
+      // console.log('update')
     })
-  }
 
-  // toggle() {
-  //   this.allSelected = !this.allSelected
-  //   this.dispatch("toggle", { detail: this.allSelected })
-  // }
+  }
 
   disconnect() {
     super.disconnect()
@@ -32,11 +40,15 @@ export default class extends BridgeComponent {
   }
 
   #addButton() {
-    const title = 'Select all'
-    const enabled = true
+    const title = this.element.innerHTML
+    const enabled = !this.element.disabled 
     const data = {title, enabled}
 
     this.send('connect', data, (e) => {
+      // Need to set this.allSelected here
+      if(e.data.info  === 'user tapped native button') {
+        this.allSelected = !this.allSelected
+      }
       this.element.click()
     })
     this.dispatch("connect")
