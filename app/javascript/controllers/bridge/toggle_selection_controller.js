@@ -43,7 +43,7 @@ export default class extends BridgeComponent {
     const data = {title, enabled}
 
     this.send('connect', data, (e) => {
-      if(e.data.info  === 'user tapped native button') {
+      if(e.data.info  === 'user tapped native button 1') {
         this.allSelected = !this.allSelected
       }
       this.element.click()

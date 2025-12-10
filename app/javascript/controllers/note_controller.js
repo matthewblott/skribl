@@ -7,6 +7,7 @@ export default class extends Controller {
 
   connect() {
     this.canvasTarget.addEventListener("canvas:dirty", this.onDirty)
+    this.started = false 
   }
 
   disconnect() {
@@ -16,6 +17,19 @@ export default class extends Controller {
   onDirty = () => {
     this.clearTarget.disabled = false
     this.saveTarget.disabled = false 
+
+    if(this.started) {
+      return
+    }
+
+    // Dispatch event here for the bridge components
+    this.dispatch("update", {
+      detail: {
+        isDirty: true
+      } 
+    }) 
+
+    this.started = true 
   }
 
   initialize() {
@@ -28,6 +42,13 @@ export default class extends Controller {
     this.canvasTarget.getContext('2d').clearRect(0, 0, this.canvasTarget.width, this.canvasTarget.height)
     this.clearTarget.disabled = true
     this.saveTarget.disabled = true
+
+    this.dispatch("update", {
+      detail: {
+        isDirty: false
+      } 
+    }) 
+    this.started = false
   }
 
   async create() {

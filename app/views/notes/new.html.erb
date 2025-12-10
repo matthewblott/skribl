@@ -1,25 +1,30 @@
-<% content_for :title, 'New Scribble' %>
+<% content_for :title, "New Scribble" %>
 
 <div data-controller="note">
   <controls role="group" class="hotwire-native-hidden">
     <%= button_tag "Clear",
       data: {
         controller: "
-          ui--clar-canvas
           bridge--clear-canvas
         ",
-        note_target: 'clear',
-        action: 'click->note#clear'
+        note_target: "clear",
+        action: "
+          click->note#clear
+          note:update@window->bridge--clear-canvas#update
+        "
       },
-      class: 'outline hotwire-native-hidden' %>
+      class: "outline hotwire-native-hidden" %>
 
     <%= button_tag "Save",
       data: {
-        controller: 'bridge--create-note',
-        action: 'click->note#create',
-        note_target: 'save'
+        controller: "bridge--create-note",
+        action: "
+          click->note#create
+          note:update@window->bridge--create-note#update
+        ",
+        note_target: "save"
       },
-      class: 'hotwire-native-hidden'
+      class: "hotwire-native-hidden"
     %>
 
     <%= link_to "Scribbles", user_notes_path, role: "button" %>
@@ -29,18 +34,18 @@
   <%= form_with(
     model: [Current.user, @note],
     html: {
-      id: 'note_form'
+      id: "note_form"
     }) do |form| %>
 
     <%= form.hidden_field :img,
       data: {
-        note_target: 'img'
+        note_target: "img"
       } %>
 
-    <%= form.submit style: 'display: none',
+    <%= form.submit style: "display: none",
       data: {
-        note_target: 'submit',
-        search_field_target: 'submit'
+        note_target: "submit",
+        search_field_target: "submit"
       } %> 
 
   <% end %>

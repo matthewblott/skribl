@@ -8,20 +8,30 @@ export default class extends BridgeComponent {
     this.#addButton()
   }
 
+  update({ detail }) {
+    const title = this.element.innerHTML
+    const enabled = detail.isDirty
+    const data = {title, enabled}
+
+    this.send('update', data)
+  }
+
   disconnect() {
     super.disconnect()
     this.#removeButton()
   }
 
   #addButton() {
-    const element = this.bridgeElement
-    const iosImage = element.bridgeAttribute("ios-image")
-    const androidImage = element.bridgeAttribute("android-image")
-    const data = {title: element.title, iosImage, androidImage}
+    const title = this.element.innerHTML
+    const enabled = false
+    const data = {title, enabled}
 
-    this.send("connect", data, () => {
+    this.send('connect', data, (e) => {
+      data.enabled = false 
+      this.send('update', data)
       this.element.click()
     })
+    this.dispatch("connect")
   }
 
   #removeButton() {
