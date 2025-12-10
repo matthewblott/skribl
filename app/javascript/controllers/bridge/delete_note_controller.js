@@ -17,8 +17,8 @@ export default class extends BridgeComponent {
     const element = this.bridgeElement
     const iosImage = element.bridgeAttribute('ios-image')
     const androidImage = element.bridgeAttribute('android-image')
-    const title = element.title || 'Are you sure?'
-    const description = element.bridgeAttribute('description')
+    const title = element.title || 'Delete Note(s)'
+    const description = element.bridgeAttribute('description') || 'Are you sure?'
     const destructive = element.bridgeAttribute('destructive') == 'true'
     const confirm = element.bridgeAttribute('confirm') || 'OK'
     const dismiss = element.bridgeAttribute('dismiss') || 'Cancel'
@@ -50,7 +50,7 @@ export default class extends BridgeComponent {
     const iosImage = element.bridgeAttribute('ios-image')
     const androidImage = element.bridgeAttribute('android-image')
     const title = element.title || 'Are you sure?'
-    const description = element.bridgeAttribute('description')
+    const description = element.bridgeAttribute('description') || 'Are you sure?'
     const destructive = element.bridgeAttribute('destructive') == 'true'
     const confirm = element.bridgeAttribute('confirm') || 'OK'
     const dismiss = element.bridgeAttribute('dismiss') || 'Cancel'
