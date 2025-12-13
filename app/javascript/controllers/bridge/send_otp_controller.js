@@ -5,7 +5,6 @@ export default class extends BridgeComponent {
 
   connect() {
     super.connect()
-    console.log('Send otp connected')
     this.#addButton()
   }
 

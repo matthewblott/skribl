@@ -1,12 +1,35 @@
 <% content_for :title, 'Send Code' %>
 
+<style>
+
+  /* Remove the default blue outline/border */
+  input[type="email"]:focus {
+    outline: none;            /* removes the outline */
+    box-shadow: none;         /* Chrome/Edge adds a shadow */
+    border-color: transparent;/* optional – hide the border color */
+  }
+
+  /* Optional: replace it with a custom, accessible style */
+  input[type="email"]:focus-visible {
+  }
+
+  input.is-valid {
+
+    border-color: green !important;
+  }
+  
+  input.is-invalid {
+    border-color: red !important;
+  }
+
+</style>
+
 <%= button_tag "Placeholder",
   data: {
     controller: 'bridge--ios-placeholder',
     action: 'click->note#clear'
   },
   class: 'hotwire-native-hidden hidden' %>
-
 
 <p>
   Enter your email address and press Submit to receive a code for signing in.
@@ -16,20 +39,34 @@
   <div>
     <%= f.label :email, class: 'hidden' %>
     <%= f.email_field :email,
+      data: {
+        controller: "ui--email",
+        action: "
+          input->ui--email#check
+          change->ui--email#check
+          invalid->ui--email#showInvalid
+        "
+      },
       value: @email,
       placeholder: "hello@example.com",
       class: 'pill',
       autocomplete: 'off',
       required: true
-     %>
+    %>
+    <div data-email-target="error" class="error-msg"></div>
   </div>
+
   <%= f.submit "Submit",
     data: {
-      controller: "bridge--send-otp"
+      controller: "
+        ui--send-otp
+        bridge--send-otp
+        ui--email:update@window->ui--send-otp#update
+      ",
+      action: "ui--email:update@window->ui--send-otp#update"
     },
     class: 'hotwire-native-hidden pill'
   %>
-
 <% end %>
 
 <%= image_tag "text.png", alt: "Scribble Logo", class: "foo" %>

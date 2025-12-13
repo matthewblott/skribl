@@ -5,9 +5,16 @@ export default class extends BridgeComponent {
 
   connect() {
     super.connect()
-    console.log('Sign in connected')
     this.#addButton()
   }
+
+  update({ detail }) {
+    const title = this.element.innerHTML
+    const enabled = detail.isDirty
+    const data = {title, enabled}
+
+    this.send('update', data)
+  } 
 
   disconnect() {
     super.disconnect()
@@ -16,13 +23,14 @@ export default class extends BridgeComponent {
 
   #addButton() {
     const element = this.bridgeElement
-    const iosImage = element.bridgeAttribute("ios-image")
-    const androidImage = element.bridgeAttribute("android-image")
-    const data = {title: element.title, iosImage, androidImage}
+    const title = element.title
+    const enabled = true
+    const data = {title, enabled}
 
-    this.send("connect", data, () => {
+    this.send('connect', data, (e) => {
       this.element.click()
     })
+    // this.dispatch("connect")
   }
 
   #removeButton() {

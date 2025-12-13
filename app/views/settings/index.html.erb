@@ -71,15 +71,16 @@ Download your scribbles as a zip file.
 
 <%= form_with url: download_images_path,
   class: "hidden",
+  data: {
+    turbo: false,
+  },
   html: {
     id: "download_form",
+    formtarget: "_top"
   } do %>
 <% end %>
 
 <%= button_tag "Download", 
-    data: {
-      turbo: false,
-    },
   form: "download_form",
   class: "outline pill"
 %>
