@@ -80,7 +80,16 @@ Download your scribbles as a zip file.
   } do %>
 <% end %>
 
-<%= button_tag "Download", 
+
+<%#= button_tag "Download", 
   form: "download_form",
   class: "outline pill"
 %>
+
+<button
+  data-controller="bridge--download"
+  data-action="bridge--download#submit"
+  data-token="<%= form_authenticity_token %>"
+  class="outline pill"
+>Download
+</button>

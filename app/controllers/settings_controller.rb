@@ -1,6 +1,9 @@
 require 'zip'
 
 class SettingsController < ApplicationController
+  # skip_forgery_protection only: :download_images
+  skip_before_action :authenticate, only: [:download_images]
+
   def destroy
     @user = User.find(Current.user.id)
     @user.destroy
@@ -10,7 +13,7 @@ class SettingsController < ApplicationController
     redirect_to send_otp_path
   end
 
-  def download_images_old
+  def download_images
     folder_path = Rails.root.join('uploads', Current.user.id.to_s)
     zip_data = Zip::OutputStream.write_buffer do |zip|
       Dir.glob("#{folder_path}/*.png").each do |file|
@@ -27,7 +30,7 @@ class SettingsController < ApplicationController
 
   end
 
-  def download_images
+  def download_images_new
     name = 'myfile'
     extension = 'zip'
     filename = "#{name}.#{extension}"
