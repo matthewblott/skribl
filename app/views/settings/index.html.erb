@@ -5,86 +5,91 @@
   <%= link_to "Scribbles", user_notes_path(Current.user), role: "button" %>
 </controls>
 
-<hr class="hotwire-native-hidden">
+<div class="settings">
 
-<h2>Sign in details</h2>
+  <hr class="hotwire-native-hidden">
 
-<p>You are currently signed as <em><%= Current.user&.email %></em>.</p>
+  <h2>Sign in details</h2>
 
-<%= form_with url: sessions_path,
-  method: :delete,
-  class: "hidden",
-  html: {
-    id: "sign_out_form",
-  } do %>
-<% end %>
+  <p>You are currently signed as <em><%= Current.user&.email %></em>.</p>
+
+  <%= form_with url: sessions_path,
+    method: :delete,
+    class: "hidden",
+    html: {
+      id: "sign_out_form",
+    } do %>
+  <% end %>
 
 
-<% unless native_app? %>
+  <% unless native_app? %>
 
-  <%= button_tag "Sign out", 
+    <%= button_tag "Sign out", 
+      data: {
+        turbo: false,
+      },
+      form: "sign_out_form",
+      class: "outline hotwire-native-hidden pill"
+    %>
+
+  <% else %>
+    <%= button_tag "Sign out", 
+        data: {
+          action: "click->bridge--sign-out#foo",
+          controller: "bridge--sign-out"
+        },
+        class: "outline pill"
+    %>
+  <% end %>
+
+  <hr class="hotwire-native-hidden">
+
+  <h2>Delete account</h2>
+  <p>
+  This action is not reversible. All information related to this account will be deleted permanently.
+  </p>
+
+  <%= button_to "Delete my account",
+    settings_path, 
+    method: :delete,
+    data: {
+      controller: "bridge--delete-account",
+      turbo_frame: "_top",
+      action: "click->bridge--delete-account#submit",
+      # turbo_method: :delete,
+      # turbo_confirm: "Are you sure?",
+      bridge_title: "Delete Account",
+      bridge_confirm: "Confirm",
+      bridge_dismiss: "Cancel",
+      bridge_description: "Are you sure you want to delete your account?"
+    },
+    class: "danger outline pill"
+  %>
+
+  <h2>Download scribbles</h2>
+  <p>
+  Download your scribbles as a zip file.
+  </p>
+
+  <%= form_with url: download_images_path,
+    class: "hidden",
     data: {
       turbo: false,
     },
-    form: "sign_out_form",
-    class: "outline hotwire-native-hidden pill"
-  %>
+    html: {
+      id: "download_form",
+      formtarget: "_top"
+    } do %>
+  <% end %>
 
-<% else %>
-  <%= button_tag "Sign out", 
-      data: {
-        action: "click->bridge--sign-out#foo",
-        controller: "bridge--sign-out"
-      },
-      class: "outline pill"
-  %>
-<% end %>
+  <button
+    data-controller="bridge--download"
+    data-action="bridge--download#submit"
+    data-token="<%= form_authenticity_token %>"
+    form="<%= unless native_app? then "download_form" end %>"
+    type="submit"
+    class="outline pill"
+  >Download
+  </button>
 
-<hr class="hotwire-native-hidden">
-
-<h2>Delete account</h2>
-<p>
-This action is not reversible. All information related to this account will be deleted permanently.
-</p>
-
-<%= button_to "Delete my account",
-  settings_path, 
-  method: :delete,
-  data: {
-    controller: "bridge--delete-account",
-    turbo_frame: "_top",
-    action: "click->bridge--delete-account#submit",
-    # turbo_method: :delete,
-    # turbo_confirm: "Are you sure?",
-    bridge_title: "Delete Account",
-    bridge_confirm: "Confirm",
-    bridge_dismiss: "Cancel",
-    bridge_description: "Are you sure you want to delete your account?"
-  },
-  class: "danger outline pill"
-%>
-
-<h2>Download scribbles</h2>
-<p>
-Download your scribbles as a zip file.
-</p>
-
-<%= form_with url: download_images_path,
-  class: "hidden",
-  data: {
-    turbo: false,
-  },
-  html: {
-    id: "download_form",
-    formtarget: "_top"
-  } do %>
-<% end %>
-
-<button
-  data-controller="bridge--download"
-  data-action="bridge--download#submit"
-  data-token="<%= form_authenticity_token %>"
-  form="<%= unless native_app? then "download_form" end %>"
-  class="outline pill"
->Download
-</button>
+</div>

@@ -53,16 +53,9 @@ span {
   
 }
 
-/* .notes-new { */
-/*   main { */
-/*     padding: 0 !important; */
-/*   } */
-/* } */
-
-
-  main {
-    padding: 0 !important;
-  }
+main {
+  padding: 0 !important;
+}
 
 body {
   padding-top: env(safe-area-inset-top);
@@ -70,12 +63,10 @@ body {
   margin: 0;
 }
 
-
 a {
   text-decoration: none;
   white-space: nowrap;
 }
-
 
 .selected {
   background-color: lightyellow;
@@ -84,4 +75,8 @@ a {
 [id^="note_"] {
   cursor: pointer;  
   cursor: default;  
+}
+
+.settings {
+  margin: 0 0.5rem;
 }
