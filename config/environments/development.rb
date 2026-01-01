@@ -49,7 +49,7 @@ Rails.application.configure do
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
-  mail_service = ENV.fetch("MAIL_SERVICE", "mailhog") # Default to MailHog
+  mail_service = ENV.fetch("MAIL_SERVICE", "smtp") # Default to mailhog
 
   case mail_service
   when "mailhog"
@@ -58,6 +58,18 @@ Rails.application.configure do
     config.action_mailer.smtp_settings = {
       address: 'localhost', 
       port:  2025,
+    }
+
+  when 'smtp'
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      user_name: Rails.application.credentials.dig(:smtp, :user_name),
+      password: Rails.application.credentials.dig(:smtp, :password),
+      address: "smtp.eu.mailgun.org",
+      port: 587,
+      authentication: :plain,
+      enable_starttls_auto: true,
+      openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
     }
   when "letter_opener"
     config.action_mailer.delivery_method = :letter_opener

@@ -25,6 +25,7 @@ gem 'stimulus-rails'
 gem 'thruster', require: false
 gem 'turbo-rails'
 gem 'rubyzip', '~> 3.2'
+gem "mailgun-ruby", "~> 1.4"
 
 group :development, :test do
   gem 'brakeman', require: false
@@ -51,3 +52,4 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 6.4'
 end
+

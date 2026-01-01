@@ -1,7 +1,7 @@
 require 'base64'
 
 class UserMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: 'notifications@matthewblott.com'
 
   def send_otp
     @user = params[:user]
