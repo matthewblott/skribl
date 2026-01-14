@@ -2,14 +2,14 @@
 
 <controls role="group" class="hotwire-native-hidden">
   <%= link_to :New, new_user_note_path(Current.user, Note.new), role: "button" %>
-  <%= link_to "Scribbles", user_notes_path(Current.user), role: "button" %>
+  <%= link_to "Notes", user_notes_path(Current.user), role: "button" %>
 </controls>
 
 <div class="settings">
 
   <hr class="hotwire-native-hidden">
 
-  <h2>Sign in details</h2>
+  <h2>Sign in Details</h2>
 
   <p>You are currently signed as <em><%= Current.user&.email %></em>.</p>
 
@@ -44,7 +44,7 @@
 
   <hr class="hotwire-native-hidden">
 
-  <h2>Delete account</h2>
+  <h2>Delete Account</h2>
   <p>
   This action is not reversible. All information related to this account will be deleted permanently.
   </p>
@@ -66,9 +66,9 @@
     class: "danger outline pill"
   %>
 
-  <h2>Download scribbles</h2>
+  <h2>Download Notes</h2>
   <p>
-  Download your scribbles as a zip file.
+  Download your notes as a zip file.
   </p>
 
   <%= form_with url: download_images_path,

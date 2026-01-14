@@ -1,4 +1,4 @@
-<% content_for :title, "New Scribble" %>
+<% content_for :title, "New Note" %>
 
 <div data-controller="note">
   <controls role="group" class="hotwire-native-hidden">
@@ -27,7 +27,7 @@
       class: "hotwire-native-hidden"
     %>
 
-    <%= link_to "Scribbles", user_notes_path, role: "button" %>
+    <%= link_to "Notes", user_notes_path, role: "button" %>
   </controls>
   <canvas data-note-target="canvas"></canvas>
 

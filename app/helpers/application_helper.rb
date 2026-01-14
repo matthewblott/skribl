@@ -4,7 +4,7 @@ module ApplicationHelper
   # Pagy::DEFAULT[:limit] = 8
 
   def page_title
-    content_for(:title || 'Scribble')
+    content_for(:title || 'Skribl')
   end
 
   def native_app?

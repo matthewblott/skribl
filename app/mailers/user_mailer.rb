@@ -9,7 +9,7 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: @user.email,
-      subject: "#{@otp_code} - Your Scribble one-time code"
+      subject: "#{@otp_code} - Your Skribl one-time code"
     )
 
   end

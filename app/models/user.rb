@@ -10,7 +10,7 @@ class User < ApplicationRecord
   after_destroy :delete_user_image_storage
 
   def totp
-    ROTP::TOTP.new(totp_secret, issuer: "Scribble")
+    ROTP::TOTP.new(totp_secret, issuer: "Skribl")
   end
 
   def generate_totp_secret
