@@ -2,6 +2,8 @@ class Note < UserRecord
   before_save :strip_whitespace
   attr_accessor :img
 
+  validates :id, presence: true
+
   scope :recent_first, -> { order(created_at: :desc) }
 
   def initialize(attributes = nil)

@@ -49,7 +49,7 @@ Rails.application.configure do
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
-  mail_service = ENV.fetch("MAIL_SERVICE", "smtp") # Default to mailhog
+  mail_service = ENV.fetch("MAIL_SERVICE", "mailhog") # Default to mailhog
 
   case mail_service
   when "mailhog"

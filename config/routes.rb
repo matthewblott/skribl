@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   get 'terms', to: 'static_pages#terms'
   get 'privacy', to: 'static_pages#privacy'
+  get 'support', to: 'static_pages#support'
 
   get "/uploads/:user_id/:filename.png", to: "user_uploads#show", as: :user_upload
 

@@ -29,25 +29,30 @@
 
     <%= link_to "Notes", user_notes_path, role: "button" %>
   </controls>
+
   <canvas data-note-target="canvas"></canvas>
 
-  <%= form_with(
-    model: [Current.user, @note],
-    html: {
-      id: "note_form"
-    }) do |form| %>
+  <turbo-frame id="note_frame">
 
-    <%= form.hidden_field :img,
-      data: {
-        note_target: "img"
-      } %>
+    <%= form_with(
+      model: [Current.user, Note.new],
+      html: {
+        id: "note_form",
+        data: { turbo: true }
+      }) do |form| %>
 
-    <%= form.submit style: "display: none",
-      data: {
-        note_target: "submit",
-        search_field_target: "submit"
-      } %> 
+      <%= form.hidden_field :img,
+        data: {
+          note_target: "img"
+        } %>
 
-  <% end %>
+      <%= form.submit style: "display: none",
+        data: {
+          note_target: "submit",
+          search_field_target: "submit"
+        } %> 
 
+    <% end %>
+
+  </turbo-frame>
 </div>

@@ -1,0 +1,42 @@
+<%= turbo_stream.update "note_frame" do %>
+  <%= form_with(
+    model: [Current.user, Note.new],
+    html: {
+      id: "note_form",
+      data: { turbo: true }
+    }) do |form| %>
+
+    <%= form.hidden_field :img,
+      data: {
+        note_target: "img"
+      } %>
+
+    <%= form.submit style: "display: none",
+      data: {
+        note_target: "submit",
+        search_field_target: "submit"
+      } %> 
+
+  <% end %>
+
+  <script>
+     console.log("hello")
+  </script>
+
+<% end %>
+
+<%= turbo_stream.update "alerts_frame" do %>
+  <% flash.each do |key, message| %>
+    <div
+      data-controller="alert"
+      class="flash hotwire-native-hidden <%= key %>"><%= message %></div>
+
+      <%= hidden_field_tag 'toast', '',
+        data: {
+          controller: "bridge--toast",
+          bridge_message: message
+        }
+      %>
+
+  <% end %>
+<% end %>
