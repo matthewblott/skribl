@@ -19,10 +19,6 @@
 
   <% end %>
 
-  <script>
-     console.log("hello")
-  </script>
-
 <% end %>
 
 <%= turbo_stream.update "alerts_frame" do %>
@@ -40,3 +36,5 @@
 
   <% end %>
 <% end %>
+
+<turbo-stream action="clear_canvas"></turbo-stream>

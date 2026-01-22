@@ -10,6 +10,10 @@ export default class extends Controller {
     this.started = false 
   }
 
+  created(){
+    console.log('Created')
+  }
+
   disconnect() {
     this.canvasTarget.removeEventListener("canvas:dirty", this.onDirty)
   }
