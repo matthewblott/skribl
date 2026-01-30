@@ -1,7 +1,7 @@
 <% content_for :title, 'Settings' %>
 
 <controls role="group" class="hotwire-native-hidden">
-  <%= link_to :New, new_user_note_path(Current.user, Note.new), role: "button" %>
+  <%= link_to :New, user_notes_new_path(Current.user, Note.new), role: "button" %>
   <%= link_to "Notes", user_notes_path(Current.user), role: "button" %>
 </controls>
 
@@ -20,7 +20,6 @@
       id: "sign_out_form",
     } do %>
   <% end %>
-
 
   <% unless native_app? %>
 

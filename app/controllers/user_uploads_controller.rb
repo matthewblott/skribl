@@ -1,5 +1,4 @@
 class UserUploadsController < ApplicationController
-  # before_action :authenticate_user!
 
   def show
     user_id = params[:user_id].to_i
@@ -11,8 +10,6 @@ class UserUploadsController < ApplicationController
     end
 
     path = Rails.root.join("uploads", "#{user_id}", "#{file}.png")
-    
-    # debugger
 
     if File.exist?(path)
       send_file path, disposition: "inline", type: "image/png"

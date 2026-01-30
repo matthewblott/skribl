@@ -4,7 +4,7 @@
 <%= turbo_stream_from :user_note_dispatcher_stream, signed: true %>
 
 <controls role="group" class="hotwire-native-hidden">
-  <%= link_to :New, new_user_note_path(Current.user, @note), role: "button" %>
+  <%= link_to :New, user_notes_new_path(Current.user, @note), role: "button" %>
   <%= link_to :Settings, settings_path, role: "button" %>
   <%= button_tag "Select all",
     data: {

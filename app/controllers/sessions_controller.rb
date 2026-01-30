@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
 
   def send_otp
     @email = params[:email]
-    # @email = 'jane@example.com' if @email.blank?
   end
 
   def validate_otp
@@ -66,7 +65,7 @@ class SessionsController < ApplicationController
   
   def sign_in_success 
     flash[:notice] = "Signed in successfully"
-    @redirect_path = new_user_note_path(Current.user)
+    @redirect_path = user_notes_new_path(Current.user)
   end
 
   def destroy
