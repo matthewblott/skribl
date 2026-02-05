@@ -2,6 +2,10 @@
 
 <style>
 
+input, p {
+  font-size: 1.1rem;
+}
+
   /* Remove the default blue outline/border */
   input[type="email"]:focus {
     outline: none;            /* removes the outline */
@@ -22,16 +26,21 @@
     border-color: red !important;
   }
 
+  p  {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
 </style>
 
-<%= button_tag "Placeholder",
+<%#= button_tag "Placeholder",
   data: {
     controller: 'bridge--ios-placeholder',
     action: 'click->note#clear'
   },
   class: 'hotwire-native-hidden hidden' %>
 
-<p>
+<p style="margin-top: 1rem">
   Enter your email address and press Submit to receive a code for signing in.
 </p>
 
@@ -68,8 +77,32 @@
     class: 'hotwire-native-hidden pill'
   %>
 <% end %>
+<p>
+<%# Your email is used to create your account, securely sync your logs, and recover access. We do not send marketing emails. %>
 
+We use your email address only to create and secure your account, sync your logs, and recover access if needed.
+
+
+</p>
+<p>
+
+We do not send marketing emails.
+
+</p>
+
+<p>
+
+This application's <strong>Privacy Policy</strong> can be found <a href="/privacy">here</a>.
+
+</p>
+
+<p>
+
+This application's <strong>Terms and Conditions</strong> can be found <a href="/terms">here</a>.
+
+</p>
+
+<%#= image_tag "text.png", alt: "Skribl Logo", class: "foo" %>
+<%#= image_tag "text.png", alt: "Skribl Logo", class: "baz" %>
 <%= image_tag "text.png", alt: "Skribl Logo", class: "foo" %>
-<%= image_tag "text.png", alt: "Skribl Logo", class: "baz" %>
-<%= image_tag "text.png", alt: "Skribl Logo", class: "foo" %>
-<%= image_tag "text.png", alt: "Skribl Logo", class: "foo" %>
+<%#= image_tag "text.png", alt: "Skribl Logo", class: "foo" %>

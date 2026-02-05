@@ -30,10 +30,6 @@ class ApplicationController < ActionController::Base
     Current.ip_address = request.ip
     Current.session = @session_record
     Current.user = @user
-
-    # Clean up invalid session
-    # session_record.destroy
-    # cookies.delete(:session_token)
   end
 
   def set_database_connection

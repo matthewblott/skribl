@@ -1,6 +1,16 @@
 <% content_for :title, 'Enter Code' %>
 
-<%= button_tag "Placeholder",
+<style>
+
+  p  {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+
+</style>
+
+<%#= button_tag "Placeholder",
   data: {
     controller: 'bridge--ios-placeholder'
   },
@@ -13,8 +23,10 @@
     <%= f.email_field :email, value: @email, class: 'pill hidden' %>
   </div>
   <div>
-    <p>
-    Enter the code we sent to <strong><%= @email %></strong> and press Submit to sign in.
+
+<p style="margin-top: 1rem">
+
+Enter the 6-digit code to sign in.
     </p>
     <%= f.label :otp_code, "One-Time Code", class: 'hidden' %>
     <%= f.text_field :otp_code,
@@ -34,7 +46,7 @@
 <% end %>
 
 <p>
-  If the code hasn't appeared in your inbox check your spam or <%= link_to "press here", send_otp_path(email: @email) %> and try again.
+Didn’t get a code? <%= link_to "Request a new one", send_otp_path(email: @email) %>
 </p>
 
 

@@ -1,7 +1,6 @@
 require 'zip'
 
 class SettingsController < ApplicationController
-  # skip_before_action :authenticate, only: [:download_images]
 
   def destroy
     @user = User.find(Current.user.id)

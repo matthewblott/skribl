@@ -1,43 +1,12 @@
 require_relative '../lib/random_line_drawing'
 
-# Create admin user
-admin = User.create!(
-  email: 'admin@example.com',
-  password: 'password12345',
-  password_confirmation: 'password12345',
-  verified: true
-)
-admin.add_role(:admin)
-
-# Create regular user
+# Create jane user 
 user = User.create!(
   email: 'jane@example.com',
   password: 'password12345',
   password_confirmation: 'password12345',
   verified: true
 )
-
-# # Create notes for admin user
-Note.set_database_connection(admin)
-
-# Delete the old images 
-FileUtils.remove_dir(Rails.root.join('uploads', admin.id.to_s))
-
-admin_images_dir = Rails.root.join('uploads', admin.id.to_s)
-
-30.times do |i|
-  note = Note.create!(
-    content: "Admin note #{i+1}: This is a sample note created by the admin user. It contains some important information that needs to be remembered.",
-    image_saved: true
-  )
-
-  filename = "#{note.id}.png"
-
-  RandomLineDrawing.generate(
-    File.join(admin_images_dir, filename)
-    # lines: rand(10..30)
-  )
-end
 
 # Create notes for jane 
 Note.set_database_connection(user)
@@ -57,6 +26,36 @@ user_images_dir = Rails.root.join('uploads', user.id.to_s)
 
   RandomLineDrawing.generate(
     File.join(user_images_dir, filename)
+    # lines: rand(10..30)
+  )
+end
+
+# Create sally user
+sally = User.create!(
+  email: 'sally@example.com',
+  password: 'password12345',
+  password_confirmation: 'password12345',
+  verified: true
+)
+
+# # Create notes for sally user
+Note.set_database_connection(sally)
+
+# Delete the old images 
+FileUtils.remove_dir(Rails.root.join('uploads', sally.id.to_s))
+
+sally_images_dir = Rails.root.join('uploads', sally.id.to_s)
+
+30.times do |i|
+  note = Note.create!(
+    content: "sally note #{i+1}: This is a sample note created by the sally user. It contains some important information that needs to be remembered.",
+    image_saved: true
+  )
+
+  filename = "#{note.id}.png"
+
+  RandomLineDrawing.generate(
+    File.join(sally_images_dir, filename)
     # lines: rand(10..30)
   )
 end

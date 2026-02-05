@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate, only: %i[ create send_otp validate_otp enter_otp signed_in ]
-
-  before_action :set_session, only: :destroy
-  before_action :prevent_caching, only: [:sign_in_success]
+  before_action :authenticate, only: :destroy
 
   def signed_in
     render json: { signed_in: Current.user.present? }
@@ -69,26 +66,10 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @session.destroy
+    Current.session.destroy 
+    Current.user = nil
     flash[:notice] = "That session has been logged out"
     redirect_to send_otp_path
-  end
-
-  private
-
-  def set_session
-    session_id = cookies.signed[:session_token] || cookies[:session_token]
-    return unless session_id
-
-    @session = Session.find_by(id: session_id)
-    Current.session = @session
-    Current.user = @session&.user
-  end
-
-  def prevent_caching
-    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
-    response.headers["Pragma"] = "no-cache"
-    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
 end
