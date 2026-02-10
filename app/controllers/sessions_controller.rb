@@ -23,7 +23,9 @@ class SessionsController < ApplicationController
     end
 
     otp_code = user.totp.now
-    
+
+    UserMailer.with(user:, otp_code:).otp_email.deliver
+
     flash[:notice] = "OTP has been sent to #{email}"
 
     redirect_to enter_otp_path(email: email)
