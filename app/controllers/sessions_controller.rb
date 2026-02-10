@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
 
     otp_code = user.totp.now
 
-    UserMailer.with(user:, otp_code:).otp_email.deliver
+    UserMailer.with(user:, otp_code:).send_otp.deliver_now
 
     flash[:notice] = "OTP has been sent to #{email}"
 
