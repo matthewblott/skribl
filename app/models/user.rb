@@ -1,22 +1,13 @@
 class User < ApplicationRecord
-  before_create :generate_totp_secret
   after_create :create_user_database
   after_create :create_user_image_storage
 
   after_destroy :delete_user_database
   after_destroy :delete_user_image_storage
 
-  def totp
-    ROTP::TOTP.new(totp_secret, issuer: "Skribl")
-  end
+  before_validation :generate_device_token, on: :create
 
-  def generate_totp_secret
-    self.totp_secret ||= ROTP::Base32.random_base32
-  end
-
-  def valid_otp?(code)
-    totp.verify(code, drift_behind: 30)
-  end
+  validates :device_token, presence: true, uniqueness: true
 
   private
 
@@ -39,12 +30,7 @@ class User < ApplicationRecord
     FileUtils.rm_rf(user_dir)
   end
 
-  has_secure_password
-
-  has_many :sessions, dependent: :destroy
-
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, allow_nil: true, length: { minimum: 12 }
-
-  normalizes :email, with: -> { _1.strip.downcase }
+  def generate_device_token
+    self.device_token ||= SecureRandom.urlsafe_base64(32)
+  end
 end

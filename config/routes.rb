@@ -5,16 +5,11 @@ Rails.application.routes.draw do
     post 'sign_in', action: :create
     get 'sign_in_success', action: :sign_in_success
 
-    get 'send_otp', action: :send_otp
-    post 'validate_otp', action: :validate_otp
-    get 'enter_otp', action: :enter_otp
-
     delete 'sessions', action: :destroy
   end
 
   controller :settings do
     get 'settings', action: :index
-    delete 'settings', action: :destroy
     post 'download_images', action: :download_images
   end
 
@@ -22,6 +17,7 @@ Rails.application.routes.draw do
     get 'terms',   action: :terms
     get 'privacy',    action: :privacy
     get 'support',    action: :support
+    get 'info',    action: :info
   end
 
   scope '/:user_id', as: 'user' do

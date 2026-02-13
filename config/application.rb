@@ -7,7 +7,7 @@ require 'active_job/railtie'
 require 'active_record/railtie'
 # require 'active_storage/engine'
 require 'action_controller/railtie'
-require 'action_mailer/railtie'
+# require 'action_mailer/railtie'
 # require 'action_mailbox/engine'
 # require 'action_text/engine'application.rb
 require 'action_view/railtie'
@@ -21,7 +21,7 @@ Bundler.require(*Rails.groups)
 module Web
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 8.0
+    config.load_defaults 8.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.

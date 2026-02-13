@@ -2,15 +2,6 @@ require 'zip'
 
 class SettingsController < ApplicationController
 
-  def destroy
-    @user = User.find(Current.user.id)
-    @user.destroy
-
-    Current.session.destroy
-    flash[:notice] = "Your account has been deleted."
-    redirect_to send_otp_path
-  end
-
   def download_images
     folder_path = Rails.root.join('uploads', Current.user.id.to_s)
     zip_data = Zip::OutputStream.write_buffer do |zip|

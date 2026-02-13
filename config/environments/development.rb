@@ -1,15 +1,6 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.after_initialize do
-    Bullet.enable        = true
-    Bullet.alert         = true
-    Bullet.bullet_logger = true
-    Bullet.console       = true
-    Bullet.rails_logger  = true
-    Bullet.add_footer    = true
-  end
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Make code changes take effect immediately without server restart.
@@ -39,44 +30,6 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   # config.active_storage.service = :local
-
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
-  # Make template changes take effect immediately.
-  config.action_mailer.perform_caching = false
-
-  # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
-
-  mail_service = ENV.fetch("MAIL_SERVICE", "mailhog") # Default to mailhog
-
-  case mail_service
-  when "mailhog"
-    # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address: 'localhost', 
-      port:  2025,
-    }
-
-  when 'smtp'
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      user_name: Rails.application.credentials.dig(:smtp, :user_name),
-      password: Rails.application.credentials.dig(:smtp, :password),
-      address: "smtp.eu.mailgun.org",
-      port: 587,
-      authentication: :plain,
-      enable_starttls_auto: true,
-      openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
-    }
-  when "letter_opener"
-    config.action_mailer.delivery_method = :letter_opener
-  end
-
-  config.action_mailer.perform_deliveries = true # Ensure emails are actually sent
-  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

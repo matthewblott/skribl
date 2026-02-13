@@ -7,23 +7,15 @@
 
 <div class="settings">
 
-  <hr class="hotwire-native-hidden">
-
-  <h2>Sign in Details</h2>
-
-  <p>You are currently signed as <em><%= Current.user&.email %></em>.</p>
-
   <%= form_with url: sessions_path,
     method: :delete,
     class: "hidden",
     html: {
       id: "sign_out_form",
     } do %>
-  <% end %>
+  <%  end %>
 
-  <% unless native_app? %>
-
-    <%= button_tag "Sign out", 
+    <%#= button_tag "Sign out", 
       data: {
         turbo: false,
       },
@@ -31,25 +23,16 @@
       class: "outline hotwire-native-hidden pill"
     %>
 
-  <% else %>
-    <%= button_tag "Sign out", 
-        data: {
-          action: "click->bridge--sign-out#foo",
-          controller: "bridge--sign-out"
-        },
-        class: "outline pill"
-    %>
-  <% end %>
-
   <hr class="hotwire-native-hidden">
 
-  <h2>Delete Account</h2>
+  <h2>Delete Session</h2>
   <p>
-  This action is not reversible. All information related to this account will be deleted permanently.
+  This action is not reversible. All information related to this session will be deleted permanently.
   </p>
 
-  <%= button_to "Delete my account",
-    settings_path, 
+  <%= button_to "Delete my session",
+    # settings_path, 
+    sessions_path, 
     method: :delete,
     data: {
       controller: "bridge--delete-account",
@@ -57,10 +40,10 @@
       action: "click->bridge--delete-account#submit",
       # turbo_method: :delete,
       # turbo_confirm: "Are you sure?",
-      bridge_title: "Delete Account",
+      bridge_title: "Delete Session",
       bridge_confirm: "Confirm",
       bridge_dismiss: "Cancel",
-      bridge_description: "Are you sure you want to delete your account?"
+      bridge_description: "Are you sure you want to delete your session?"
     },
     class: "danger outline pill"
   %>

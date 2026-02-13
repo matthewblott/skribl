@@ -1,5 +1,4 @@
 class Current < ActiveSupport::CurrentAttributes
-  attribute :session
+  # attribute :session
   attribute :user
-  attribute :user_agent, :ip_address
 end
