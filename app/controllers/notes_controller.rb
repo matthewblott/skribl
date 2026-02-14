@@ -16,6 +16,8 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
+    
+    # debugger
 
     respond_to do |format|
       if @note.save
