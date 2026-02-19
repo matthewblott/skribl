@@ -1,24 +1,14 @@
-# README
+# Skribl
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An note taking application for scribbling things dow, hence the name Skribl!
 
-Things you may want to cover:
+The iOS app is in a separate repo and can be found [here](https://github.com/matthewblott/skribl-ios). The Android app (currently not finished) can be found [here](https://github.com/matthewblott/skribl-android).
 
-* Ruby version
+## Getting started
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To get started clone the repo and run the following:
+```
+bundle install
+rails db:migrate
+rails server
+```
