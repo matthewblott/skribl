@@ -1,79 +1,14 @@
-<% content_for :title, 'Notes' %>
+<p style="color: green"><%= notice %></p>
 
-<%= turbo_stream_from :user_notes_stream, signed: true %>
-<%= turbo_stream_from :user_note_dispatcher_stream, signed: true %>
+<% content_for :title, "Notes" %>
 
-<controls role="group" class="hotwire-native-hidden">
-  <%= link_to :New, user_notes_new_path(Current.user, @note), role: "button" %>
-  <%= link_to :Settings, settings_path, role: "button" %>
-  <%= button_tag "Select all",
-    data: {
-      controller: "
-        ui--toggle-selection
-        bridge--toggle-selection
-      ",
-    action: "
-      ui--toggle-selection#toggle
-      ui--items:update@window->ui--toggle-selection#update
-      ui--items:update@window->bridge--toggle-selection#update
-    "
-    },
-    class: "hotwire-native-hidden"
-  %>
-
-  <%= button_tag "Delete",
-    data: {
-      controller: "
-        ui--delete-button
-        bridge--delete-note
-      ",
-      action: "
-        ui--delete-button#submit
-        ui--items:update@window->ui--delete-button#update
-        ui--items:update@window->bridge--delete-note#update
-      "
-    },
-    disabled: true,
-    form: "delete-form"
-  %>
-</controls>
-
-<div id="user_<%= Current.user.id %>_note_dispatcher" data-controller="ui--item-dispatcher"></div>
-
-<%= form_with url: user_notes_path(Current.user),
-  method: :delete,
-  data: {
-    controller: "
-      ui--delete-form
-    ",
-    action: "
-      bridge--delete-note:submit@window->ui--delete-form#submit
-      ui--delete-button:submit@window->ui--delete-form#submit
-      ui--items:update@window->ui--delete-form#update
-    "
-  },
-  id: "delete-form" %>
-
-<% # This is where the state for the controls are determined %>
-<section id="user_<%= Current.user.id %>_notes"
-  data-controller="ui--items"
-  data-action="
-    ui--items#toggle
-    ui--toggle-selection:toggle@window->ui--items#toggle
-    ui--item-dispatcher:update@window->ui--items#update
-    ui--toggle-selection:connect@window->ui--items#update
-    bridge--toggle-selection:connect@window->ui--items#update
-  "
->
+<div id="notes">
   <% @notes.each do |note| %>
-    <%= render partial: "notes/note", locals: { note: note } %>
+    <%= render note %>
+    <p>
+      <%= link_to "Show this Note",  user_note_path(Current.user, note) %>
+    </p>
   <% end %>
+</div>
 
-  <% if @pagy.next %>
-    <%= turbo_frame_tag :pagination, 
-        src: user_notes_path(Current.user, page: @pagy.next),
-        loading: "lazy" do %>
-      Loading more...
-    <% end %>
-  <% end %>
-</section>
+<%= link_to "New Note", user_new_note_path %>

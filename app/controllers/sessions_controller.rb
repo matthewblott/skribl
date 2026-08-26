@@ -1,41 +1,57 @@
-class SessionsController < ApplicationController
-  before_action :require_user, only: :destroy
-  skip_before_action :authenticate_user!, only: [:create, :signed_in]
+class SessionsController < EmailAuthController
+  skip_before_action :load_current_user, only: %i[new send_code verify create]
+  skip_before_action :authenticate_user!, only: %i[new send_code verify create]
+  skip_before_action :authorize_user!, only: %i[new send_code verify create]
 
-  def signed_in
-    render json: { signed_in: Current.user.present? }
+  def send_code
+    email = params[:email]
+    user = User.find_by(email: email, otp_enabled: true)
+    
+    if user.blank?
+      flash.now[:alert] = "No OTP account found for that email."
+      render :new, status: :unprocessable_entity and return
+    end
+
+    # generate_and_send_otp(email)
+    send_otp(user)
+
+    redirect_to session_verify_code_path
+  end
+
+  def verify
+    @email = session[:email]
+    redirect_to session_path if @email.blank?
   end
 
   def create
-    return redirect_to root_path if Current.user
+    email = session[:email]
+    user = User.find_by(email: email, otp_enabled: true)
 
-    user = User.create!
-
-    cookies.permanent.encrypted[:device_token] = {
-      value: user.device_token,
-      httponly: true,
-      secure: Rails.env.production?,
-      same_site: :lax
-    }
-
-    Current.user = user
-    redirect_to sign_in_success_path
-  end
-
-  def sign_in_success
+    if user&.valid_otp?(params[:otp_code])
+      new_session = user.sessions.create!
+      session.delete(:email)
+      set_session_cookie(new_session)
+      redirect_to user_notes_path(user)
+    else
+      flash.now[:alert] = "Invalid or expired code."
+      @email = email
+      render :verify, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    Current.user&.destroy
-    cookies.delete(:device_token)
-    flash[:notice] = "Your session has been deleted."
-    redirect_to sign_in_path 
-  end
+    if Current.user.otp_user?
+      session_id = cookies.signed[:session_token]
+      Session.find_by(id: session_id)&.destroy
+      cookies.delete(:session_token)
+      cookies.delete(:device_token)
+    else
+      Apartment::Tenant.drop(Current.user.id.to_s)
+      Current.user.destroy
+      cookies.delete(:device_token)
+    end
 
-  private
-
-  def require_user
-    redirect_to root_path unless Current.user
+    redirect_to root_path
   end
 
 end

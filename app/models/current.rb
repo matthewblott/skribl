@@ -1,4 +1,3 @@
 class Current < ActiveSupport::CurrentAttributes
-  # attribute :session
-  attribute :user
+  attribute :user, :session
 end

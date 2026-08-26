@@ -1,34 +1,29 @@
 default: &default
   adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
-  primary:
-    <<: *default
-    database: storage/development.sqlite3
-  queue:
-    <<: *default
-    database: storage/development_queue.sqlite3
+  # tenant needs to be the first listed in this file!
 
-test:
-  primary:
-    <<: *default
-    database: storage/test.sqlite3
+  # For the shared database to create a migration file run the following
+  # rails generate migration CreateFoo --database=tenant
+  #
+  # rails db:migrate:tenant
 
-production:
-  primary:
+  tenant:
     <<: *default
-    database: storage/production.sqlite3
-  cache:
+    database: storage/<%= Rails.env %>/tenant.sqlite3
+    migrations_paths: db/migrate/tenant
+
+
+  # For the shared database to create a migration file run the following
+  # rails generate migration CreateFoo --database=auth
+  #
+  # rails db:migrate:auth
+    
+  auth:
     <<: *default
-    database: storage/production_cache.sqlite3
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *default
-    database: storage/production_queue.sqlite3
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *default
-    database: storage/production_cable.sqlite3
-    migrations_paths: db/cable_migrate
+    database: storage/<%= Rails.env %>/auth.sqlite3
+    migrations_paths: db/migrate/auth
+

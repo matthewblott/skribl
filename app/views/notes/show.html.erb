@@ -1,0 +1,12 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Note" %>
+
+<%= render @note %>
+
+<div>
+  <%= link_to "Edit this Note", user_note_edit_path(Current.user, @note) %> |
+  <%= link_to "Back to Notes", user_notes_path %>
+
+  <%= button_to "Destroy this Note", user_note_destroy_path(Current.user, @note), method: :delete %>
+</div>

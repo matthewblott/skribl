@@ -1,36 +1,33 @@
-class User < ApplicationRecord
-  after_create :create_user_database
-  after_create :create_user_image_storage
-
-  after_destroy :delete_user_database
-  after_destroy :delete_user_image_storage
+class User < AuthRecord
+  has_many :sessions, dependent: :destroy
 
   before_validation :generate_device_token, on: :create
 
-  validates :device_token, presence: true, uniqueness: true
+  validates :device_token, presence: false, uniqueness: true, allow_nil: true
+  validates :email, presence: false, uniqueness: true, allow_nil: true
+
+  after_create :create_tenant
+
+  def otp
+    ROTP::TOTP.new(otp_secret, issuer: "MyApp")
+  end
+
+  def valid_otp?(code)
+    otp.verify(code, drift_behind: 30)
+  end
+
+  def otp_user?
+    otp_enabled?
+  end
 
   private
-
-  def create_user_database
-    UserDatabaseService.create_database(self)
-  end
-
-  def delete_user_database
-    UserDatabaseService.delete_database(self)
-  end
-
-  def create_user_image_storage
-    user_dir = Rails.root.join('uploads', "#{id.to_s}")
-    FileUtils.mkdir_p(user_dir)
-    FileUtils.chmod_R(0755, user_dir)
-  end
-
-  def delete_user_image_storage
-    user_dir = Rails.root.join('uploads', "#{id.to_s}")
-    FileUtils.rm_rf(user_dir)
-  end
 
   def generate_device_token
     self.device_token ||= SecureRandom.urlsafe_base64(32)
   end
+
+  def create_tenant
+    Apartment::Tenant.create(id.to_s)
+  end
+
 end

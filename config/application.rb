@@ -1,24 +1,43 @@
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails'
+require "rails"
 # Pick the frameworks you want:
-require 'active_model/railtie'
-require 'active_job/railtie'
-require 'active_record/railtie'
-# require 'active_storage/engine'
-require 'action_controller/railtie'
-# require 'action_mailer/railtie'
-# require 'action_mailbox/engine'
-# require 'action_text/engine'application.rb
-require 'action_view/railtie'
-require 'action_cable/engine'
-# require 'rails/test_unit/railtie'
+require "active_model/railtie"
+# require "active_job/railtie"
+require "active_record/railtie"
+# require "active_storage/engine"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+# require "action_mailbox/engine"
+# require "action_text/engine"
+require "action_view/railtie"
+# require "action_cable/engine"
+# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Web
+class ApartmentPathTenant
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    path = env["PATH_INFO"]
+    first_segment = path.split("/").reject(&:empty?).first
+
+    if first_segment&.match?(/\A\d+\z/)
+      Apartment::Tenant.switch(first_segment) do
+        @app.call(env)
+      end
+    else
+      @app.call(env)
+    end
+  end
+end
+
+module App 
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.1
@@ -33,13 +52,14 @@ module Web
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = 'Central Time (US & Canada)'
-    # config.eager_load_paths << Rails.root.join('extras')
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-    config.active_job.scheduled_jobs = Rails.application.config_for(:recurring)
-    config.solid_queue.connects_to = { database: { writing: :queue } }
+
+    # Apartment
+    config.middleware.use ApartmentPathTenant
 
   end
 end

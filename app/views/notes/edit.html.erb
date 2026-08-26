@@ -1,0 +1,10 @@
+<% content_for :title, "Editing Note" %>
+
+<%= render "form", note: @note %>
+
+<br>
+
+<div>
+  <%= link_to "Show this Note", user_note_path(Current.user, @note) %> |
+  <%= link_to "Back to Notes", user_notes_path %>
+</div>

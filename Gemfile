@@ -1,28 +1,12 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-ruby File.read('.ruby-version').strip
-
-gem 'bootsnap', require: false
-gem 'faker'
-gem 'image_processing', '~> 1.2'
-gem 'importmap-rails'
-gem 'pagy', '~> 9.3'
-gem 'propshaft'
-gem 'puma', '>= 5.0'
-gem 'rack'
-gem "rails", "~> 8.1.1"
-gem 'requestjs-rails'
-gem 'solid_cable'
-gem 'solid_cache'
-gem 'solid_queue'
-gem 'sqlite3', '>= 2.1'
-gem 'stimulus-rails'
-gem 'thruster', require: false
-gem 'turbo-rails'
-gem 'rubyzip', '~> 3.2'
+gem "rails", "~> 8.1"
+gem "propshaft"
+gem "sqlite3", "~> 2.9"
+gem "puma", "~> 8.0"
+gem 'ros-apartment', require: 'apartment'
+gem "rotp", "~> 6.3"
 
 group :development, :test do
-  gem 'brakeman', require: false
-  gem 'debug', platforms: %i[ mri ] 
-  gem 'debase'
+  gem "debug", platforms: %i[ mri ], require: "debug/prelude"
 end

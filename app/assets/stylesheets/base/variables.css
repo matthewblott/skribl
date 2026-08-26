@@ -1,8 +1,0 @@
-h2 {
-  --pico-typography-spacing-top: 20px;
-}
-
-:root,
-:host {
-  --pico-font-size: 112.5%;
-}

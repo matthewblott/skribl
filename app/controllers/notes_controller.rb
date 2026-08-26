@@ -1,66 +1,43 @@
 class NotesController < ApplicationController
-  
+  before_action :set_note, only: %i[ show edit update destroy ]
+
   def index
-    @pagy, @notes = pagy_countless(Note.recent_first, items: 20)
-    
-    if turbo_frame_request?
-      render partial: "notes/notes_frame", locals: { notes_view_models: @notes, pagy: @pagy }
-    end
+    @notes = Note.all
   end
 
   def new
-    if params[:from_sign_in] == 1.to_s 
-      flash.now[:notice] = "Signed in successfully"
-    end
+    @note = Note.new
   end
 
   def create
     @note = Note.new(note_params)
-    
-    # debugger
 
-    respond_to do |format|
-      if @note.save
-        begin
-          ImageToFileJob.perform_now(Current.user.id, @note.id, @note.img)
-
-          flash.now[:notice] = "Note was successfully created."
-          @note = Note.new
-        rescue => e
-          # Job failed – treat as an error
-          flash.now[:alert] = "Note saved, but processing failed: #{e.message}"
-        end
-      else
-        flash.now[:alert] = "There was an error, try again."
-      end
-
-      format.turbo_stream
+    if @note.save
+      redirect_to user_note_path(Current.user, @note), notice: "Note was successfully created."
+    else
+      render :new, status: :unprocessable_content
     end
-
   end
 
-  def destroy_multiple
-    @deleted_ids = Array(params[:ids])
-
-    Note.where(id: params[:ids]).destroy_all
-
-    @deleted_ids.each do |id|
-      DeleteImageJob.perform_later(Current.user.id, id)
+  def update
+    if @note.update(note_params)
+      redirect_to user_note_path(Current.user, @note), notice: "Note was successfully updated.", status: :see_other
+    else
+      render :edit, status: :unprocessable_content
     end
+  end
 
-    respond_to do |format|
-      format.turbo_stream
-      format.html {
-        flash[:notice] = "Note was successfully deleted."
-        redirect_to user_notes_path(Current.user)
-      }
-    end
-
+  def destroy
+    @note.destroy!
+    redirect_to user_notes_path(Current.user), notice: "Note was successfully destroyed.", status: :see_other
   end
 
   private
+    def set_note
+      @note = Note.find(params.expect(:id))
+    end
 
-  def note_params
-    params.require(:note).permit(:content, :img)
-  end
+    def note_params
+      params.expect(note: [ :title, :details, :completed ])
+    end
 end
