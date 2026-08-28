@@ -1,15 +1,22 @@
 class User < AuthRecord
   has_many :sessions, dependent: :destroy
-
   before_validation :generate_device_token, on: :create
-
   validates :device_token, presence: false, uniqueness: true, allow_nil: true
   validates :email, presence: false, uniqueness: true, allow_nil: true
-
   after_create :create_tenant
 
+  OTP_ISSUER = "MyApp"
+
+  def self.generate_otp_secret
+    ROTP::Base32.random_base32
+  end
+
+  def self.otp_for_secret(secret)
+    ROTP::TOTP.new(secret, issuer: OTP_ISSUER)
+  end
+
   def otp
-    ROTP::TOTP.new(otp_secret, issuer: "MyApp")
+    self.class.otp_for_secret(otp_secret)
   end
 
   def valid_otp?(code)
@@ -29,5 +36,4 @@ class User < AuthRecord
   def create_tenant
     Apartment::Tenant.create(id.to_s)
   end
-
 end
