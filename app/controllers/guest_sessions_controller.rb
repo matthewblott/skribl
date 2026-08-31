@@ -3,7 +3,7 @@ class GuestSessionsController < ApplicationController
 
   def create
     if Current.user
-      return redirect_to user_notes_path(Current.user)
+      return redirect_to user_home_path(Current.user)
     end
 
     user = User.create!
@@ -17,7 +17,7 @@ class GuestSessionsController < ApplicationController
 
     Current.user = user
 
-    redirect_to user_notes_path(Current.user)
+    redirect_to user_home_path(Current.user)
   end
 
 end

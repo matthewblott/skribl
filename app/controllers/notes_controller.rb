@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: %i[ show edit update destroy ]
+  before_action :set_note, only: %i[ edit update destroy ]
 
   def index
     @notes = Note.all
@@ -21,7 +21,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      redirect_to user_note_path(Current.user, @note), notice: "Note was successfully updated.", status: :see_other
+      redirect_to user_notes_path(Current.user), notice: "Note was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_content
     end

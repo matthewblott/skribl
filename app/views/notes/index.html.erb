@@ -1,18 +1,60 @@
 <p style="color: green"><%= notice %></p>
 
+<style>
+  article {
+    a {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2rem;
+      align-items: center;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        h2 {
+          color: color-mix(in srgb, var(--color-primary), black 30%);
+          font-size: xx-large;
+        }
+        h3 {
+          font-size: large;
+          color: grey;
+        }
+      }
+    }
+  }
+  p {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+</style>
+
 <% content_for :title, "Notes" %>
 
 <% content_for :header_controls do %>
-  <a href="<%= user_account_path %>">Account</a>
+  <div role="group">
+    <a href="<%= user_home_path %>" role="button">Home</a>
+    <a href="<%= user_new_note_path %>" role="button">New</a>
+  </div>
 <% end %>
 
-<div id="notes">
-  <% @notes.each do |note| %>
-    <%= render note %>
-    <p>
-      <%= link_to "Show this Note",  user_note_path(Current.user, note) %>
-    </p>
-  <% end %>
-</div>
+<% if @notes.empty? %>
+  <p>
+    You haven't created any notes yet.
+  </p>
 
-<%= link_to "New Note", user_new_note_path %>
+<% end %>
+
+
+<% @notes.each do |note| %>
+  <article class="pill">
+    <h2>
+      <%= link_to note.title,  user_note_path(Current.user, note) %>
+    </h2>
+    <h3><%= note.details %></h3>
+  </article>
+
+<% end %>
