@@ -1,5 +1,3 @@
-<% content_for :title, "Editing Note" %>
-
 <style>
   legend {
     span {
@@ -8,12 +6,45 @@
     margin-bottom: 0.25rem;
   }
   label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
     span {
       margin-left: 0.5rem;
     }
     input, textarea {
       margin-top: 0.5rem;
     }
+    input[type="checkbox"] {
+      cursor: pointer;
+      appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin: 0;
+      margin-top: 0.4rem;
+      margin-left: 0.5rem;
+      border: 1px solid #999;
+      border-radius: 0.25rem;
+      background: white;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked {
+      background: #333;
+    }
+
+    input[type="checkbox"]:checked::after {
+      content: "";
+      display: block;
+      width: 0.35rem;
+      height: 0.65rem;
+      margin: 0.15rem 0 0 0.4rem;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
   }
   
   textarea {
@@ -26,43 +57,39 @@
 
 </style>
 
-<% content_for :header_controls do %>
-  <div role="group">
-    <a href="<%= user_notes_path %>" role="button">Notes</a>
-    <button form="update_note">Save</button>
+<% if note.errors.any? %>
+  <div style="color: red">
+    <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+    <ul>
+      <% note.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
 
-<form action="<%= user_note_update_path %>" method="post" id="update_note">
+<form method="post" id="note_form">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="patch">
 
   <fieldset>
-    <form-field>
-      <label>
-        <span>Title</span>
-        <input
-          name="note[title]"
-          placeholder="Buy groceries"
-          value="<%= @note.title %>"
-        >
-      </label>
-    </form-field>
-
-    <form-field>
-      <label>
-        <span>Details</span>
-        <textarea name="note[details]" class="autosize" class="pill"><%= @note.details %></textarea>
-      </label>
-    </form-field>
-
-    <form-field>
-      <label>
-        <span>Completed</span>
-        <input type="checkbox" name="note[completed]" <%= @note.completed ? "checked" : "" %>>
-      </label>
-    </form-field>
-
+    <label>
+      <span>Title</span>
+      <input
+        name="note[title]"
+        placeholder="Buy groceries"
+        value="<%= note.title %>"
+      >
+    </label>
+    <label>
+      <span>Details</span>
+      <textarea name="note[details]" class="autosize" class="pill" placeholder="Milk, eggs, bread"><%= note.details %></textarea>
+    </label>
+    <label>
+      <span>Completed</span>
+      <input type="checkbox" name="note[completed]" <%= note.completed ? "checked" : "" %>>
+      <input type="hidden" name="note[completed]" value="0">
+    </label>
   </fieldset>
 </form>
 

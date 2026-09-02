@@ -1,7 +1,7 @@
 @layer
-  core,
-  components,
-  utilities 
+  core
+, components
+, utilities
 ;
 
 @import url('./core/_index.css') layer(core);

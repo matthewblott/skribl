@@ -1,66 +1,11 @@
-<% content_for :title, "New note" %>
-
-<style>
-  legend {
-    span {
-      margin-left: 0.5rem;
-    }
-    margin-bottom: 0.25rem;
-  }
-  label {
-    span {
-      margin-left: 0.5rem;
-    }
-    input, textarea {
-      margin-top: 0.5rem;
-    }
-  }
-  
-  textarea {
-    padding: 0.5rem 1rem;
-    border: 0.05rem solid darkgray;
-    width: 100%;
-    border-radius: var(--border-radius-pill);
-    cursor: pointer;
-  }
-
-</style>
+<% content_for :title, "New Note" %>
 
 <% content_for :header_controls do %>
   <div role="group">
     <a href="<%= user_notes_path %>" role="button">Notes</a>
-    <button form="new_note">Save</button>
+    <button form="note_form" formaction="<%= user_notes_path %>">Save</button>
   </div>
 <% end %>
 
-<form action="<%= user_notes_path %>" method="post" id="new_note">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<%= render "form", note: @note %>
 
-  <fieldset>
-    <form-field>
-      <label>
-        <span>Title</span>
-        <input
-          name="note[title]"
-          placeholder="Buy groceries"
-        >
-      </label>
-    </form-field>
-
-    <form-field>
-      <label>
-        <span>Details</span>
-        <textarea name="note[details]" class="autosize" class="pill" rows="3">
-        </textarea>
-      </label>
-    </form-field>
-
-    <form-field>
-      <label>
-        <span>Completed</span>
-        <input type="checkbox" name="note[completed]">
-      </label>
-    </form-field>
-
-  </fieldset>
-</form>

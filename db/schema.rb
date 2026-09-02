@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_02_16_202609) do
-  create_table "notes", force: :cascade do |t|
+  create_table "notes", id: :string, force: :cascade do |t|
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.text "details"
