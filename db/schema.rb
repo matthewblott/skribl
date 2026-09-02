@@ -12,10 +12,9 @@
 
 ActiveRecord::Schema[8.1].define(version: 2026_02_16_202609) do
   create_table "notes", id: :string, force: :cascade do |t|
-    t.boolean "completed"
+    t.text "content"
     t.datetime "created_at", null: false
-    t.text "details"
-    t.string "title"
+    t.boolean "image_saved"
     t.datetime "updated_at", null: false
   end
 end

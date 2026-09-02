@@ -13,7 +13,7 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
 
     if @note.save
-      redirect_to user_note_path(Current.user, @note), notice: "Note was successfully created."
+      redirect_to user_notes_path(Current.user), notice: "Note was successfully created."
     else
       render :new, status: :unprocessable_content
     end
@@ -38,6 +38,6 @@ class NotesController < ApplicationController
     end
 
     def note_params
-      params.expect(note: [ :title, :details, :completed ])
+      params.expect(note: [ :content, :image_saved ])
     end
 end

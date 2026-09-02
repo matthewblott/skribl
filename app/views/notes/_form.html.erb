@@ -60,7 +60,6 @@
 <% if note.errors.any? %>
   <div style="color: red">
     <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
-
     <ul>
       <% note.errors.each do |error| %>
         <li><%= error.full_message %></li>
@@ -71,25 +70,15 @@
 
 <form method="post" id="note_form">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
   <fieldset>
     <label>
-      <span>Title</span>
-      <input
-        name="note[title]"
-        placeholder="Buy groceries"
-        value="<%= note.title %>"
-      >
-    </label>
-    <label>
-      <span>Details</span>
-      <textarea name="note[details]" class="autosize" class="pill" placeholder="Milk, eggs, bread"><%= note.details %></textarea>
+      <span>Content</span>
+      <textarea name="note[content]" class="autosize" class="pill" placeholder="Milk, eggs, bread"><%= note.content %></textarea>
     </label>
     <label>
       <span>Completed</span>
-      <input type="checkbox" name="note[completed]" <%= note.completed ? "checked" : "" %>>
-      <input type="hidden" name="note[completed]" value="0">
+      <input type="hidden" name="note[image_saved]" value="0">
+      <input type="checkbox" name="note[image_saved]" value="1" <%= note.image_saved ? "checked" : "" %>>
     </label>
   </fieldset>
 </form>
-

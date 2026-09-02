@@ -45,16 +45,13 @@
   <p>
     You haven't created any notes yet.
   </p>
-
 <% end %>
-
 
 <% @notes.each do |note| %>
   <article class="pill">
     <h2>
-      <%= link_to note.title,  user_note_path(Current.user, note) %>
+      <%= link_to note.content,  user_note_path(Current.user, note) %>
     </h2>
-    <h3><%= note.details %></h3>
   </article>
 
 <% end %>
