@@ -2,6 +2,15 @@ class NotesController < ApplicationController
   include Pagy::Method
   before_action :set_note, only: %i[ destroy ]
 
+  def legacy_index
+    @pagy, @notes = pagy(Note.recent_first, items: 20)
+    if turbo_frame_request?
+      render partial: "notes/legacy_notes_frame", locals: { note_view_models: @notes, pagy: @pagy }
+    else
+      render :legacy_index
+    end
+  end
+
   def index
     @pagy, @notes = pagy(Note.recent_first, items: 20)
     if turbo_frame_request?
@@ -11,22 +20,23 @@ class NotesController < ApplicationController
     end
   end
 
-  def new
+  def legacy_new 
     @note = Note.new
   end
 
-  def legacy_new 
+  def new
     @note = Note.new
   end
 
   def create
     @note = Note.new(note_params)
     if @note.save
-      # redirect_to user_notes_path(Current.user), notice: "Note was successfully created."
-      redirect_to user_notes_path(Current.user)
+      redirect_to user_notes_path(Current.user), notice: "Note was successfully created."
+      ImageToFileJob.perform_now(Current.user.id, @note.id, @note.img)
     else
       render :new, status: :unprocessable_content
     end
+
   end
 
   def destroy
@@ -35,11 +45,14 @@ class NotesController < ApplicationController
   end
 
   private
-    def set_note
-      @note = Note.find(params.expect(:id))
-    end
 
-    def note_params
-      params.expect(note: [ :content, :image_saved ])
-    end
+  def set_note
+    @note = Note.find(params.expect(:id))
+  end
+
+  def note_params
+    # params.expect(note: [ :content, :image_saved ])
+    params.expect(note: [ :content, :image_saved, :img ])
+    # params.expect(note: [ :img ])
+  end
 end

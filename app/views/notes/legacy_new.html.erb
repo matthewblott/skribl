@@ -1,7 +1,5 @@
 <% content_for :title, "New Note" %>
 
-<div data-controller="ui--hello">Hello</div>
-
 <style>
   legend {
     span {
@@ -63,7 +61,7 @@
 
 <% content_for :header_controls do %>
   <div role="group">
-    <a href="<%= user_notes_path %>" role="button">Notes</a>
+    <a href="<%= user_legacy_notes_path %>" role="button">Notes</a>
     <button form="note_form" formaction="<%= user_notes_path %>">Save</button>
   </div>
 <% end %>
@@ -81,6 +79,10 @@
 
 <form method="post" id="note_form">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <input type="hidden" name="note[img]" value="0">
+  <input type="hidden" name="note[id]" value="0">
+
   <fieldset>
     <label>
       <span>Content</span>

@@ -1,12 +1,18 @@
 class User < AuthRecord
   has_many :sessions, dependent: :destroy
+
   before_validation :generate_device_token, on: :create
+
   validates :device_token, presence: false, uniqueness: true, allow_nil: true
   validates :email, presence: false, uniqueness: true, allow_nil: true
-  after_create :create_tenant
-  after_destroy :drop_tenant
 
-  OTP_ISSUER = "MyApp"
+  after_create :create_tenant
+  after_create :create_image_storage
+
+  after_destroy :drop_tenant
+  after_destroy :delete_image_storage
+
+  OTP_ISSUER = "Skribl"
 
   def self.generate_otp_secret
     ROTP::Base32.random_base32
@@ -66,6 +72,17 @@ class User < AuthRecord
       path = "#{tenant_db_path}#{suffix}"
       File.delete(path) if File.exist?(path)
     end
+  end
+
+  def create_image_storage
+    user_dir = Rails.root.join('uploads', "#{id.to_s}")
+    FileUtils.mkdir_p(user_dir)
+    FileUtils.chmod_R(0755, user_dir)
+  end
+
+  def delete_image_storage
+    user_dir = Rails.root.join('uploads', "#{id.to_s}")
+    FileUtils.rm_rf(user_dir)
   end
 
 end

@@ -9,15 +9,14 @@ Rails.application.routes.draw do
     controller :notes do
       get    "notes",          action: :index,            as: :notes
       get    "notes/new",      action: :new,              as: :new_note
-
-      # For testing
-      get    "notes/legacy-new",      action: :legacy_new,              as: :legacy_new_note
-
       post   "notes",          action: :create,           as: :notes_create
       delete "notes",          action: :destroy_multiple, as: :notes_destroy_multiple
       get    "notes/:id",      action: :edit,             as: :note
       delete "notes/:id",      action: :destroy,          as: :note_destroy
 
+      # For testing
+      get  "legacy/notes",     action: :legacy_index,     as: :legacy_notes
+      get  "legacy/notes/new", action: :legacy_new,       as: :legacy_new_note
     end
 
     controller :account do
@@ -30,6 +29,10 @@ Rails.application.routes.draw do
       delete "account/sign-out",  action: :sign_out,         as: :account_sign_out
       get    "account/delete",    action: :confirm_delete,   as: :confirm_account_delete
       delete "account",           action: :destroy,          as: :account_destroy
+    end
+
+    controller :uploads do
+      get 'uploads/:filename.png', action: :show, as: :upload
     end
 
   end
