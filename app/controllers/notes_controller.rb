@@ -15,6 +15,10 @@ class NotesController < ApplicationController
     @note = Note.new
   end
 
+  def legacy_new 
+    @note = Note.new
+  end
+
   def create
     @note = Note.new(note_params)
     if @note.save

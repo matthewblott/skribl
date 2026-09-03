@@ -9,10 +9,15 @@ Rails.application.routes.draw do
     controller :notes do
       get    "notes",          action: :index,            as: :notes
       get    "notes/new",      action: :new,              as: :new_note
+
+      # For testing
+      get    "notes/legacy-new",      action: :legacy_new,              as: :legacy_new_note
+
       post   "notes",          action: :create,           as: :notes_create
       delete "notes",          action: :destroy_multiple, as: :notes_destroy_multiple
       get    "notes/:id",      action: :edit,             as: :note
       delete "notes/:id",      action: :destroy,          as: :note_destroy
+
     end
 
     controller :account do
