@@ -1,8 +1,14 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: %i[ edit update destroy ]
+  include Pagy::Method
+  before_action :set_note, only: %i[ destroy ]
 
   def index
-    @notes = Note.all
+    @pagy, @notes = pagy(Note.recent_first, items: 20)
+    if turbo_frame_request?
+      render partial: "notes/notes_frame", locals: { note_view_models: @notes, pagy: @pagy }
+    else
+      render :index
+    end
   end
 
   def new
@@ -11,19 +17,11 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
-
     if @note.save
-      redirect_to user_notes_path(Current.user), notice: "Note was successfully created."
+      # redirect_to user_notes_path(Current.user), notice: "Note was successfully created."
+      redirect_to user_notes_path(Current.user)
     else
       render :new, status: :unprocessable_content
-    end
-  end
-
-  def update
-    if @note.update(note_params)
-      redirect_to user_notes_path(Current.user), notice: "Note was successfully updated.", status: :see_other
-    else
-      render :edit, status: :unprocessable_content
     end
   end
 

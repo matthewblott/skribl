@@ -47,12 +47,16 @@
   </p>
 <% end %>
 
-<% @notes.each do |note| %>
-  <article class="pill">
-    <h2>
-      <%= link_to note.content,  user_note_path(Current.user, note) %>
-    </h2>
-  </article>
+<%= turbo_stream_from :notes_after_create_stream %>
 
-<% end %>
+<section id="notes_element">
+  <% @notes.each do |note| %>
+    <%= render partial: "notes/note", locals: { note: note } %>
+  <% end %>
 
+  <% if @pagy.next %>
+    <turbo-frame id="pagination" src="<%= user_notes_path(page: @pagy.next) %>" loading="lazy">
+      Loading more...
+    </turbo-frame>
+  <% end %>
+</section>

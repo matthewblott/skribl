@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
 
   scope "/:user_id", constraints: { user_id: /\d+/ }, as: :user do
     controller :home do
@@ -10,9 +11,7 @@ Rails.application.routes.draw do
       get    "notes/new",      action: :new,              as: :new_note
       post   "notes",          action: :create,           as: :notes_create
       delete "notes",          action: :destroy_multiple, as: :notes_destroy_multiple
-
       get    "notes/:id",      action: :edit,             as: :note
-      patch  "notes/:id",      action: :update,           as: :note_update
       delete "notes/:id",      action: :destroy,          as: :note_destroy
     end
 

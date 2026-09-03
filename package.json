@@ -5,7 +5,10 @@
     "build:css": "postcss app/assets/stylesheets/application.css -o app/assets/builds/application.css",
     "build:css:watch": "postcss app/assets/stylesheets/application.css -o app/assets/builds/application.css --watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^8.0.23"
+  },
   "devDependencies": {
     "concurrently": "^10.0.5",
     "open-props": "^1.7.23",
