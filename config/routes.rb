@@ -13,10 +13,6 @@ Rails.application.routes.draw do
       delete "notes",          action: :destroy_multiple, as: :notes_destroy_multiple
       get    "notes/:id",      action: :edit,             as: :note
       delete "notes/:id",      action: :destroy,          as: :note_destroy
-
-      # For testing
-      get  "legacy/notes",     action: :legacy_index,     as: :legacy_notes
-      get  "legacy/notes/new", action: :legacy_new,       as: :legacy_new_note
     end
 
     controller :account do

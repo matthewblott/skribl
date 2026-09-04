@@ -20,8 +20,8 @@
     "
     data-action="
       ui--toggle-selection#toggle
-      ui--items:update@window-&gt;ui--toggle-selection#update
-      ui--items:update@window-&gt;bridge--toggle-selection#update
+      ui--items:update@window->;ui--toggle-selection#update
+      ui--items:update@window->;bridge--toggle-selection#update
     "
   >Select all</button>
 
@@ -32,8 +32,8 @@
     "
     data-action="
       ui--delete-button#submit
-      ui--items:update@window-&gt;ui--delete-button#update
-      ui--items:update@window-&gt;bridge--delete-note#update
+      ui--items:update@window->;ui--delete-button#update
+      ui--items:update@window->;bridge--delete-note#update
     "
     form="delete-form"
     disabled
