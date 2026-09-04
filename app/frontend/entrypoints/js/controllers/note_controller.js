@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { ocr } from '../lib/ocr'
+import { canvas } from '../lib/canvas'
 
 export default class extends Controller {
 
@@ -37,7 +37,7 @@ export default class extends Controller {
   }
 
   initialize() {
-    ocr(this.canvasTarget)
+    canvas(this.canvasTarget)
     this.clearTarget.disabled = true
     this.saveTarget.disabled = true
   }
@@ -63,7 +63,7 @@ export default class extends Controller {
     const canvas = this.canvasTarget.toDataURL('image/png')
     this.imgTarget.value = canvas
     this.submitTarget.click()
-    // this.clear()
+    this.clear()
   }
 
   isCanvasDirty() {

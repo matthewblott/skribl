@@ -13,31 +13,16 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= vite_client_tag %>
     <%= vite_stylesheet_tag 'index' %>
     <%= vite_javascript_tag 'index' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
   </head>
 
-  <body <%= " data-controller=\"#{content_for(:page_controller)}\"".html_safe if content_for?(:page_controller) %>>
+  <body <%= "data-controller=\"#{content_for(:page_controller)}\"".html_safe if content_for?(:page_controller) %>>
     <header class="hotwire-native-hidden">
       <%= render "shared/header" %>
     </header>

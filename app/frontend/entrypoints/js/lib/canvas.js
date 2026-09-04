@@ -1,18 +1,18 @@
-const ocr = (canvas) => {
+const canvas = (element) => {
 
   const markDirty = () => {
-    canvas.dispatchEvent(new CustomEvent("canvas:dirty", {
+    element.dispatchEvent(new CustomEvent("canvas:dirty", {
       bubbles: true,    // optional but useful so Stimulus can catch it
     }));
   };
 
-  const ctx = canvas.getContext('2d')
+  const ctx = element.getContext('2d')
   const lineWidth = 3
   
   let hasDimensionsSet = false
 
-  canvas.width = canvas.clientWidth
-  canvas.height = canvas.clientHeight
+  element.width = element.clientWidth
+  element.height = element.clientHeight
 
   // We need a background colour for the pen-to-print api
   ctx.fillStyle = 'white'
@@ -22,23 +22,23 @@ const ocr = (canvas) => {
   let startY
 
   //Mouse
-  canvas.addEventListener('mousedown', (e) => {
+  element.addEventListener('mousedown', (e) => {
     isPainting = true
     startX = e.clientX
     startY = e.clientY
     markDirty();
   })
-  canvas.addEventListener('mousemove', e => {
+  element.addEventListener('mousemove', e => {
     if (!isPainting) {
       return
     }
     ctx.lineWidth = lineWidth
     ctx.lineCap = 'round'
-    ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop)
+    ctx.lineTo(e.clientX - element.offsetLeft, e.clientY - element.offsetTop)
     ctx.stroke()
     markDirty();
   })
-  canvas.addEventListener('mouseup', () => {
+  element.addEventListener('mouseup', () => {
     isPainting = false
     ctx.stroke()
     ctx.beginPath()
@@ -46,10 +46,10 @@ const ocr = (canvas) => {
   })
 
   // Touch
-  canvas.addEventListener('touchstart', (e) => {
+  element.addEventListener('touchstart', (e) => {
     if (!hasDimensionsSet) {
-      canvas.width = canvas.clientWidth
-      canvas.height = canvas.clientHeight
+      element.width = element.clientWidth
+      element.height = element.clientHeight
       hasDimensionsSet = true
     }
 
@@ -58,23 +58,22 @@ const ocr = (canvas) => {
     startY = e.touches[0].clientY
     markDirty();
   })
-  canvas.addEventListener('touchend', () => {
+  element.addEventListener('touchend', () => {
     isPainting = false
     ctx.stroke()
     ctx.beginPath()
     markDirty();
   })
-  canvas.addEventListener('touchmove', e => {
+  element.addEventListener('touchmove', e => {
     if (!isPainting) {
       return
     }
     ctx.lineWidth = lineWidth
     ctx.lineCap = 'round'
-    ctx.lineTo(e.touches[0].clientX - canvas.offsetLeft, e.touches[0].clientY - canvas.offsetTop)
+    ctx.lineTo(e.touches[0].clientX - element.offsetLeft, e.touches[0].clientY - element.offsetTop)
     ctx.stroke()
     markDirty();
   })
 }
 
-export { ocr }
-
+export { canvas }

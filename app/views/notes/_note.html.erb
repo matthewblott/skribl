@@ -1,9 +1,9 @@
-<div id="note_<%= note.id %>" data-bulk-selection-target="item" data-id="<%= note.id %>"
-  data-action="click->bulk-selection#select">
+<div id="note_<%= note.id %>" data-notes-target="item" data-id="<%= note.id %>"
+  data-action="click->notes#select">
 
-  <% #if note.image_saved %>
-    <%#= image_tag "/#{note.user_id}/uploads/#{note.id}.png" %> 
-  <% #else %>
+  <% if note.image_saved %>
+    <%= image_tag "/#{note.user_id}/uploads/#{note.id}.png" %> 
+  <% else %>
     <%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-  <% #end %>
+  <% end %>
 </div>

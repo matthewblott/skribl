@@ -214,6 +214,7 @@ GEM
       public_suffix (>= 2.0.5, < 7)
       rack (>= 1.3.6, < 4.0)
     rotp (6.3.0)
+    rubyzip (3.6.0)
     securerandom (0.4.1)
     solid_cable (4.0.2)
       actioncable (>= 7.2)
@@ -273,6 +274,7 @@ DEPENDENCIES
   rails (~> 8.1)
   ros-apartment (~> 3.4)
   rotp (~> 6.3)
+  rubyzip (~> 3.6)
   solid_cable (~> 4.0)
   sqlite3 (~> 2.9)
   stimulus-rails (~> 1.3)
@@ -352,6 +354,7 @@ CHECKSUMS
   reline (0.7.0) sha256=5b012d8e55dbf9d450f12bde2cf7d15ff546ae80b3f8f3b30e570d431815583d
   ros-apartment (3.4.4) sha256=fd4d62cb771d80cb690662c229898b658c9fbb2ce5418f314e37e1f16b2aeeff
   rotp (6.3.0) sha256=75d40087e65ed0d8022c33055a6306c1c400d1c12261932533b5d6cbcd868854
+  rubyzip (3.6.0) sha256=268994d44d62282d1cfd99bf10eae48d7267199158ad7ea3e1fee2da9458b695
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
   solid_cable (4.0.2) sha256=084636a67679ad00d23088b33c84047e614bcf41ee559db24b414d83cdc42d03
   sqlite3 (2.9.6-aarch64-linux-gnu) sha256=d8b1f7d23efd7abac285775a9566562fc7debfef79d594e3a20354406fb7907c

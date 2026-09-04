@@ -17,54 +17,35 @@
   }
 </style>
 
-<% content_for :header_controls do %>
-<% end %>
+<% content_for :page_controller, "note" %>
 
-<div data-controller="note">
+<% content_for :header_controls do %>
 
   <div role="group">
-    <button
-      data-controller="bridge--clear-canvas"
-      data-note-target="clear"
-      data-action="
-        click-&gt;note#clear
-        note:update@window-&gt;bridge--clear-canvas#update
-      "
-      disabled
-    >Clear</button>
-    <button
-      data-controller="bridge--create-note"
-      data-note-target="save"
-      data-action="
-        click->note#create
-        note:update@window->bridge--create-note#update
-      "
-      disabled
-    >Save</button>
+    <button data-note-target="clear" data-action="note#clear" disabled>Clear</button>
+    <button data-note-target="save" data-action="note#create" disabled>Save</button>
     <a role="button" href="<%= user_notes_path %>">Notes</a>
   </div>
-  <canvas data-note-target="canvas"></canvas>
 
-  <turbo-frame id="note_frame">
+<% end %>
 
-    <form id="note_form" data-turbo="true" action="<%= user_notes_path %>" method="post">
+<canvas data-note-target="canvas"></canvas>
 
-      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-      <input data-note-target="img" type="hidden" name="note[img]" id="note_img">
+<form id="note_form" data-turbo="true" action="<%= user_notes_path %>" method="post">
 
-      <input type="hidden" name="note[image_saved]" value="0">
-      <input type="hidden" name="note[content]" value="0">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input data-note-target="img" type="hidden" name="note[img]" id="note_img">
 
-      <button
-        class="hidden"
-        data-note-target="submit"
-        data-search-field-target="submit"
-        data-disable-with="Create Note"
-      >
-        Create
-      </button>
-      
-    </form>
+  <input type="hidden" name="note[image_saved]" value="0">
+  <input type="hidden" name="note[content]" value="0">
 
-  </turbo-frame>
-</div>
+  <button
+    class="hidden"
+    data-note-target="submit"
+    data-search-field-target="submit"
+    data-disable-with="Create Note"
+  >
+    Create
+  </button>
+  
+</form>
