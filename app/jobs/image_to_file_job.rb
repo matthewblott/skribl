@@ -16,12 +16,12 @@ class ImageToFileJob < ApplicationJob
       note.save
       note.user_id = user_id
 
-      Turbo::StreamsChannel.broadcast_update_to(
-        :user_notes_stream,
-        target: "note_#{note_id}",
-        partial: "notes/note",
-        locals: { user_id: user_id, note: note }
-      )
+      # Turbo::StreamsChannel.broadcast_update_to(
+      #   :user_notes_stream,
+      #   target: "note_#{note_id}",
+      #   partial: "notes/note",
+      #   locals: { user_id: user_id, note: note }
+      # )
 
     end
 

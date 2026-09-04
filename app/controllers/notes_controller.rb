@@ -1,6 +1,5 @@
 class NotesController < ApplicationController
   include Pagy::Method
-  before_action :set_note, only: %i[ destroy ]
 
   def index
     @pagy, @notes = pagy(Note.recent_first, items: 20)
@@ -19,7 +18,6 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
     if @note.save
       # redirect_to user_notes_path(Current.user)
-      # redirect_to user_notes_path(Current.user)
       # , notice: "Note was successfully created."
       ImageToFileJob.perform_now(Current.user.id, @note.id, @note.img)
     else
@@ -28,10 +26,14 @@ class NotesController < ApplicationController
 
   end
 
-  def destroy
-    @note.destroy!
-    redirect_to user_notes_path(Current.user)
-    # , notice: "Note was successfully destroyed.", status: :see_other
+  def destroy_multiple
+    @deleted_ids = Array(params[:ids])
+    Note.where(id: params[:ids]).destroy_all
+    # redirect_to user_home_path
+    # respond_to do |format|
+    #   format.turbo_stream
+    #   format.html { redirect_to user_notes_path, notice: "Deleted" }
+    # end
   end
 
   private

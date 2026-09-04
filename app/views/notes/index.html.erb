@@ -1,86 +1,42 @@
 <% content_for :title, "Notes" %>
 
-<p style="color: green"><%= notice %></p>
+<style>
+  .selected {
+    background-color: lightyellow;
+  }
+  [id^="note_"] {
+    cursor: pointer;  
+    cursor: default;  
+  }
+</style>
+
+<% content_for :page_controller, "bulk-selection" %>
 
 <% content_for :header_controls do %>
+  <div role="group">
+    <a href="<%= user_home_path %>" role="button">Home</a>
+    <a href="<%= user_new_note_path %>" role="button">New</a>
+    <button data-bulk-selection-target="selectAllButton"
+            data-action="bulk-selection#toggleAll">Select all</button>
+    <button data-bulk-selection-target="deleteButton"
+            data-action="bulk-selection#submitDelete" disabled>Delete</button>
+  </div>
 <% end %>
 
-<%= turbo_stream_from :user_notes_stream, signed: true %>
-<%= turbo_stream_from :user_note_dispatcher_stream, signed: true %>
+<form id="delete-form" action="<%= user_notes_destroy_multiple_path %>" method="post"
+      data-bulk-selection-target="form">
+  <input type="hidden" name="_method" value="delete">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form>
 
-<div role="group">
+<% @notes.each do |note| %>
+  <%= render partial: "notes/note", locals: { note: note } %>
+<% end %>
 
-  <a href="<%= user_home_path %>" role="button">Home</a>
-  <a href="<%= user_new_note_path %>" role="button">New</a>
+<% if @pagy.next %>
 
-  <button
-    data-controller="
-      ui--toggle-selection
-      bridge--toggle-selection
-    "
-    data-action="
-      ui--toggle-selection#toggle
-      ui--items:update@window->;ui--toggle-selection#update
-      ui--items:update@window->;bridge--toggle-selection#update
-    "
-  >Select all</button>
+  <turbo-frame id="pagination" src="<%= user_notes_path(page: @pagy.next) %>" loading="lazy">
+    Loading more...
+  </turbo-frame>
 
-  <button
-    data-controller="
-      ui--delete-button
-      bridge--delete-note
-    "
-    data-action="
-      ui--delete-button#submit
-      ui--items:update@window->;ui--delete-button#update
-      ui--items:update@window->;bridge--delete-note#update
-    "
-    form="delete-form"
-    disabled
-  >Delete</button>
-
-</div>
-
-<div id="user_<%= Current.user.id %>_note_dispatcher" data-controller="ui--item-dispatcher"></div>
-
-<%= form_with url: user_notes_path(Current.user),
-  method: :delete,
-  data: {
-    controller: "
-      ui--delete-form
-    ",
-    action: "
-      bridge--delete-note:submit@window->ui--delete-form#submit
-      ui--delete-button:submit@window->ui--delete-form#submit
-      ui--items:update@window->ui--delete-form#update
-    "
-  },
-  id: "delete-form" %>
-
-<% # This is where the state for the controls are determined %>
-<section id="user_<%= Current.user.id %>_notes"
-  data-controller="ui--items"
-  data-action="
-    ui--items#toggle
-    ui--toggle-selection:toggle@window->ui--items#toggle
-    ui--item-dispatcher:update@window->ui--items#update
-    ui--toggle-selection:connect@window->ui--items#update
-    bridge--toggle-selection:connect@window->ui--items#update
-  "
->
-  <% @notes.each do |note| %>
-    <% note.user_id = Current.user.id %>
-    <%= render partial: "notes/note", locals: { note: note } %>
-  <% end %>
-
-  <% if @pagy.next %>
-
-    <%= turbo_frame_tag :pagination, 
-        src: user_notes_path(Current.user, page: @pagy.next),
-        loading: "lazy" do %>
-      Loading more...
-    <% end %>
-
-  <% end %>
-
-</section>
+<% end %>

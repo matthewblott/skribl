@@ -37,7 +37,7 @@
 
   </head>
 
-  <body>
+  <body <%= " data-controller=\"#{content_for(:page_controller)}\"".html_safe if content_for?(:page_controller) %>>
     <header class="hotwire-native-hidden">
       <%= render "shared/header" %>
     </header>

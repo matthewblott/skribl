@@ -12,7 +12,6 @@ Rails.application.routes.draw do
       post   "notes",          action: :create,           as: :notes_create
       delete "notes",          action: :destroy_multiple, as: :notes_destroy_multiple
       get    "notes/:id",      action: :edit,             as: :note
-      delete "notes/:id",      action: :destroy,          as: :note_destroy
     end
 
     controller :account do
