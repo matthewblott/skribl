@@ -48,6 +48,6 @@ class NotesController < ApplicationController
   end
 
   def note_params
-    params.expect(note: [ :content, :image_saved, :img ])
+    params.expect(note: [ :img ])
   end
 end

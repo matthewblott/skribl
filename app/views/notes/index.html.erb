@@ -10,6 +10,8 @@
   }
 </style>
 
+<%= turbo_stream_from "image_notes_#{Current.user.id}" %>
+
 <% content_for :page_controller, "notes" %>
 
 <% content_for :header_controls do %>
@@ -29,15 +31,18 @@
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 </form>
 
-<% @notes.each do |note| %>
-  <% note.user_id = Current.user.id %>
-  <%= render partial: "notes/note", locals: { note: note } %>
-<% end %>
+<section id="<%= "user-notes-#{Current.user.id}" %>">
 
-<% if @pagy.next %>
+  <% @notes.each do |note| %>
+    <%= render partial: "notes/note", locals: { user_id: Current.user.id, note: note } %>
+  <% end %>
 
-  <turbo-frame id="pagination" src="<%= user_notes_path(page: @pagy.next) %>" loading="lazy">
-    Loading more...
-  </turbo-frame>
+  <% if @pagy.next %>
 
-<% end %>
+    <turbo-frame id="pagination" src="<%= user_notes_path(page: @pagy.next) %>" loading="lazy">
+      Loading more...
+    </turbo-frame>
+
+  <% end %>
+
+</section>
