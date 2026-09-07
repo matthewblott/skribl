@@ -2,10 +2,4 @@
   <%= page_title %>
 </h1>
 
-<div>
-
-  <% if is_signed_in? %>
-    <%= yield :header_controls %>
-  <% end %>
-
-</div>
+<%= yield :header_controls %>

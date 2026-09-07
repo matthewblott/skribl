@@ -12,9 +12,6 @@
   </div>
 <% end %>
 
-<% if is_signed_in? %>
-<% end %>
-
 <form action="<%= user_account_destroy_path %>" method="post" id="delete_account_form">
   <input type="hidden" name="_method" value="delete">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

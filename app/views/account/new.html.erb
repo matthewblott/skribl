@@ -1,5 +1,11 @@
 <% content_for :title, "Register" %>
 
+<% content_for :header_controls do %>
+  <div role="group">
+    <a href="<%= user_account_path %>" role="button">Account</a>
+  </div>
+<% end %>
+
 <form action="<%= user_account_send_code_path %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="email" name="email" placeholder="alice@example.com" required>
