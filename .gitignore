@@ -360,3 +360,7 @@ node_modules
 
 # Ignore uploaded files
 uploads
+
+# Ignore key files for decrypting credentials and more.
+/config/credentials/*.key
+
