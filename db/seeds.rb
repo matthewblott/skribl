@@ -7,4 +7,4 @@
 # end
 
 # Create test user for Apple sign in 
-User.create(email: 'testuser@coderscoffeehouse.com')
+User.create(email: 'testuser@coderscoffeehouse.com', otp_enabled: true)
