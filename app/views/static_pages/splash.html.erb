@@ -1,6 +1,7 @@
 <% content_for :title, "Home" %>
 
-<% unless is_signed_in? %>
+<% if params[:from_sign_out].present? %>
+  <input type="hidden" data-controller="unauthenticated">
 <% end %>
 
 <script>

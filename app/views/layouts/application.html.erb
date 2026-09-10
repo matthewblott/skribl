@@ -22,10 +22,19 @@
     <%= vite_javascript_tag 'index' %>
   </head>
 
-  <body <%= "data-controller=\"#{content_for(:page_controller)}\"".html_safe if content_for?(:page_controller) %>>
+  <body
+    <%= "data-controller=\"#{content_for(:page_controller)}\"".html_safe if content_for?(:page_controller) %>
+    class="<%= 'hotwire-native' if is_native_app? %>"
+  >
     <header class="hotwire-native-hidden">
-      <%= render "shared/header" %>
+      <%= render 'shared/header' %>
     </header>
+    <div id="alerts" class="hotwire-native-hidden">
+      <%= render 'shared/alerts' %>
+    </div>
+    <% if is_signed_in? %>
+      <%= turbo_stream_from AlertsChannel.stream_name_for(Current.user.id) %>
+    <% end %>
     <main>
       <%= yield %>
     </main>

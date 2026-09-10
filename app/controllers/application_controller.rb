@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+  helper_method :is_native_app?
+
   allow_browser versions: :modern
   before_action :load_current_user
   before_action :authenticate_user!

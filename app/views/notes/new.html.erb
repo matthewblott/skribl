@@ -22,8 +22,8 @@
 <% content_for :header_controls do %>
 
   <div role="group">
-    <button data-note-target="clear" data-action="note#clear" disabled>Clear</button>
-    <button data-note-target="save" data-action="note#create" disabled>Save</button>
+    <button data-note-target="clear" data-action="note#clear" data-bridge-side="left" data-controller="bridge--button" disabled>Clear</button>
+    <button data-note-target="save" data-action="note#create" data-controller="bridge--button" disabled>Save</button>
     <a role="button" href="<%= user_notes_path %>">Notes</a>
   </div>
 

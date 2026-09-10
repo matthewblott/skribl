@@ -1,5 +1,17 @@
 <% content_for :title, "Information" %>
 
+<style>
+  a {
+    color: blue;
+  }
+
+  p {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+</style>
+
 <p>
   Unless You choose to create an account, Your records are stored securely and are accessible only from this device.
 </p>
@@ -13,15 +25,3 @@
 </p>
 
 <a href="<%= auth_path %>" role="button" class="outline">Continue</a>
-
-<style>
-  a {
-    color: blue;
-  }
-
-  p {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    font-size: 1.2rem;
-  }
-</style>

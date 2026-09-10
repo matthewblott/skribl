@@ -1,0 +1,31 @@
+<% content_for :title, "Download Notes" %>
+
+<style>
+  p {
+    text-align: center;
+  }
+</style>
+
+<% content_for :header_controls do %>
+  <div role="group">
+    <a href="<%= user_account_path %>" role="button">Account</a>
+  </div>
+<% end %>
+
+<form id="download_form"
+  formtarget: "_top"
+  data-turbo="false"
+  action="<%= user_download_images_path %>"
+  method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+</form>
+
+<p>Download your notes as a zip file.</p>
+
+<button
+  data-controller="download"
+  data-action="download#submit"
+  data-token="<%= form_authenticity_token %>"
+  form="<%= unless is_native_app? then "download_form" end %>"
+  class="outline"
+>Download Notes</button>

@@ -18,10 +18,16 @@
   <div role="group">
     <a href="<%= user_home_path %>" role="button">Home</a>
     <a href="<%= user_new_note_path %>" role="button">New</a>
-    <button data-notes-target="selectAllButton"
-            data-action="notes#toggleAll">Select all</button>
-    <button data-notes-target="deleteButton"
-            data-action="notes#submitDelete" disabled>Delete</button>
+    <button
+      data-notes-target="selectAllButton"
+      data-bridge-side="left"
+      data-controller="bridge--button" 
+      data-action="notes#toggleAll">Toggle selection</button>
+    <button
+      data-notes-target="deleteButton"
+      data-controller="bridge--button"
+      data-action="notes#submitDelete"
+      disabled>Delete</button>
   </div>
 <% end %>
 

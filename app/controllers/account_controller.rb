@@ -21,7 +21,13 @@ class AccountController < EmailAuthController
 
     deliver_otp(email, User.otp_for_secret(otp_secret).now)
 
-    redirect_to user_account_verify_code_path
+    message = "Verification code sent to #{email}."
+    redirect_to user_account_verify_code_path, notice: message
+    # AlertBroadcaster.broadcast(Current.user.id, "Verification code sent to #{email}.", type: :success)
+  end
+  
+  def verify
+    @email = session[:email]
   end
 
   def verify_code
@@ -51,7 +57,14 @@ class AccountController < EmailAuthController
     session.delete(:otp_secret)
     session.delete(:email)
 
-    redirect_to user_home_path(Current.user), notice: "Email added — you can now sign in from any device."
+    # redirect_to user_home_path(Current.user), notice: "Email added — you can now sign in from any device."
+    message = "Email added — you can now sign in from any device."
+
+    if is_native_app?
+      redirect_to user_account_path, notice: message
+    else
+      redirect_to user_home_path, notice: message
+    end
   end
 
   def sign_out 
@@ -59,13 +72,28 @@ class AccountController < EmailAuthController
     Session.find_by(id: session_id)&.destroy
     cookies.delete(:session_token)
     cookies.delete(:device_token)
-    redirect_to root_path
+    redirect_to root_path(from_sign_out: true)
   end
   
   def destroy
     Current.user.destroy
     cookies.delete(:device_token)
-    redirect_to root_path
+    redirect_to root_path(from_sign_out: true)
+  end
+
+  def download_images
+    folder_path = Rails.root.join('uploads', Current.user.id.to_s)
+    zip_data = Zip::OutputStream.write_buffer do |zip|
+      Dir.glob("#{folder_path}/*.png").each do |file|
+        zip.put_next_entry(File.basename(file))
+        zip.write(File.read(file))
+      end
+    end
+
+    send_data zip_data.string, 
+      filename: 'images.zip', 
+      type: 'application/zip'
+
   end
 
 end

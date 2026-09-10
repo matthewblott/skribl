@@ -23,7 +23,13 @@ class AuthController < EmailAuthController
 
     deliver_otp(email, User.otp_for_secret(otp_secret).now)
 
-    redirect_to auth_verify_code_path
+    message = "Verification code sent to #{email}."
+
+    redirect_to auth_verify_code_path, notice: message
+  end
+
+  def verify
+    @email = session[:email]
   end
 
   def create
@@ -31,7 +37,7 @@ class AuthController < EmailAuthController
     otp_secret = session[:otp_secret]
 
     if email.blank? || otp_secret.blank?
-      redirect_to sign_in_path and return
+      redirect_to new_auth_path and return
     end
 
     unless User.otp_for_secret(otp_secret).verify(params[:otp_code], drift_behind: 30)
@@ -52,8 +58,8 @@ class AuthController < EmailAuthController
     Current.session = new_session
     Current.user = user
 
-    notice = is_new_user ? "Account created. You can now sign in from any device." : nil
-    redirect_to user_home_path(user), notice: notice
+    message = is_new_user ? "Account created. You can now sign in from any device." : "You have successfully signed in." 
+    redirect_to user_home_path(user), notice: message
   end
 
 end

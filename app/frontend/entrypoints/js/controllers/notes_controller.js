@@ -10,7 +10,6 @@ export default class extends Controller {
   toggleAll() {
     this.allSelected = !this.allSelected
     this.itemTargets.forEach(item => this.setSelected(item, this.allSelected))
-    this.selectAllButtonTarget.textContent = this.allSelected ? 'Deselect all' : 'Select all'
     this.refreshDeleteButton()
   }
 

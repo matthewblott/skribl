@@ -17,9 +17,8 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     if @note.save
-      # redirect_to user_notes_path(Current.user)
-      # , notice: "Note was successfully created."
       ImageToFileJob.perform_now(Current.user.id, @note.id, @note.img)
+      AlertBroadcaster.broadcast(Current.user.id, "Note was successfully created.", type: :success)
     else
       render :new, status: :unprocessable_content
     end
@@ -34,6 +33,8 @@ class NotesController < ApplicationController
       DeleteImageJob.perform_later(Current.user.id, id)
     end
     
+    AlertBroadcaster.broadcast(Current.user.id, "Note(s) successfully deleted.", type: :danger)
+
     # respond_to do |format|
     #   format.turbo_stream
     #   format.html { redirect_to user_notes_path, notice: "Deleted" }

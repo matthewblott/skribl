@@ -6,9 +6,10 @@
   </div>
 <% end %>
 
+<p>Enter your email address and we’ll send you a code to enter.</p>
+
 <form action="<%= user_account_send_code_path %>" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="email" name="email" placeholder="alice@example.com" required>
-  <button>send otp</button>
+  <button data-controller="bridge--button" class="hotwire-native-hidden">Send Code</button>
 </form>
-
