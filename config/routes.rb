@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   controller :static_pages do
     get 'index',   action: :index
     get 'info',    action: :info
+    get 'support', action: :support
     get 'terms',   action: :terms
     get 'privacy', action: :privacy
   end
