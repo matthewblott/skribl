@@ -1,0 +1,89 @@
+{
+  "settings": {
+  },
+  "rules": [
+    {
+      "patterns": [
+        ".*"
+      ],
+      "properties": {
+        "context": "default",
+        "pull_to_refresh_enabled": true
+      }
+    },
+    {
+      "patterns": [
+        "/info"
+      ],
+      "properties": {
+        "presentation": "replace_root"
+      }
+    },
+    {
+      "patterns": [
+        "/auth"
+      ],
+      "properties": {
+        "presentation": "replace_root"
+      }
+    },
+    {
+      "patterns": [
+        "/auth/new"
+      ],
+      "properties": {
+        "presentation": "default"
+      }
+    },
+    {
+      "patterns": [
+        "/auth/verify"
+      ],
+      "properties": {
+        "presentation": "default"
+      }
+    },
+    {
+      "patterns": [
+        "/\\d+/account$"
+      ],
+      "properties": {
+        "presentation": "replace_root"
+      }
+    },
+    {
+      "patterns": [
+        "/\\d+/notes$"
+      ],
+      "properties": {
+        "presentation": "clear"
+      }
+    },
+    {
+      "patterns": [
+        "/\\d+/notes\\?note_deleted=1$"
+      ],
+      "properties": {
+        "presentation": "clear"
+      }
+    },
+    {
+      "patterns": [
+        "/\\d+/notes/new$"
+      ],
+      "properties": {
+        "presentation": "clear",
+        "pull_to_refresh_enabled": false
+      }
+    },
+    {
+      "patterns": [
+        "/\\d+/notes/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+      ],
+      "properties": {
+        "context": "default",
+        "pull_to_refresh_enabled": false
+      }
+    }
+  ]
+}
