@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'json', '~> 2.9'
 gem 'pagy', '~> 43.6'
 gem 'puma', '~> 8.0'
 gem 'rails', '~> 8.1'

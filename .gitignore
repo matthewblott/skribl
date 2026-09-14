@@ -345,9 +345,6 @@ build-iPhoneSimulator/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,rails,ruby,jetbrains,rubymine
 
-# Gemfile.lock
-Gemfile.lock
-
 # Vite Ruby
 /public/vite*
 node_modules
@@ -355,12 +352,13 @@ node_modules
 # https://vitejs.dev/guide/env-and-mode.html#env-files
 *.local
 
-
-!app/frontend/entrypoints/css/tokens.css
-
 # Ignore uploaded files
 uploads
 
 # Ignore key files for decrypting credentials and more.
 /config/credentials/*.key
 
+# Override default ignore list 
+!.ruby-version
+!app/frontend/entrypoints/css/tokens.css
+!bun.lock
