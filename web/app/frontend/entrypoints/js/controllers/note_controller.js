@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 import { canvas } from '../lib/canvas'
 
 export default class extends Controller {
@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ['canvas', 'text', 'submit', 'img', 'clear', 'save']
 
   connect() {
-    this.canvasTarget.addEventListener("canvas:dirty", this.onDirty)
+    this.canvasTarget.addEventListener('canvas:dirty', this.onDirty)
     this.started = false 
   }
 
@@ -15,7 +15,7 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.canvasTarget.removeEventListener("canvas:dirty", this.onDirty)
+    this.canvasTarget.removeEventListener('canvas:dirty', this.onDirty)
   }
 
   onDirty = () => {
@@ -27,7 +27,7 @@ export default class extends Controller {
     }
 
     // Dispatch event here for the bridge components
-    this.dispatch("update", {
+    this.dispatch('update', {
       detail: {
         isDirty: true
       } 
@@ -47,7 +47,7 @@ export default class extends Controller {
     this.clearTarget.disabled = true
     this.saveTarget.disabled = true
 
-    this.dispatch("update", {
+    this.dispatch('update', {
       detail: {
         isDirty: false
       } 

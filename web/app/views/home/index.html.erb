@@ -6,18 +6,16 @@
   }
 </style>
 
-<input type="hidden" value="<%= Current.user.id %>"" data-controller="authenticated">
-
 <% content_for :header_controls do %>
   <div role="group">
     <a href="<%= user_account_path %>" role="button">Account</a> 
   </div>
 <% end %>
 
-
 <p>
   Proceed to your notes.
 </p>
+
 <a href="<%= user_notes_path %>" role="button" class="outline">Notes</a>
 
-
+<input type="hidden" value="<%= Current.user.id %>"" data-controller="authenticated">

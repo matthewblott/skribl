@@ -19,5 +19,4 @@ class GuestSessionsController < ApplicationController
 
     redirect_to user_home_path(Current.user)
   end
-
 end

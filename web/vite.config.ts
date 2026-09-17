@@ -5,5 +5,8 @@ export default defineConfig({
   plugins: [
     RubyPlugin(),
   ],
+  server: {
+    origin: process.env.VITE_ORIGIN,
+  },
 })
 
