@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- Base application theme. -->
+  <style name="Base.Theme.Skribl" parent="Theme.Material3.DayNight.NoActionBar">
+    <item name="colorPrimary">#0172AD</item>
+    <item name="colorOnPrimary">@android:color/black</item>
+    <item name="materialButtonStyle">@style/CustomMaterialButton</item>
+  </style>
+  
+  <!-- Custom button style that inherits Material 3 defaults -->
+  <style name="CustomMaterialButton" parent="Widget.Material3.Button">
+    <item name="backgroundTint">#0172AD</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="cornerRadius">6dp</item>
+  </style>
+  <style name="Theme.Skribl" parent="Base.Theme.Skribl" />
+</resources>
