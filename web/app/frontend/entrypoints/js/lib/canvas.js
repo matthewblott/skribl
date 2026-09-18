@@ -11,8 +11,11 @@ const canvas = (element) => {
   
   let hasDimensionsSet = false
 
-  element.width = element.clientWidth
-  element.height = element.clientHeight
+  const width = element.clientWidth
+  const height = element.clientHeight
+
+  element.width = width 
+  element.height = height
 
   // We need a background colour for the pen-to-print api
   ctx.fillStyle = 'white'
@@ -48,8 +51,13 @@ const canvas = (element) => {
   // Touch
   element.addEventListener('touchstart', (e) => {
     if (!hasDimensionsSet) {
-      element.width = element.clientWidth
-      element.height = element.clientHeight
+
+      const width = element.clientWidth
+      const height = element.clientHeight
+
+      element.width = width 
+      element.height = height
+
       hasDimensionsSet = true
     }
 

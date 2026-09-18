@@ -1,19 +1,10 @@
 <% content_for :title, "New Note" %>
 
 <style>
-
-  div[data-controller="note"] {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    width: 100%;
-  }
   canvas {
-    flex-grow: 1;
+    flex: 1 1 0;   /* flex-grow: 1, flex-shrink: 1, flex-basis: 0 — replaces flex-grow: 1 */
+    min-height: 0; /* flex items default to min-height: auto (content-based); this prevents that from re-introducing a content dependency */
     background-color: lightyellow;
-  }
-  .hidden {
-    display: none;
   }
 </style>
 
