@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://gem.coop'
 
 gem 'json', '~> 2.9'
 gem 'pagy', '~> 43.6'
