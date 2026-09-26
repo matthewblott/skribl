@@ -1,5 +1,21 @@
 <% content_for :title, "Home" %>
 
+<style>
+  .splash-1 {
+    opacity: 0.03;
+    padding-bottom: 10px;
+  }
+
+  .splash-2 {
+    opacity: 0.04;
+    padding-bottom: 10px;
+  }
+
+  h1 {
+    display: none;
+  }
+</style>
+
 <% if params[:from_sign_out].present? %>
   <input type="hidden" data-controller="unauthenticated">
 <% end %>
@@ -9,3 +25,10 @@
     window.location.replace('<%= info_path %>');
   }, 1000) 
 </script>
+
+<img src="<%= vite_asset_path 'images/logo.png' %>" alt="Skribl logo" class="splash-1">
+<img src="<%= vite_asset_path 'images/logo.png' %>" alt="Skribl logo" class="splash-2">
+<img src="<%= vite_asset_path 'images/logo.png' %>" alt="Skribl logo">
+<img src="<%= vite_asset_path 'images/logo.png' %>" alt="Skribl logo" class="splash-2">
+<img src="<%= vite_asset_path 'images/logo.png' %>" alt="Skribl logo" class="splash-1">
+
