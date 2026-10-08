@@ -15,7 +15,7 @@ android {
     minSdk = 28
     targetSdk = 37
     versionCode = 1
-    versionName = "1.0"
+    versionName = "2.0.0"
   }
   buildFeatures {
     compose = true
@@ -25,13 +25,6 @@ android {
     release {
       isMinifyEnabled = true
       isShrinkResources = true
-      proguardFiles(
-        getDefaultProguardFile("proguard-android-optimize.txt"),
-        "proguard-rules.pro"
-      )
-      ndk {
-        debugSymbolLevel = "FULL"
-      }
       optimization {
         enable = false
       }
@@ -62,4 +55,3 @@ dependencies {
   implementation("androidx.compose.ui:ui-tooling-preview")
   implementation("androidx.compose.runtime:runtime")
 }
-
