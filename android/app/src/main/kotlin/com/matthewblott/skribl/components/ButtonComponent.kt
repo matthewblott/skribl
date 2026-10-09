@@ -10,12 +10,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.sp
-import com.masilotti.bridgecomponents.R
-import com.masilotti.bridgecomponents.shared.Colors
+import com.google.android.material.color.MaterialColors
+import com.matthewblott.skribl.R
 import dev.hotwire.core.bridge.BridgeComponent
 import dev.hotwire.core.bridge.BridgeDelegate
 import dev.hotwire.core.bridge.Message
@@ -61,10 +62,15 @@ class ButtonComponent(
     val composeView = ComposeView(fragment.requireContext()).apply {
       id = buttonId
       setContent {
+        val color = MaterialColors.getColor(
+          LocalContext.current,
+          com.google.android.material.R.attr.colorOnSurface,
+          android.graphics.Color.BLACK
+        )
         ToolbarButton(
           title = data.title,
           imageName = data.imageName,
-          contentColor = Colors.bridgeworkColor("button", hex = data.colorCode),
+          contentColor = Color(color),
           onClick = { replyTo(message.event) })
       }
     }

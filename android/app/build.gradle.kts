@@ -28,6 +28,10 @@ android {
       optimization {
         enable = false
       }
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro"
+      )
     }
   }
   compileOptions {
@@ -44,7 +48,6 @@ dependencies {
   implementation(libs.material)
   implementation("dev.hotwire:core:1.3.1")
   implementation("dev.hotwire:navigation-fragments:1.3.1")
-  implementation("com.github.joemasilotti:bridge-components:0.14.0")
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
   implementation(platform("androidx.compose:compose-bom:2026.06.00"))
   implementation("com.squareup.okhttp3:okhttp:4.12.0")

@@ -1,10 +1,10 @@
 package com.matthewblott.skribl
 
-import com.masilotti.bridgecomponents.toast.ToastComponent
 import com.matthewblott.skribl.components.AuthenticatedComponent
 import com.matthewblott.skribl.components.ButtonComponent
 import com.matthewblott.skribl.components.DownloadComponent
 import com.matthewblott.skribl.components.NoticeComponent
+import com.matthewblott.skribl.components.ToastComponent
 import com.matthewblott.skribl.components.UnauthenticatedComponent
 import com.matthewblott.skribl.fragments.DownloadFileFragment
 import com.matthewblott.skribl.fragments.WebFragment
