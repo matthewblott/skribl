@@ -7,9 +7,8 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
-import okhttp3.CookieJar
-import okhttp3.FormBody
-import okhttp3.JavaNetCookieJar
+//import okhttp3.CookieJar
+//import okhttp3.JavaNetCookieJar
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -17,16 +16,15 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import java.io.File
 import java.io.IOException
-import java.net.CookieManager
-import java.net.CookiePolicy
+//import java.net.CookieManager
+//import java.net.CookiePolicy
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-//import kotlin.coroutines.suspendCancellableCoroutine
 
 class ZipDownloadService(
-  cookieJar: CookieJar = JavaNetCookieJar(
-    CookieManager().apply { setCookiePolicy(CookiePolicy.ACCEPT_ALL) }
-  )
+//  cookieJar: CookieJar = JavaNetCookieJar(
+//    CookieManager().apply { setCookiePolicy(CookiePolicy.ACCEPT_ALL) }
+//  )
 ) {
   sealed class DownloadError(message: String? = null, cause: Throwable? = null) :
     Exception(message, cause) {
@@ -36,7 +34,6 @@ class ZipDownloadService(
   }
 
   private val client: OkHttpClient = OkHttpClient.Builder()
-//    .cookieJar(cookieJar)
     .cookieJar(WebViewCookieJar())
     .build()
 
@@ -57,21 +54,6 @@ class ZipDownloadService(
       .build()
     val response = executeRequest(request)
 
-//    val client = OkHttpClient.Builder()
-//      .cookieJar(WebViewCookieJar())
-//      .build()
-
-//    val requestBody = FormBody.Builder()
-//      .add("authenticity_token", csrfToken)
-//      .build()
-//    val request = Request.Builder()
-//      .url("$baseUrl/$userId/account/download")
-//      .url("$baseUrl/test-download")
-//      .post(requestBody)
-//      .addHeader("X-CSRF-Token", csrfToken)
-//      .build()
-//    val response = executeRequest(request) // uses `client` internally 
-    
     response.use { resp ->
       if (!resp.isSuccessful) {
         throw DownloadError.ServerError(resp.code)
