@@ -6,17 +6,6 @@ plugins {
 
 android {
   namespace = "com.matthewblott.skribl"
-  compileSdk {
-    version = release(37)
-  }
-
-  defaultConfig {
-    applicationId = "com.matthewblott.skribl"
-    minSdk = 28
-    targetSdk = 37
-    versionCode = 1
-    versionName = "2.0.0"
-  }
   buildFeatures {
     compose = true
     buildConfig = true
@@ -34,9 +23,23 @@ android {
       )
     }
   }
+  compileSdk {
+    version = release(37)
+  }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+  }
+  defaultConfig {
+    applicationId = "com.matthewblott.skribl"
+    minSdk = 28
+    targetSdk = 37
+    versionCode = 1
+    versionName = "2.0.0"
+  }
+  dependenciesInfo {
+    includeInApk = false
+    includeInBundle = false
   }
 }
 
