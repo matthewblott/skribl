@@ -1,9 +1,0 @@
-article {
-  padding: 0.5rem;
-  display: flex;
-  border-radius: 0.5rem;
-  /* box-shadow: var(--shadow);  */
-
-  border: 0.1rem solid var(--color-border);
-
-}

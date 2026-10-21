@@ -1,5 +1,0 @@
-body {
-  &.hotwire-native .hotwire-native-hidden {
-    display: none !important;
-  }
-}
