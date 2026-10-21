@@ -7,8 +7,6 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
-//import okhttp3.CookieJar
-//import okhttp3.JavaNetCookieJar
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -16,15 +14,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import java.io.File
 import java.io.IOException
-//import java.net.CookieManager
-//import java.net.CookiePolicy
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 class ZipDownloadService(
-//  cookieJar: CookieJar = JavaNetCookieJar(
-//    CookieManager().apply { setCookiePolicy(CookiePolicy.ACCEPT_ALL) }
-//  )
 ) {
   sealed class DownloadError(message: String? = null, cause: Throwable? = null) :
     Exception(message, cause) {
