@@ -272,4 +272,5 @@ hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,jetbrains,androidstudio
 
-# Overrides
+# Don't include the release directory
+/app/release/
