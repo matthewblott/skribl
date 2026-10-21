@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-import { canvas } from '../lib/canvas'
+import { canvas } from 'lib/canvas'
 
 export default class extends Controller {
 
