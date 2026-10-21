@@ -12,15 +12,9 @@ The back end server is a Rails application in the `web` folder, `cd` into this f
 cd skribl/web
 ```
 
-The project uses `Vite` which needs to be installed along with the other dependencies so install these:
+First install the dependencies:
 ```bash
 bundle install
-bundle exec vite install
-```
-
-Install the front end dependencies with `bun` or your favoured package manager:
-```bash
-bun install
 ```
 
 Perform the necessary migrations:
@@ -32,12 +26,21 @@ rails db:migrate:queue
 
 Now you should be good to go:
 ```
-bun dev
+rails server
 ```
 
 Browse to the default Rails development endpoint `http://localhost:3000` and you will Srkibl's splash page.
 
-The `ios` and `android` projects should just work if you have up to date Xcode and Android Studio versions installed. The only thing to bear in mind is in development Vite needs to serve the assets on a path Android understands so you'll need to start the Rails server with the following:  
-```bash
-VITE_ORIGIN=http://10.0.2.2:3036 bin/dev
+## iOS
+
+The `ios` project should just work if you have an up to date version of Xcode installed.
+
+## Android
+
+The following needs to be run for `android` to create the source generated `BuildConfig` file:
 ```
+cd android
+./gradlew :app:generateDebugBuildConfig
+```
+
+After that the project should work with an up to date version of Android Studio.
