@@ -53,6 +53,9 @@ Rails.application.routes.draw do
     get 'support', action: :support
     get 'terms',   action: :terms
     get 'privacy', action: :privacy
+
+    # Requirement for Google Play
+    get 'info/account/delete', action: :account_deletion
   end
 
   root 'static_pages#splash'
